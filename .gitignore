@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# Keep local MBPP arrows (small); ignore other data dumps
+data/**/*.json
+data/**/*.jsonl
+*.egg-info/
+dist/
+build/
+.DS_Store
+hf_cache/
+*.pt
+*.bin
+*.safetensors

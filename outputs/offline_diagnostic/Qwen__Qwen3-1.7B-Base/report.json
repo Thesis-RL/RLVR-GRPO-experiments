@@ -1,0 +1,242 @@
+{
+  "model": "Qwen/Qwen3-1.7B-Base",
+  "role": "main_candidate",
+  "config": {
+    "group_size": 16,
+    "noise_draws": 3,
+    "noise_specs": [
+      "clean",
+      "fp_only",
+      "fn_only",
+      "ind_flip_10",
+      "group_flip_10"
+    ],
+    "aggregations": [
+      "fractional",
+      "binary"
+    ],
+    "n_problems": 374,
+    "mem_mb": 64,
+    "timeout_s": 0.5
+  },
+  "screening": {
+    "model": "Qwen/Qwen3-1.7B-Base",
+    "role": "main_candidate",
+    "n_problems": 374,
+    "mean_fractional_reward": 0.4878565062388592,
+    "frac_problems_nonzero_variance": 0.9171122994652406,
+    "eligible_as_main": true,
+    "stratum_counts": {
+      "easy": 134,
+      "medium": 103,
+      "hard": 137
+    }
+  },
+  "summaries": {
+    "clean__fractional": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 31.0,
+      "n_usable": 343.0,
+      "mean_advantage_sign_agreement": 1.0,
+      "mean_advantage_cosine": 1.0,
+      "mean_pairwise_fidelity": 1.0,
+      "mean_spearman": 1.0,
+      "mean_top1_preserved": 1.0,
+      "mean_clean_reward_all": 0.4878565062388592,
+      "mean_noisy_reward_all": 0.4878565062388592,
+      "frac_problems_nonzero_variance": 0.9171122994652406,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "clean__binary": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 62.0,
+      "n_usable": 312.0,
+      "mean_advantage_sign_agreement": 1.0,
+      "mean_advantage_cosine": 1.0,
+      "mean_pairwise_fidelity": 1.0,
+      "mean_spearman": 1.0,
+      "mean_top1_preserved": 1.0,
+      "mean_clean_reward_all": 0.4279745989304813,
+      "mean_noisy_reward_all": 0.4279745989304813,
+      "frac_problems_nonzero_variance": 0.8342245989304814,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "fp_only__fractional": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 31.0,
+      "n_usable": 343.0,
+      "mean_advantage_sign_agreement": 0.8769747201033752,
+      "mean_advantage_cosine": 0.8196600936775215,
+      "mean_pairwise_fidelity": 0.8817270579836044,
+      "mean_spearman": 0.8135665635269408,
+      "mean_top1_preserved": 0.955296404275996,
+      "mean_clean_reward_all": 0.4878565062388592,
+      "mean_noisy_reward_all": 0.6406899881164588,
+      "frac_problems_nonzero_variance": 0.9171122994652406,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "fp_only__binary": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 62.0,
+      "n_usable": 312.0,
+      "mean_advantage_sign_agreement": 0.967711682743837,
+      "mean_advantage_cosine": 0.9189424718220832,
+      "mean_pairwise_fidelity": 0.9392291024502564,
+      "mean_spearman": 0.9189424718220832,
+      "mean_top1_preserved": 1.0,
+      "mean_clean_reward_all": 0.4279745989304813,
+      "mean_noisy_reward_all": 0.4622326203208556,
+      "frac_problems_nonzero_variance": 0.8342245989304814,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "fn_only__fractional": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 31.0,
+      "n_usable": 343.0,
+      "mean_advantage_sign_agreement": 0.8622932026659282,
+      "mean_advantage_cosine": 0.8151808749987203,
+      "mean_pairwise_fidelity": 0.8905911520437431,
+      "mean_spearman": 0.7960736300999557,
+      "mean_top1_preserved": 0.4732750242954325,
+      "mean_clean_reward_all": 0.4878565062388592,
+      "mean_noisy_reward_all": 0.34128045157456915,
+      "frac_problems_nonzero_variance": 0.9171122994652406,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "destroyed"
+    },
+    "fn_only__binary": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 62.0,
+      "n_usable": 312.0,
+      "mean_advantage_sign_agreement": 0.6468373579691987,
+      "mean_advantage_cosine": 0.45290039909499974,
+      "mean_pairwise_fidelity": 0.35243710764544095,
+      "mean_spearman": 0.45290039909499974,
+      "mean_top1_preserved": 0.4882478632478633,
+      "mean_clean_reward_all": 0.4279745989304813,
+      "mean_noisy_reward_all": 0.14661319073083778,
+      "frac_problems_nonzero_variance": 0.8342245989304814,
+      "mean_advantage_sign_agreement_bucket": "attenuated",
+      "mean_advantage_cosine_bucket": "attenuated",
+      "mean_pairwise_fidelity_bucket": "destroyed",
+      "mean_top1_preserved_bucket": "destroyed"
+    },
+    "ind_flip_10__fractional": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 31.0,
+      "n_usable": 343.0,
+      "mean_advantage_sign_agreement": 0.8485664103739904,
+      "mean_advantage_cosine": 0.8375382483581167,
+      "mean_pairwise_fidelity": 0.9145618072473843,
+      "mean_spearman": 0.7631160016865214,
+      "mean_top1_preserved": 0.7482993197278912,
+      "mean_clean_reward_all": 0.4878565062388592,
+      "mean_noisy_reward_all": 0.4894719251336898,
+      "frac_problems_nonzero_variance": 0.9171122994652406,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "ind_flip_10__binary": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 62.0,
+      "n_usable": 312.0,
+      "mean_advantage_sign_agreement": 0.8582014206404031,
+      "mean_advantage_cosine": 0.7059479951769724,
+      "mean_pairwise_fidelity": 0.722077819794166,
+      "mean_spearman": 0.7059479951769724,
+      "mean_top1_preserved": 0.7564102564102564,
+      "mean_clean_reward_all": 0.4279745989304813,
+      "mean_noisy_reward_all": 0.3181261140819964,
+      "frac_problems_nonzero_variance": 0.8342245989304814,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "attenuated",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "group_flip_10__fractional": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 31.0,
+      "n_usable": 343.0,
+      "mean_advantage_sign_agreement": 0.8892128279883381,
+      "mean_advantage_cosine": 0.7784256559766765,
+      "mean_pairwise_fidelity": 0.8892128279883381,
+      "mean_spearman": 0.7784256559766765,
+      "mean_top1_preserved": 0.8892128279883381,
+      "mean_clean_reward_all": 0.4878565062388592,
+      "mean_noisy_reward_all": 0.49027035056446816,
+      "frac_problems_nonzero_variance": 0.9171122994652406,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "group_flip_10__binary": {
+      "n_groups": 374.0,
+      "n_zero_variance_clean": 62.0,
+      "n_usable": 312.0,
+      "mean_advantage_sign_agreement": 0.9020485967050443,
+      "mean_advantage_cosine": 0.8015764128216301,
+      "mean_pairwise_fidelity": 0.8888888888888888,
+      "mean_spearman": 0.8015764128216301,
+      "mean_top1_preserved": 0.892094017094017,
+      "mean_clean_reward_all": 0.4279745989304813,
+      "mean_noisy_reward_all": 0.4297014260249554,
+      "frac_problems_nonzero_variance": 0.8342245989304814,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    }
+  },
+  "proposition1_offline": {
+    "fractional": {
+      "delta_advantage_sign_agreement": -0.014681517437446945,
+      "delta_pairwise_fidelity": 0.00886409406013866,
+      "fp": {
+        "agreement": 0.8769747201033752,
+        "pairwise": 0.8817270579836044,
+        "agreement_bucket": "survives",
+        "pairwise_bucket": "survives"
+      },
+      "fn": {
+        "agreement": 0.8622932026659282,
+        "pairwise": 0.8905911520437431,
+        "agreement_bucket": "survives",
+        "pairwise_bucket": "survives"
+      }
+    },
+    "binary": {
+      "delta_advantage_sign_agreement": -0.3208743247746383,
+      "delta_pairwise_fidelity": -0.5867919948048155,
+      "fp": {
+        "agreement": 0.967711682743837,
+        "pairwise": 0.9392291024502564,
+        "agreement_bucket": "survives",
+        "pairwise_bucket": "survives"
+      },
+      "fn": {
+        "agreement": 0.6468373579691987,
+        "pairwise": 0.35243710764544095,
+        "agreement_bucket": "attenuated",
+        "pairwise_bucket": "destroyed"
+      }
+    }
+  },
+  "pre_registration": "/home/belyak_anya/RLVR-GRPO-experiments/notes/pre_registration.md"
+}
