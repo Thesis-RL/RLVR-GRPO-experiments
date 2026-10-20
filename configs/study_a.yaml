@@ -1,0 +1,19 @@
+extends: shared.yaml
+
+experiment:
+  name: study_a_reward_aggregation
+  study: study_a
+
+# Study A: hold verification errors fixed and compare reward aggregation.
+matrix:
+  reward_types:
+    - binary
+    - fractional
+  noise_specs:
+    - name: clean
+    - name: ind_flip_10
+      mode: independent_flip
+      flip_p: 0.1
+    - name: group_flip_10
+      mode: group_flip
+      flip_p: 0.1

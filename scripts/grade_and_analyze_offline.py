@@ -13,12 +13,12 @@ import sys
 from pathlib import Path
 
 import numpy as np
-import yaml
 from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from rlvr.config import load_config, resolve_model_config  # noqa: E402
 from rlvr.data.mbpp import load_mbpp  # noqa: E402
 from rlvr.exec.mbpp_executor import grade_codes  # noqa: E402
 from rlvr.metrics.signal import (  # noqa: E402
@@ -27,15 +27,20 @@ from rlvr.metrics.signal import (  # noqa: E402
     stats_to_dict,
     summarize_groups,
 )
-from rlvr.noise.corruption import PLANNED_SPECS, apply_noise  # noqa: E402
-from rlvr.rewards.aggregation import binary_rewards, fractional_rewards  # noqa: E402
+from rlvr.noise.corruption import apply_noise, resolve_noise_specs  # noqa: E402
+from rlvr.rewards.aggregation import (  # noqa: E402
+    binary_rewards,
+    fractional_rewards,
+    resolve_reward_functions,
+)
+from rlvr.run_logging import RunContext, write_run_manifest  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--config", type=Path, default=ROOT / "configs/offline_diagnostic.yaml")
-    p.add_argument("--model", type=str, default="Qwen/Qwen3-1.7B-Base")
-    p.add_argument("--role", type=str, default="main_candidate")
+    p.add_argument("--model", type=str, default=None, help="Override the model selected by config")
+    p.add_argument("--role", type=str, default=None, help="Override the configured model role")
     p.add_argument("--out-dir", type=Path, default=None)
     p.add_argument("--mem-mb", type=int, default=64, help="Per-code child RAM cap (MiB)")
     p.add_argument("--timeout-s", type=float, default=0.5)
@@ -54,8 +59,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    cfg = yaml.safe_load(args.config.read_text())
-    safe_name = args.model.replace("/", "__")
+    cfg = load_config(args.config)
+    model_cfg = resolve_model_config(cfg, model_id=args.model, role=args.role)
+    model_id = model_cfg.id
+    model_role = model_cfg.role
+    safe_name = model_id.replace("/", "__")
     out_dir = args.out_dir or (ROOT / "outputs" / "offline_diagnostic" / safe_name)
     rollouts_path = out_dir / "rollouts.jsonl"
     if not rollouts_path.exists():
@@ -64,6 +72,34 @@ def main() -> None:
     clean_path = out_dir / "clean_grades.jsonl"
     mem_bytes = args.mem_mb * 1024 * 1024
     timeout_s = float(args.timeout_s)
+    noise_specs = resolve_noise_specs(cfg["noise_specs"])
+    reward_functions = resolve_reward_functions(cfg["aggregations"])
+
+    write_run_manifest(
+        out_dir,
+        context=RunContext(
+            pipeline="offline_grade_analyze",
+            experiment="offline_diagnostic",
+            study="shared",
+            model=model_id,
+            model_role=model_role,
+        ),
+        config=cfg,
+        config_path=args.config,
+        overrides={
+            key: value
+            for key, value in {
+                "model": args.model,
+                "role": args.role,
+                "out_dir": str(args.out_dir) if args.out_dir else None,
+                "mem_mb": args.mem_mb,
+                "timeout_s": args.timeout_s,
+                "grade_only": args.grade_only,
+                "analyze_only": args.analyze_only,
+            }.items()
+            if value is not None and value is not False
+        },
+    )
 
     if not args.analyze_only:
         problems = {p.task_id: p for p in load_mbpp("train")}
@@ -112,7 +148,7 @@ def main() -> None:
                 mean_frac = float(frac.mean())
                 out = {
                     "task_id": task_id,
-                    "model": args.model,
+                    "model": model_id,
                     "outcomes": outcomes,
                     "errors": errors,
                     "fractional_rewards": frac.tolist(),
@@ -151,10 +187,9 @@ def main() -> None:
     signal_path = out_dir / "signal_by_group.jsonl"
 
     with signal_path.open("w") as sigf:
-        for spec_name in cfg["noise_specs"]:
-            spec = PLANNED_SPECS[spec_name]
-            for agg_name in cfg["aggregations"]:
-                agg_fn = fractional_rewards if agg_name == "fractional" else binary_rewards
+        for spec in noise_specs:
+            spec_name = spec.name
+            for agg_name, agg_fn in reward_functions.items():
                 key = f"{spec_name}__{agg_name}"
                 per_draw = []
                 for draw in range(noise_draws):
@@ -168,7 +203,7 @@ def main() -> None:
                             json.dumps(
                                 {
                                     "task_id": task_id,
-                                    "model": args.model,
+                                    "model": model_id,
                                     "noise": spec_name,
                                     "aggregation": agg_name,
                                     "noise_draw": draw,
@@ -185,8 +220,8 @@ def main() -> None:
     mean_frac = float(np.mean([d["mean_fractional"] for d in difficulty.values()]))
     frac_nonzero = float(np.mean([d["nonzero_variance_frac"] for d in difficulty.values()]))
     screening = {
-        "model": args.model,
-        "role": args.role,
+        "model": model_id,
+        "role": model_role,
         "n_problems": len(difficulty),
         "mean_fractional_reward": mean_frac,
         "frac_problems_nonzero_variance": frac_nonzero,
@@ -223,13 +258,13 @@ def main() -> None:
         }
 
     report = {
-        "model": args.model,
-        "role": args.role,
+        "model": model_id,
+        "role": model_role,
         "config": {
             "group_size": cfg["group_size"],
             "noise_draws": noise_draws,
-            "noise_specs": cfg["noise_specs"],
-            "aggregations": cfg["aggregations"],
+            "noise_specs": [spec.name for spec in noise_specs],
+            "aggregations": list(reward_functions),
             "n_problems": len(difficulty),
             "mem_mb": args.mem_mb,
             "timeout_s": timeout_s,

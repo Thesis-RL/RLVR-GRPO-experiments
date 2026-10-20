@@ -1,0 +1,21 @@
+extends: shared.yaml
+
+experiment:
+  name: priority_bridge
+  study: shared_bridge
+
+# Run first: Clean + FP-only + FN-only crossed with both reward maps.
+matrix:
+  reward_types:
+    - binary
+    - fractional
+  noise_specs:
+    - name: clean
+    - name: fp_only
+      mode: class_conditional
+      alpha: 0.3
+      beta: 0.0
+    - name: fn_only
+      mode: class_conditional
+      alpha: 0.0
+      beta: 0.3

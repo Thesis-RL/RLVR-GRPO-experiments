@@ -15,12 +15,12 @@ import time
 from pathlib import Path
 
 import numpy as np
-import yaml
 from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+from rlvr.config import load_config, resolve_model_config  # noqa: E402
 from rlvr.data.mbpp import MBPPProblem, load_mbpp  # noqa: E402
 from rlvr.exec.mbpp_executor import grade_codes  # noqa: E402
 from rlvr.generate.sample import GenerationConfig, load_model, sample_completions  # noqa: E402
@@ -30,9 +30,14 @@ from rlvr.metrics.signal import (  # noqa: E402
     stats_to_dict,
     summarize_groups,
 )
-from rlvr.noise.corruption import PLANNED_SPECS, apply_noise  # noqa: E402
+from rlvr.noise.corruption import apply_noise, resolve_noise_specs  # noqa: E402
 from rlvr.prompts.mbpp import build_prompt, extract_code  # noqa: E402
-from rlvr.rewards.aggregation import binary_rewards, fractional_rewards  # noqa: E402
+from rlvr.rewards.aggregation import (  # noqa: E402
+    binary_rewards,
+    fractional_rewards,
+    resolve_reward_functions,
+)
+from rlvr.run_logging import RunContext, write_run_manifest  # noqa: E402
 
 
 def _grade_job(args: tuple) -> dict:
@@ -68,8 +73,8 @@ def _grade_job(args: tuple) -> dict:
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--config", type=Path, default=ROOT / "configs/offline_diagnostic.yaml")
-    p.add_argument("--model", type=str, required=True)
-    p.add_argument("--role", type=str, default="main_candidate")
+    p.add_argument("--model", type=str, default=None, help="Override the model selected by config")
+    p.add_argument("--role", type=str, default=None, help="Override the configured model role")
     p.add_argument("--limit", type=int, default=None, help="Optional cap on #training problems")
     p.add_argument("--skip-generate", action="store_true", help="Reuse saved rollouts JSONL")
     p.add_argument("--out-dir", type=Path, default=None)
@@ -80,8 +85,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    cfg = yaml.safe_load(args.config.read_text())
-    model_id = args.model
+    cfg = load_config(args.config)
+    model_cfg = resolve_model_config(cfg, model_id=args.model, role=args.role)
+    model_id = model_cfg.id
+    model_role = model_cfg.role
     safe_name = model_id.replace("/", "__")
     out_dir = args.out_dir or (ROOT / "outputs" / "offline_diagnostic" / safe_name)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -90,8 +97,36 @@ def main() -> None:
     noise_draws = int(cfg["noise_draws"])
     noise_base_seed = int(cfg["noise_base_seed"])
     batch_size = int(args.batch_size or cfg["batch_size"])
-    dtype = args.dtype or cfg["dtype"]
+    dtype = args.dtype or model_cfg.dtype
     timeout_s = float(cfg["timeout_s"])
+    noise_specs = resolve_noise_specs(cfg["noise_specs"])
+    reward_functions = resolve_reward_functions(cfg["aggregations"])
+
+    write_run_manifest(
+        out_dir,
+        context=RunContext(
+            pipeline="offline_diagnostic",
+            experiment="offline_diagnostic",
+            study="shared",
+            model=model_id,
+            model_role=model_role,
+        ),
+        config=cfg,
+        config_path=args.config,
+        overrides={
+            key: value
+            for key, value in {
+                "model": args.model,
+                "role": args.role,
+                "limit": args.limit,
+                "batch_size": args.batch_size,
+                "dtype": args.dtype,
+                "out_dir": str(args.out_dir) if args.out_dir else None,
+                "skip_generate": args.skip_generate,
+            }.items()
+            if value is not None and value is not False
+        },
+    )
 
     train = load_mbpp("train")
     prompt_split = {p.task_id: p for p in load_mbpp("prompt")}
@@ -189,10 +224,9 @@ def main() -> None:
             row = json.loads(line)
             clean_by_id[row["task_id"]] = np.asarray(row["outcomes"], dtype=np.int8)
 
-    for spec_name in cfg["noise_specs"]:
-        spec = PLANNED_SPECS[spec_name]
-        for agg_name in cfg["aggregations"]:
-            agg_fn = fractional_rewards if agg_name == "fractional" else binary_rewards
+    for spec in noise_specs:
+        spec_name = spec.name
+        for agg_name, agg_fn in reward_functions.items():
             key = f"{spec_name}__{agg_name}"
             per_draw_summaries = []
             for draw in range(noise_draws):
@@ -230,7 +264,7 @@ def main() -> None:
     frac_nonzero = float(np.mean([d["nonzero_variance_frac"] for d in difficulty.values()]))
     screening = {
         "model": model_id,
-        "role": args.role,
+        "role": model_role,
         "n_problems": len(difficulty),
         "mean_fractional_reward": mean_frac,
         "frac_problems_nonzero_variance": frac_nonzero,
@@ -271,12 +305,12 @@ def main() -> None:
 
     report = {
         "model": model_id,
-        "role": args.role,
+        "role": model_role,
         "config": {
             "group_size": group_size,
             "noise_draws": noise_draws,
-            "noise_specs": cfg["noise_specs"],
-            "aggregations": cfg["aggregations"],
+            "noise_specs": [spec.name for spec in noise_specs],
+            "aggregations": list(reward_functions),
             "n_problems": len(difficulty),
         },
         "screening": screening,

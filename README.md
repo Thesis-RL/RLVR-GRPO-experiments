@@ -15,7 +15,11 @@ RLVR-GRPO-experiments/
 │   └── pre_registration.md     # locked metrics & thresholds (before results)
 │
 ├── configs/
-│   └── offline_diagnostic.yaml # default generation / noise / model list
+│   ├── shared.yaml             # model, data, generation, eval, logging
+│   ├── study_a.yaml            # binary vs fractional × shared-noise matrix
+│   ├── study_b.yaml            # fractional × matched-J FP/FN matrix
+│   ├── priority_bridge.yaml    # clean / FP / FN × both rewards (run first)
+│   └── offline_diagnostic.yaml # frozen-rollout diagnostic settings
 │
 ├── data/
 │   └── mbpp/                   # local MBPP arrow splits (train/val/test/prompt)
@@ -60,6 +64,26 @@ RLVR-GRPO-experiments/
 | `rlvr.noise` | Planned schedules: `clean`, `fp_only`, `fn_only`, `ind_flip_10`, `group_flip_10`, … |
 | `rlvr.rewards` | `fractional` ∈ {0,⅓,⅔,1}, `binary` = all-tests-pass; GRPO within-group advantages. |
 | `rlvr.metrics` | Clean–noisy advantage agreement / cosine, pairwise fidelity, top-1, margins, difficulty strata. |
+| `rlvr.config` | Layered YAML loading plus validated model, reward, noise, seed, and condition selection. |
+| `rlvr.run_logging` | Stable run IDs, resolved-config snapshots, metadata manifests, and JSONL events. |
+
+### Shared experiment configs
+
+`configs/shared.yaml` is the common testbed contract. The two thesis studies and
+the priority bridge extend it and only replace their experiment identity and
+condition matrix:
+
+| Config | Expanded conditions per seed |
+|---|---:|
+| `configs/study_a.yaml` | 3 verification conditions × 2 reward maps = 6 |
+| `configs/study_b.yaml` | 5 matched/asymmetric FP/FN conditions × fractional = 5 |
+| `configs/priority_bridge.yaml` | clean / FP-only / FN-only × binary / fractional = 6 |
+
+Noise rates live in the study YAML rather than in training code. Named legacy
+noise schedules remain supported by the offline diagnostic. The config loader
+validates names/rates and expands a deterministic condition order for the future
+online runner. Every runner can use `rlvr.run_logging.write_run_manifest()` to
+store `resolved_config.yaml` and `run_metadata.json` before expensive work.
 
 ---
 
@@ -124,8 +148,8 @@ uv run python scripts/run_offline_diagnostic.py \
 
 | Flag | Default | Meaning |
 |---|---|---|
-| `--model` | *(required)* | HF model id, e.g. `Qwen/Qwen3-1.7B-Base` |
-| `--role` | `main_candidate` | Label in the report (`main_candidate` / `pipeline_debug` / …) |
+| `--model` | selected from config | Optional HF model override, e.g. `Qwen/Qwen3-1.7B-Base` |
+| `--role` | selected from config | Optional report label override (`main_candidate` / `pipeline_debug` / …) |
 | `--config` | `configs/offline_diagnostic.yaml` | YAML with G, temp, noise list, etc. |
 | `--limit` | all train | Cap number of train problems (smoke tests) |
 | `--batch-size` | from config (`4`) | `num_return_sequences` chunk size; raise if VRAM allows (e.g. `8`) |

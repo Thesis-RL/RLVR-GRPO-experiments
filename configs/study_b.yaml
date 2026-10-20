@@ -1,0 +1,28 @@
+extends: shared.yaml
+
+experiment:
+  name: study_b_fp_fn_asymmetry
+  study: study_b
+
+# Study B: matched-J FP/FN conditions trained with fractional reward.
+matrix:
+  reward_types:
+    - fractional
+  noise_specs:
+    - name: clean
+    - name: fp_only
+      mode: class_conditional
+      alpha: 0.3
+      beta: 0.0
+    - name: fn_only
+      mode: class_conditional
+      alpha: 0.0
+      beta: 0.3
+    - name: fp_heavy
+      mode: class_conditional
+      alpha: 0.3
+      beta: 0.1
+    - name: fn_heavy
+      mode: class_conditional
+      alpha: 0.1
+      beta: 0.3

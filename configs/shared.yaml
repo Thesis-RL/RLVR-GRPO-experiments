@@ -1,0 +1,43 @@
+# Shared settings for both thesis studies. Study files extend this base and
+# define only their condition matrix.
+schema_version: 1
+
+experiment:
+  name: shared_rlvr
+  study: shared
+
+model:
+  id: Qwen/Qwen3-1.7B-Base
+  role: main_candidate
+  dtype: bfloat16
+
+data:
+  dataset: mbpp
+  train_split: train
+  validation_split: validation
+  test_split: test
+  few_shot_task_ids: [2, 3, 4]
+
+generation:
+  group_size: 16
+  train_temperature: 1.0
+  eval_temperature: 0.7
+  top_p: 0.95
+  max_new_tokens: 256
+
+training:
+  algorithm: grpo
+  seeds: [0, 1, 2]
+
+evaluation:
+  clean_only: true
+  primary_metric: pass_at_1
+  primary_metric_last_n: 2
+
+logging:
+  output_root: outputs
+  save_rollouts: true
+  save_clean_outcomes: true
+  save_noisy_outcomes: true
+  save_both_rewards: true
+  save_advantages: true

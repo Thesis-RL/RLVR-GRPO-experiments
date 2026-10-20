@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable, Sequence
+
 import numpy as np
+
+RewardFunction = Callable[[np.ndarray], np.ndarray]
 
 
 def fractional_rewards(outcomes: np.ndarray) -> np.ndarray:
@@ -25,3 +29,25 @@ def grpo_advantages(rewards: np.ndarray, eps: float = 1e-8) -> np.ndarray:
     if std < eps:
         return np.zeros_like(rewards)
     return (rewards - mean) / (std + eps)
+
+
+REWARD_FUNCTIONS: dict[str, RewardFunction] = {
+    "binary": binary_rewards,
+    "fractional": fractional_rewards,
+}
+
+
+def get_reward_function(name: str) -> RewardFunction:
+    try:
+        return REWARD_FUNCTIONS[name]
+    except KeyError as exc:
+        available = ", ".join(sorted(REWARD_FUNCTIONS))
+        raise ValueError(f"Unknown reward {name!r}; choose one of: {available}") from exc
+
+
+def resolve_reward_functions(names: Sequence[str]) -> dict[str, RewardFunction]:
+    if isinstance(names, (str, bytes)):
+        raise TypeError("Reward names must be a sequence, not a single string")
+    if len(names) != len(set(names)):
+        raise ValueError(f"Reward names must be unique, got: {list(names)}")
+    return {name: get_reward_function(name) for name in names}
