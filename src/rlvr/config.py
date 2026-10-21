@@ -42,6 +42,20 @@ class ExperimentConfig:
     conditions: tuple[ExperimentCondition, ...]
     values: dict[str, Any]
 
+    def condition(self, name: str) -> ExperimentCondition:
+        """Return one configured condition by its stable name."""
+        for condition in self.conditions:
+            if condition.name == name:
+                return condition
+        available = ", ".join(item.name for item in self.conditions)
+        raise ConfigError(f"Unknown condition {name!r}; choose one of: {available}")
+
+    def require_seed(self, seed: int) -> int:
+        """Validate a seed against the predeclared matched-seed protocol."""
+        if seed not in self.seeds:
+            raise ConfigError(f"Seed {seed} is not configured; choose one of: {list(self.seeds)}")
+        return seed
+
 
 def load_config(path: str | Path) -> dict[str, Any]:
     """Load YAML, recursively applying relative ``extends`` files."""
@@ -52,9 +66,13 @@ def load_experiment_config(path: str | Path) -> ExperimentConfig:
     """Load a shared online-study config and expand its condition matrix."""
     source = Path(path).resolve()
     values = load_config(source)
+    if values.get("schema_version") != 1:
+        raise ConfigError("schema_version must be 1")
     experiment = _mapping(values, "experiment")
     matrix = _mapping(values, "matrix")
     training = _mapping(values, "training")
+    if str(training.get("algorithm")) != "grpo":
+        raise ConfigError("training.algorithm must be grpo")
 
     name = _required_string(experiment, "name")
     study = _required_string(experiment, "study")

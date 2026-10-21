@@ -9,6 +9,7 @@ experiment:
 model:
   id: Qwen/Qwen3-1.7B-Base
   role: main_candidate
+  revision: null  # Freeze to an immutable revision after the smoke pilot.
   dtype: bfloat16
 
 data:
@@ -17,6 +18,9 @@ data:
   validation_split: validation
   test_split: test
   few_shot_task_ids: [2, 3, 4]
+  train_difficulty_path: outputs/offline_diagnostic/Qwen__Qwen3-1.7B-Base/difficulty.json
+  # Generated once from the frozen initial checkpoint; required for main runs.
+  test_difficulty_path: outputs/offline_diagnostic/Qwen__Qwen3-1.7B-Base/test/difficulty.json
 
 generation:
   group_size: 16
@@ -28,11 +32,57 @@ generation:
 training:
   algorithm: grpo
   seeds: [0, 1, 2]
+  protocol_status: pilot_not_frozen
+  precision: bfloat16
+  optimizer: adamw_torch
+  lr_scheduler_type: linear
+  warmup_steps: 0
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1.0e-8
+  gradient_checkpointing: true
+  use_vllm: false
+  scale_rewards: group
+  loss_type: dapo
+  num_iterations: 1
+  lora:
+    rank: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: [q_proj, v_proj]
+  smoke:
+    group_size: 8
+    learning_rate: 1.0e-6
+    per_device_train_batch_size: 1
+    # One optimizer step consumes the full eight-completion GRPO group.
+    gradient_accumulation_steps: 8
+    max_steps: 2
+    kl_coefficient: 0.0
+    logging_steps: 1
+    save_steps: 1
+    save_total_limit: 2
+  # Freeze these after the clean pilot. A non-smoke run refuses null values.
+  main:
+    learning_rate: null
+    per_device_train_batch_size: null
+    gradient_accumulation_steps: null
+    max_steps: null
+    kl_coefficient: null
+    logging_steps: null
+    save_steps: null
+    save_total_limit: null
 
 evaluation:
   clean_only: true
   primary_metric: pass_at_1
   primary_metric_last_n: 2
+  validation_interval_fraction: 0.1
+  test_fractions: [0.9, 1.0]
+  seed: 0
+  timeout_s: 0.5
+  mem_mb: 64
 
 logging:
   output_root: outputs

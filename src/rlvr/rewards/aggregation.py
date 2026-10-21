@@ -22,10 +22,10 @@ def binary_rewards(outcomes: np.ndarray) -> np.ndarray:
 
 
 def grpo_advantages(rewards: np.ndarray, eps: float = 1e-8) -> np.ndarray:
-    """Within-group standardized advantages (GRPO-style)."""
+    """Within-group standardized advantages matching TRL's sample std."""
     rewards = np.asarray(rewards, dtype=np.float64)
     mean = rewards.mean()
-    std = rewards.std(ddof=0)
+    std = rewards.std(ddof=1) if rewards.size > 1 else 0.0
     if std < eps:
         return np.zeros_like(rewards)
     return (rewards - mean) / (std + eps)

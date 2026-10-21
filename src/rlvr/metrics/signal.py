@@ -54,11 +54,7 @@ def group_signal_stats(
 
     pairwise = _pairwise_fidelity(clean_rewards, noisy_rewards)
     spearman = None
-    if (
-        not zero_var
-        and len(np.unique(clean_rewards)) > 1
-        and len(np.unique(noisy_rewards)) > 1
-    ):
+    if not zero_var and len(np.unique(clean_rewards)) > 1 and len(np.unique(noisy_rewards)) > 1:
         rho, _ = spearmanr(clean_rewards, noisy_rewards)
         spearman = float(rho) if np.isfinite(rho) else None
 

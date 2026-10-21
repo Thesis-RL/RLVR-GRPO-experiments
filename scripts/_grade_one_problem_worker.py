@@ -53,6 +53,14 @@ def _set_limits(mem_bytes: int, cpu_s: int) -> None:
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     except (ValueError, OSError):
         pass
+    for limit_name, value in (("RLIMIT_FSIZE", 1024 * 1024), ("RLIMIT_NOFILE", 32)):
+        limit = getattr(resource, limit_name, None)
+        if limit is None:
+            continue
+        try:
+            resource.setrlimit(limit, (value, value))
+        except (ValueError, OSError):
+            pass
 
 
 @contextlib.contextmanager
@@ -73,6 +81,14 @@ _DENY_SUBSTR = (
     "__import__",
     "os.system",
     "os.popen",
+    "os.remove",
+    "os.unlink",
+    "os.rmdir",
+    "os.rename",
+    "os.replace",
+    "os.chdir",
+    "os.chmod",
+    "os.chown",
     "shutil",
     "pathlib",
     "socket",
@@ -114,7 +130,10 @@ def grade_one(code: str, setup: str, tests: list[str], timeout_s: float):
     ns: dict = {"__builtins__": __builtins__}
     try:
         with _timed(timeout_s):
-            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            with (
+                contextlib.redirect_stdout(io.StringIO()),
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
                 if setup.strip():
                     exec(setup, ns)  # noqa: S102
                 exec(code, ns)  # noqa: S102
@@ -129,7 +148,10 @@ def grade_one(code: str, setup: str, tests: list[str], timeout_s: float):
     for test in tests:
         try:
             with _timed(timeout_s):
-                with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                with (
+                    contextlib.redirect_stdout(io.StringIO()),
+                    contextlib.redirect_stderr(io.StringIO()),
+                ):
                     exec(test, ns)  # noqa: S102
             outs.append(1)
         except _Timeout:

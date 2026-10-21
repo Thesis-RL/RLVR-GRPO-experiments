@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
+from rlvr.data.mbpp import resolve_mbpp_split
 from rlvr.metrics.signal import group_signal_stats, summarize_groups
 from rlvr.noise.corruption import PLANNED_SPECS, apply_noise
 from rlvr.rewards.aggregation import binary_rewards, fractional_rewards, grpo_advantages
@@ -47,10 +49,16 @@ def test_grpo_advantages_unit_std():
     r = np.array([1.0, 0.0, 1.0, 0.0])
     a = grpo_advantages(r)
     assert abs(a.mean()) < 1e-9
-    assert abs(a.std(ddof=0) - 1.0) < 1e-6
+    assert abs(a.std(ddof=1) - 1.0) < 1e-6
 
 
 def test_summarize_groups_buckets():
     stats = [group_signal_stats(np.array([1.0, 0.0]), np.array([1.0, 0.0])) for _ in range(5)]
     sm = summarize_groups(stats)
     assert sm["mean_advantage_sign_agreement_bucket"] == "survives"
+
+
+def test_mbpp_split_validation():
+    assert resolve_mbpp_split("test") == "test"
+    with pytest.raises(ValueError, match="Unknown MBPP split"):
+        resolve_mbpp_split("dev")

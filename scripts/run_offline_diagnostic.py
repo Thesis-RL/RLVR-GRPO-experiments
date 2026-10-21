@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import sys
 import time
 from pathlib import Path
@@ -21,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from rlvr.config import load_config, resolve_model_config  # noqa: E402
-from rlvr.data.mbpp import MBPPProblem, load_mbpp  # noqa: E402
+from rlvr.data.mbpp import MBPPProblem, load_mbpp, resolve_mbpp_split  # noqa: E402
 from rlvr.exec.mbpp_executor import grade_codes  # noqa: E402
 from rlvr.generate.sample import GenerationConfig, load_model, sample_completions  # noqa: E402
 from rlvr.metrics.signal import (  # noqa: E402
@@ -37,11 +38,16 @@ from rlvr.rewards.aggregation import (  # noqa: E402
     fractional_rewards,
     resolve_reward_functions,
 )
-from rlvr.run_logging import RunContext, write_run_manifest  # noqa: E402
+from rlvr.run_logging import (  # noqa: E402
+    RunContext,
+    collect_environment_metadata,
+    update_run_metadata,
+    write_run_manifest,
+)
 
 
 def _grade_job(args: tuple) -> dict:
-    task_id, model_id, codes, test_list, test_setup_code, timeout_s = args
+    task_id, model_id, codes, test_list, test_setup_code, timeout_s, split = args
     problem = MBPPProblem(
         task_id=task_id,
         text="",
@@ -49,7 +55,7 @@ def _grade_job(args: tuple) -> dict:
         test_list=list(test_list),
         test_setup_code=str(test_setup_code or ""),
         challenge_test_list=[],
-        split="train",
+        split=split,
     )
     results = grade_codes(codes, problem, timeout_s=timeout_s)
     outcomes = [list(r.outcomes) for r in results]
@@ -75,7 +81,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--config", type=Path, default=ROOT / "configs/offline_diagnostic.yaml")
     p.add_argument("--model", type=str, default=None, help="Override the model selected by config")
     p.add_argument("--role", type=str, default=None, help="Override the configured model role")
-    p.add_argument("--limit", type=int, default=None, help="Optional cap on #training problems")
+    p.add_argument("--revision", type=str, default=None, help="Immutable model revision")
+    p.add_argument("--limit", type=int, default=None, help="Optional cap on configured problems")
     p.add_argument("--skip-generate", action="store_true", help="Reuse saved rollouts JSONL")
     p.add_argument("--out-dir", type=Path, default=None)
     p.add_argument("--batch-size", type=int, default=None)
@@ -89,13 +96,28 @@ def main() -> None:
     model_cfg = resolve_model_config(cfg, model_id=args.model, role=args.role)
     model_id = model_cfg.id
     model_role = model_cfg.role
+    split = resolve_mbpp_split(cfg.get("split", "train"))
+    revision = args.revision or cfg.get("model_revision")
+    if split == "test" and not str(revision or "").strip():
+        raise SystemExit(
+            "A frozen --revision (or model_revision in config) is required for test difficulty"
+        )
     safe_name = model_id.replace("/", "__")
-    out_dir = args.out_dir or (ROOT / "outputs" / "offline_diagnostic" / safe_name)
+    default_out_dir = ROOT / "outputs" / "offline_diagnostic" / safe_name
+    if split != "train":
+        default_out_dir = default_out_dir / split
+    out_dir = args.out_dir or default_out_dir
+    if split == "test" and not args.skip_generate and out_dir.exists() and any(out_dir.iterdir()):
+        raise SystemExit(
+            f"Refusing to overwrite frozen test difficulty artifacts in {out_dir}; "
+            "use --skip-generate or choose a new --out-dir"
+        )
     out_dir.mkdir(parents=True, exist_ok=True)
 
     group_size = int(cfg["group_size"])
     noise_draws = int(cfg["noise_draws"])
     noise_base_seed = int(cfg["noise_base_seed"])
+    generation_seed = int(cfg.get("generation_seed", 0))
     batch_size = int(args.batch_size or cfg["batch_size"])
     dtype = args.dtype or model_cfg.dtype
     timeout_s = float(cfg["timeout_s"])
@@ -110,6 +132,8 @@ def main() -> None:
             study="shared",
             model=model_id,
             model_role=model_role,
+            profile=split,
+            model_revision=str(revision) if revision else None,
         ),
         config=cfg,
         config_path=args.config,
@@ -118,6 +142,7 @@ def main() -> None:
             for key, value in {
                 "model": args.model,
                 "role": args.role,
+                "revision": args.revision,
                 "limit": args.limit,
                 "batch_size": args.batch_size,
                 "dtype": args.dtype,
@@ -126,9 +151,10 @@ def main() -> None:
             }.items()
             if value is not None and value is not False
         },
+        environment=collect_environment_metadata(ROOT),
     )
 
-    train = load_mbpp("train")
+    problems = load_mbpp(split)
     prompt_split = {p.task_id: p for p in load_mbpp("prompt")}
     few_shot_ids = list(cfg["few_shot_task_ids"])
     few_shot = [prompt_split[i] for i in few_shot_ids if i in prompt_split]
@@ -137,7 +163,7 @@ def main() -> None:
         few_shot = list(prompt_split.values())[:3]
 
     if args.limit is not None:
-        train = train[: args.limit]
+        problems = problems[: args.limit]
 
     rollouts_path = out_dir / "rollouts.jsonl"
     clean_path = out_dir / "clean_grades.jsonl"
@@ -145,7 +171,17 @@ def main() -> None:
     if not args.skip_generate:
         print(f"Loading model {model_id} ({dtype})…")
         t0 = time.time()
-        model, tokenizer = load_model(model_id, dtype=dtype)
+        model, tokenizer = load_model(
+            model_id,
+            dtype=dtype,
+            revision=str(revision) if revision else None,
+        )
+        actual_revision = (
+            revision
+            or tokenizer.init_kwargs.get("_commit_hash")
+            or getattr(tokenizer, "_commit_hash", None)
+        )
+        update_run_metadata(out_dir, {"resolved_model_revision": actual_revision})
         print(f"Model ready in {time.time() - t0:.1f}s")
         gen = GenerationConfig(
             temperature=float(cfg["temperature"]),
@@ -153,7 +189,12 @@ def main() -> None:
             max_new_tokens=int(cfg["max_new_tokens"]),
         )
         with rollouts_path.open("w") as f:
-            for problem in tqdm(train, desc="generate"):
+            for problem in tqdm(problems, desc="generate"):
+                task_generation_seed = _task_generation_seed(
+                    generation_seed,
+                    problem.task_id,
+                )
+                _set_generation_seed(task_generation_seed)
                 prompt = build_prompt(problem, few_shot)
                 completions = sample_completions(
                     model, tokenizer, prompt, n=group_size, gen=gen, batch_size=batch_size
@@ -162,6 +203,7 @@ def main() -> None:
                 row = {
                     "task_id": problem.task_id,
                     "model": model_id,
+                    "generation_seed": task_generation_seed,
                     "prompt": prompt,
                     "completions": completions,
                     "codes": codes,
@@ -180,7 +222,7 @@ def main() -> None:
         raise SystemExit(f"--skip-generate set but missing {rollouts_path}")
 
     # Clean grade (CPU-only; can resume / rerun without the model)
-    problems = {p.task_id: p for p in train}
+    problems_by_id = {p.task_id: p for p in problems}
     difficulty: dict[int, dict] = {}
     # Sequential: each candidate already runs in a memory-capped child.
     # Parallel pools of nested processes previously tripped the OOM killer.
@@ -188,7 +230,7 @@ def main() -> None:
     with rollouts_path.open() as fin:
         for line in fin:
             row = json.loads(line)
-            problem = problems[row["task_id"]]
+            problem = problems_by_id[row["task_id"]]
             jobs.append(
                 (
                     row["task_id"],
@@ -197,6 +239,7 @@ def main() -> None:
                     problem.test_list,
                     problem.test_setup_code,
                     timeout_s,
+                    split,
                 )
             )
 
@@ -213,6 +256,23 @@ def main() -> None:
             fout.flush()
 
     (out_dir / "difficulty.json").write_text(json.dumps(difficulty, indent=2))
+    (out_dir / "difficulty_metadata.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "model": model_id,
+                "model_revision": str(revision) if revision else None,
+                "split": split,
+                "group_size": group_size,
+                "strata_definition": "fractional_thresholds_v1",
+                "generation_seed": generation_seed,
+                "batch_size": batch_size,
+                "dtype": dtype,
+            },
+            indent=2,
+        )
+        + "\n"
+    )
 
     # Offline noise + signal metrics
     signal_rows: list[dict] = []
@@ -308,6 +368,8 @@ def main() -> None:
         "role": model_role,
         "config": {
             "group_size": group_size,
+            "split": split,
+            "generation_seed": generation_seed,
             "noise_draws": noise_draws,
             "noise_specs": [spec.name for spec in noise_specs],
             "aggregations": list(reward_functions),
@@ -327,6 +389,21 @@ def _sub(a, b):
     if a is None or b is None:
         return None
     return float(a) - float(b)
+
+
+def _task_generation_seed(seed: int, task_id: int) -> int:
+    sequence = np.random.SeedSequence([seed, task_id])
+    return int(sequence.generate_state(1, dtype=np.uint64)[0])
+
+
+def _set_generation_seed(seed: int) -> None:
+    import torch
+
+    random.seed(seed)
+    np.random.seed(seed % (2**32))
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
 
 def _mean_summaries(items: list[dict]) -> dict:

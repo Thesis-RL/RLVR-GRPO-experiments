@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal
+from pathlib import Path
+from typing import Literal, cast
 
 from datasets import Dataset, load_dataset
 
 SplitName = Literal["train", "validation", "test", "prompt"]
+_SPLITS = ("train", "validation", "test", "prompt")
 
 
 @dataclass(frozen=True)
@@ -28,8 +30,6 @@ def load_mbpp(
     local_dir: str | None = None,
 ) -> list[MBPPProblem]:
     """Load MBPP. Prefers local arrow files under data/mbpp/ when present."""
-    from pathlib import Path
-
     root = Path(__file__).resolve().parents[3]  # repo root
     local = Path(local_dir) if local_dir else root / "data" / "mbpp"
     if (local / "mbpp-train.arrow").exists():
@@ -44,7 +44,15 @@ def load_mbpp(
     return _from_split(ds[split], split)
 
 
-def _from_local_arrows(local: "Path", split: SplitName | None) -> list[MBPPProblem]:
+def resolve_mbpp_split(value: object) -> SplitName:
+    """Validate an MBPP split read from a runtime configuration."""
+    split = str(value).strip()
+    if split not in _SPLITS:
+        raise ValueError(f"Unknown MBPP split {split!r}; choose one of: {', '.join(_SPLITS)}")
+    return cast(SplitName, split)
+
+
+def _from_local_arrows(local: Path, split: SplitName | None) -> list[MBPPProblem]:
     from datasets import Dataset
 
     mapping = {

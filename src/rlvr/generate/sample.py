@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizerBase
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    PreTrainedModel,
+    PreTrainedTokenizerBase,
+)
 
 
 @dataclass
@@ -22,6 +27,7 @@ def load_model(
     *,
     dtype: str = "bfloat16",
     device: str | None = None,
+    revision: str | None = None,
 ) -> tuple[PreTrainedModel, PreTrainedTokenizerBase]:
     torch_dtype = {
         "bfloat16": torch.bfloat16,
@@ -31,13 +37,18 @@ def load_model(
     if device is None:
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_id,
+        revision=revision,
+        trust_remote_code=True,
+    )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
+        revision=revision,
         dtype=torch_dtype,
         trust_remote_code=True,
         device_map=device if device == "cuda" else None,

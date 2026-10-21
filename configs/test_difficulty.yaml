@@ -1,0 +1,13 @@
+extends: offline_diagnostic.yaml
+
+# Freeze this to the same immutable commit as model.revision in shared.yaml.
+model_revision: null
+split: test
+
+# The test pass@1 difficulty strata only need clean initial-checkpoint groups.
+noise_draws: 1
+noise_specs:
+  - clean
+aggregations:
+  - fractional
+  - binary

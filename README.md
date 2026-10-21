@@ -19,7 +19,8 @@ RLVR-GRPO-experiments/
 │   ├── study_a.yaml            # binary vs fractional × shared-noise matrix
 │   ├── study_b.yaml            # fractional × matched-J FP/FN matrix
 │   ├── priority_bridge.yaml    # clean / FP / FN × both rewards (run first)
-│   └── offline_diagnostic.yaml # frozen-rollout diagnostic settings
+│   ├── offline_diagnostic.yaml # frozen-rollout diagnostic settings
+│   └── test_difficulty.yaml    # frozen initial-checkpoint test strata
 │
 ├── data/
 │   └── mbpp/                   # local MBPP arrow splits (train/val/test/prompt)
@@ -29,20 +30,24 @@ RLVR-GRPO-experiments/
 │   ├── data/mbpp.py            # MBPPProblem + load_mbpp()
 │   ├── prompts/mbpp.py         # few-shot prompts + code extraction
 │   ├── generate/sample.py      # HF model load + G completions / prompt
-│   ├── exec/mbpp_executor.py   # clean unit-test grading (isolated subprocess)
+│   ├── exec/mbpp_executor.py   # clean grading (credential-scrubbed, resource-capped child)
 │   ├── noise/corruption.py     # FP/FN / flip schedules
 │   ├── rewards/aggregation.py  # binary, fractional, GRPO advantages
-│   └── metrics/signal.py       # advantage agreement, ranking fidelity, strata
+│   ├── metrics/signal.py       # advantage agreement, ranking fidelity, strata
+│   └── online/                 # GRPO dataset, noisy reward, callbacks, clean eval
 │
 ├── scripts/
+│   ├── run_online_grpo.py           # one online condition / seed, smoke and resume
 │   ├── run_offline_diagnostic.py      # end-to-end: generate (+ optional grade/noise)
 │   ├── grade_and_analyze_offline.py   # safe grade / analyze over saved rollouts (CPU)
 │   └── _grade_one_problem_worker.py   # isolated child: exec one candidate under resource caps
 │
 ├── tests/
-│   └── test_offline_core.py    # noise / rewards / Prop.1 sanity (no GPU)
+│   ├── test_offline_core.py    # noise / rewards / Prop.1 sanity (no GPU)
+│   ├── test_online_reward.py   # online reward path and config guards (no GPU)
+│   └── test_online_runtime.py  # resume, evaluation, difficulty, schedules (no GPU)
 │
-└── outputs/                    # gitignored run artifacts
+└── outputs/                    # frozen diagnostics + gitignored online runs
     └── offline_diagnostic/
         └── <org>__<model>/
             ├── rollouts.jsonl         # prompts + raw completions + extracted code
@@ -60,12 +65,13 @@ RLVR-GRPO-experiments/
 | `rlvr.data` | Official MBPP splits (374 / 90 / 500 / 10). Prefers `data/mbpp/*.arrow`. |
 | `rlvr.prompts` | Austin-style few-shot prompt; strips `[BEGIN]`/`[DONE]` / fences from completions. |
 | `rlvr.generate` | Loads causal LM (bf16/fp16), samples `G` answers at train temperature. |
-| `rlvr.exec` | Runs each candidate in a **separate** Python process with resource caps (address space, CPU time, process count). |
+| `rlvr.exec` | Runs each candidate in a separate temporary working directory with a scrubbed environment and resource-capped Python child. This is defense in depth, not a VM-grade security boundary. |
 | `rlvr.noise` | Planned schedules: `clean`, `fp_only`, `fn_only`, `ind_flip_10`, `group_flip_10`, … |
 | `rlvr.rewards` | `fractional` ∈ {0,⅓,⅔,1}, `binary` = all-tests-pass; GRPO within-group advantages. |
 | `rlvr.metrics` | Clean–noisy advantage agreement / cosine, pairwise fidelity, top-1, margins, difficulty strata. |
 | `rlvr.config` | Layered YAML loading plus validated model, reward, noise, seed, and condition selection. |
 | `rlvr.run_logging` | Stable run IDs, resolved-config snapshots, metadata manifests, and JSONL events. |
+| `rlvr.online` | TRL dataset, clean execution + noisy reward, trainer events, and scheduled clean evaluation. |
 
 ### Shared experiment configs
 
@@ -81,7 +87,7 @@ condition matrix:
 
 Noise rates live in the study YAML rather than in training code. Named legacy
 noise schedules remain supported by the offline diagnostic. The config loader
-validates names/rates and expands a deterministic condition order for the future
+validates names/rates and expands a deterministic condition order for the
 online runner. Every runner can use `rlvr.run_logging.write_run_manifest()` to
 store `resolved_config.yaml` and `run_metadata.json` before expensive work.
 
@@ -100,7 +106,19 @@ git clone <repo-url> RLVR-GRPO-experiments
 cd RLVR-GRPO-experiments
 uv sync
 uv run pytest tests/ -q
+uv run ruff check .
+uv run ruff format --check .
 ```
+
+Install the additional training stack only in an environment that will run
+online GRPO:
+
+```bash
+uv sync --extra train
+```
+
+The `train` extra installs TRL and PEFT. GPU-specific accelerators such as
+vLLM are deliberately not forced into the local macOS environment.
 
 Optional environment variables:
 
@@ -150,12 +168,13 @@ uv run python scripts/run_offline_diagnostic.py \
 |---|---|---|
 | `--model` | selected from config | Optional HF model override, e.g. `Qwen/Qwen3-1.7B-Base` |
 | `--role` | selected from config | Optional report label override (`main_candidate` / `pipeline_debug` / …) |
+| `--revision` | selected from config | Immutable HF revision (required for the test split) |
 | `--config` | `configs/offline_diagnostic.yaml` | YAML with G, temp, noise list, etc. |
-| `--limit` | all train | Cap number of train problems (smoke tests) |
+| `--limit` | entire configured split | Cap number of problems (smoke tests) |
 | `--batch-size` | from config (`4`) | `num_return_sequences` chunk size; raise if VRAM allows (e.g. `8`) |
 | `--dtype` | from config (`bfloat16`) | `bfloat16` / `float16` / `float32` |
 | `--skip-generate` | off | Reuse existing `rollouts.jsonl` (no GPU) |
-| `--out-dir` | `outputs/offline_diagnostic/<org>__<model>/` | Override output directory |
+| `--out-dir` | `outputs/offline_diagnostic/<org>__<model>[/<split>]/` | Override output directory |
 
 #### Config keys — `configs/offline_diagnostic.yaml`
 
@@ -167,15 +186,37 @@ uv run python scripts/run_offline_diagnostic.py \
 | `batch_size` | `4` | Default chunk size (CLI overrides) |
 | `noise_draws` | `3` | Independent noise resamples for offline metrics |
 | `noise_base_seed` | `0` | Base seed for noise RNGs |
+| `generation_seed` | `0` | Per-task deterministic generation seed base |
 | `few_shot_task_ids` | `[2,3,4]` | Prompt examples (fallback: first 3 of prompt split) |
 | `noise_specs` | clean, fp_only, fn_only, ind_flip_10, group_flip_10 | Schedules to apply offline |
 | `aggregations` | fractional, binary | Reward maps for signal metrics |
 | `dtype` | `bfloat16` | Model dtype |
 | `split` | `train` | Which MBPP split to sample |
 
+### Freeze test difficulty before main runs
+
+After the clean GPU pilot has fixed the exact model revision, copy the same
+immutable revision into `model.revision` in `configs/shared.yaml` and
+`model_revision` in `configs/test_difficulty.yaml`. Then generate the initial
+checkpoint's 16-answer groups on the held-out split:
+
+```bash
+uv run python scripts/run_offline_diagnostic.py \
+  --config configs/test_difficulty.yaml
+```
+
+This writes `difficulty.json` and `difficulty_metadata.json` under
+`outputs/offline_diagnostic/Qwen__Qwen3-1.7B-Base/test/`. Main training checks
+the model ID, immutable revision, split, and complete 500-task coverage before
+starting. A fresh test generation refuses to overwrite this directory. These
+strata use the fractional-reward thresholds locked in `pre_registration.md`;
+they are for reporting only and must not be used for tuning.
+
 ### 2) Grade + analyze (CPU)
 
-Uses saved `rollouts.jsonl`. Each candidate code runs in an isolated subprocess (default `--mem-mb 64`). Resumes if `clean_grades.jsonl` already has some task_ids.
+Uses saved `rollouts.jsonl`. Each candidate code runs in a credential-scrubbed,
+resource-capped subprocess (default `--mem-mb 64`). Resumes if
+`clean_grades.jsonl` already has some task_ids.
 
 ```bash
 # Grade only (resume-friendly)
@@ -203,6 +244,7 @@ uv run python scripts/grade_and_analyze_offline.py \
 |---|---|---|
 | `--model` | `Qwen/Qwen3-1.7B-Base` | Must match folder name under `outputs/…` |
 | `--role` | `main_candidate` | Written into `report.json` |
+| `--revision` | selected from config | Immutable HF revision (required for the test split) |
 | `--config` | `configs/offline_diagnostic.yaml` | Noise specs / draws / aggregations |
 | `--out-dir` | auto from model id | Directory containing `rollouts.jsonl` |
 | `--mem-mb` | `64` | Per-code child address-space cap (MiB) |
@@ -223,13 +265,101 @@ Screening rule (from pre-registration): main model is eligible if mean fractiona
 
 ---
 
+## Online GRPO — priority bridge
+
+The first online block uses `configs/priority_bridge.yaml`: clean, FP-only
+30%, and FN-only 30%, each with binary and fractional reward. Each command
+runs exactly one condition and one predeclared seed.
+
+List the six condition names:
+
+```bash
+uv run python scripts/run_online_grpo.py --list-conditions
+```
+
+Validate config, execution, noise, rewards, advantages, and logging without
+loading a model:
+
+```bash
+uv run python scripts/run_online_grpo.py \
+  --condition fp_only__fractional \
+  --seed 0 \
+  --dry-run \
+  --limit 2
+```
+
+Run the short end-to-end GPU smoke pilot (two training steps and two clean
+evaluation problems by default):
+
+```bash
+uv run python scripts/run_online_grpo.py \
+  --condition clean__fractional \
+  --seed 0 \
+  --smoke
+```
+
+Resume its latest checkpoint:
+
+```bash
+uv run python scripts/run_online_grpo.py \
+  --condition clean__fractional \
+  --seed 0 \
+  --smoke \
+  --resume
+```
+
+Useful controls are `--limit`, `--max-steps`, `--eval-limit`,
+`--skip-clean-eval`, `--model`, `--dtype`, and `--out-dir`. vLLM can be
+enabled explicitly with `--use-vllm` after it is installed in the cloud GPU
+environment. These overrides are pilot-only: a frozen main run refuses them so
+that all six conditions use exactly the YAML protocol.
+
+Run directories are immutable by default. Re-running a command into a non-empty
+directory fails instead of appending mixed observations. `--resume` validates
+the saved context and resolved config, locates the latest checkpoint, preserves
+the original manifest, and appends a resume event.
+
+The non-smoke profile is intentionally blocked while
+`training.protocol_status: pilot_not_frozen`. After the clean smoke run, set
+the reviewed `training.main` values in `configs/shared.yaml`, pin the model
+revision, and change the status to `frozen` before launching the six-condition
+matrix and additional seeds. Main runs additionally require a clean Git
+worktree and the frozen test-set difficulty map configured at
+`data.test_difficulty_path`.
+
+Each run writes its resolved config and metadata before training, then records
+rollouts, clean/noisy test outcomes, corruption masks, both reward variants,
+selected training reward, advantages, zero-variance groups, optimizer events,
+checkpoints, and final clean evaluation under:
+
+```
+outputs/online_grpo/priority_bridge/<profile>/<model>[__rev-<revision>]/<condition>/seed-<n>/
+```
+
+The manifest includes Git state, package versions, platform, CUDA and GPU
+details. `resource_report.json` records peak GPU/RAM use, parent and grading
+subprocess CPU time, generated completion tokens, disk size, and stage timings;
+`resource_report_attempts.jsonl` preserves every failed or resumed attempt.
+Every rollout includes a policy step and verifier-call index; evaluation writes
+one resumable JSONL row per task without changing the training RNG stream.
+
+For a frozen main run, clean validation runs every 10% of the optimizer budget.
+Clean test evaluation runs at 90% and 100%; `primary_metric_summary.json`
+averages these last two Pass@1 values. Difficulty-stratified test scores are
+included when the frozen test difficulty map is available.
+
+---
+
 ## Tests
 
 ```bash
 uv run pytest tests/ -q
 ```
 
-Covers fractional/binary maps, GRPO advantages, Prop.1 Monte Carlo sanity (FN hurts binary correct answers more than FP invents wrong ones), and signal buckets — no GPU.
+Covers fractional/binary maps, GRPO advantages, Prop.1 Monte Carlo sanity (FN
+hurts binary correct answers more than FP invents wrong ones), signal buckets,
+the online reward path, immutable run directories, exact resume validation,
+resumable evaluation, difficulty maps, and evaluation schedules — no GPU.
 
 ---
 
@@ -246,7 +376,9 @@ outputs/offline_diagnostic/Qwen__Qwen3-1.7B-Base/
   report.json / report.md
 ```
 
-Next (not implemented here yet): priority GRPO training block — Clean + FP-only + FN-only × binary/fractional (LoRA GRPO, group size 16).
+The priority GRPO runner is implemented. The next operational step is the
+clean GPU smoke pilot; the full matrix remains blocked until its
+hyperparameters are reviewed and frozen.
 
 ---
 

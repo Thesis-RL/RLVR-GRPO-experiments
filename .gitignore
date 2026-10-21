@@ -15,3 +15,5 @@ hf_cache/
 *.pt
 *.bin
 *.safetensors
+outputs/online_grpo/
+outputs/dry_run/

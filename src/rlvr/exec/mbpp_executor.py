@@ -6,9 +6,10 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
 
 from rlvr.data.mbpp import MBPPProblem
 
@@ -43,9 +44,7 @@ def grade_code(
     tests: Sequence[str] | None = None,
     mem_limit: int = _MEM_LIMIT,
 ) -> ExecResult:
-    return grade_codes(
-        [code], problem, timeout_s=timeout_s, tests=tests, mem_limit=mem_limit
-    )[0]
+    return grade_codes([code], problem, timeout_s=timeout_s, tests=tests, mem_limit=mem_limit)[0]
 
 
 def grade_codes(
@@ -70,9 +69,7 @@ def grade_codes(
             )
             continue
         out.append(
-            _grade_one_subprocess(
-                code, problem.test_setup_code, test_list, timeout_s, mem_limit
-            )
+            _grade_one_subprocess(code, problem.test_setup_code, test_list, timeout_s, mem_limit)
         )
     return out
 
@@ -92,18 +89,30 @@ def _grade_one_subprocess(
         "mem_bytes": int(mem_limit),
     }
     wall = timeout_s * (1 + len(test_list)) + 3.0
-    env = os.environ.copy()
-    env["PYTHONMALLOC"] = "malloc"  # more predictable RSS accounting
     try:
-        proc = subprocess.run(
-            [sys.executable, "-I", str(_WORKER)],  # -I: isolated, no user site
-            input=json.dumps(payload),
-            capture_output=True,
-            text=True,
-            timeout=wall,
-            check=False,
-            env=env,
-        )
+        with tempfile.TemporaryDirectory(prefix="rlvr-exec-") as work_dir:
+            # Never inherit Hugging Face, Git, cloud, or other user credentials.
+            env = {
+                "HOME": work_dir,
+                "TMPDIR": work_dir,
+                "PATH": os.defpath,
+                "LANG": "C.UTF-8",
+                "LC_ALL": "C.UTF-8",
+                "PYTHONHASHSEED": "0",
+                "PYTHONMALLOC": "malloc",
+            }
+            proc = subprocess.run(
+                [sys.executable, "-I", str(_WORKER)],  # -I: isolated, no user site
+                input=json.dumps(payload),
+                capture_output=True,
+                text=True,
+                timeout=wall,
+                check=False,
+                env=env,
+                cwd=work_dir,
+                close_fds=True,
+                start_new_session=True,
+            )
     except subprocess.TimeoutExpired:
         return ExecResult(outcomes=tuple(0 for _ in test_list), error="timeout")
 

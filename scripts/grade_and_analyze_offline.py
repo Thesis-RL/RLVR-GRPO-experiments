@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from rlvr.config import load_config, resolve_model_config  # noqa: E402
-from rlvr.data.mbpp import load_mbpp  # noqa: E402
+from rlvr.data.mbpp import load_mbpp, resolve_mbpp_split  # noqa: E402
 from rlvr.exec.mbpp_executor import grade_codes  # noqa: E402
 from rlvr.metrics.signal import (  # noqa: E402
     difficulty_stratum,
@@ -41,6 +41,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--config", type=Path, default=ROOT / "configs/offline_diagnostic.yaml")
     p.add_argument("--model", type=str, default=None, help="Override the model selected by config")
     p.add_argument("--role", type=str, default=None, help="Override the configured model role")
+    p.add_argument("--revision", type=str, default=None, help="Immutable model revision")
     p.add_argument("--out-dir", type=Path, default=None)
     p.add_argument("--mem-mb", type=int, default=64, help="Per-code child RAM cap (MiB)")
     p.add_argument("--timeout-s", type=float, default=0.5)
@@ -63,8 +64,17 @@ def main() -> None:
     model_cfg = resolve_model_config(cfg, model_id=args.model, role=args.role)
     model_id = model_cfg.id
     model_role = model_cfg.role
+    split = resolve_mbpp_split(cfg.get("split", "train"))
+    revision = args.revision or cfg.get("model_revision")
+    if split == "test" and not str(revision or "").strip():
+        raise SystemExit(
+            "A frozen --revision (or model_revision in config) is required for test difficulty"
+        )
     safe_name = model_id.replace("/", "__")
-    out_dir = args.out_dir or (ROOT / "outputs" / "offline_diagnostic" / safe_name)
+    default_out_dir = ROOT / "outputs" / "offline_diagnostic" / safe_name
+    if split != "train":
+        default_out_dir = default_out_dir / split
+    out_dir = args.out_dir or default_out_dir
     rollouts_path = out_dir / "rollouts.jsonl"
     if not rollouts_path.exists():
         raise SystemExit(f"Missing rollouts: {rollouts_path}")
@@ -83,6 +93,8 @@ def main() -> None:
             study="shared",
             model=model_id,
             model_role=model_role,
+            profile=split,
+            model_revision=str(revision) if revision else None,
         ),
         config=cfg,
         config_path=args.config,
@@ -91,6 +103,7 @@ def main() -> None:
             for key, value in {
                 "model": args.model,
                 "role": args.role,
+                "revision": args.revision,
                 "out_dir": str(args.out_dir) if args.out_dir else None,
                 "mem_mb": args.mem_mb,
                 "timeout_s": args.timeout_s,
@@ -102,7 +115,7 @@ def main() -> None:
     )
 
     if not args.analyze_only:
-        problems = {p.task_id: p for p in load_mbpp("train")}
+        problems = {p.task_id: p for p in load_mbpp(split)}
         # Resume: keep already graded task_ids; drop a truncated last line if any
         done: set[int] = set()
         if clean_path.exists() and clean_path.stat().st_size > 0:
@@ -180,6 +193,21 @@ def main() -> None:
                 "nonzero_variance_frac": bool(frac.std(ddof=0) > 1e-12),
             }
     (out_dir / "difficulty.json").write_text(json.dumps(difficulty, indent=2))
+    (out_dir / "difficulty_metadata.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "model": model_id,
+                "model_revision": str(revision) if revision else None,
+                "split": split,
+                "group_size": int(cfg["group_size"]),
+                "strata_definition": "fractional_thresholds_v1",
+                "generation_seed": int(cfg.get("generation_seed", 0)),
+            },
+            indent=2,
+        )
+        + "\n"
+    )
 
     noise_draws = int(cfg["noise_draws"])
     noise_base_seed = int(cfg["noise_base_seed"])
@@ -262,6 +290,8 @@ def main() -> None:
         "role": model_role,
         "config": {
             "group_size": cfg["group_size"],
+            "split": split,
+            "generation_seed": int(cfg.get("generation_seed", 0)),
             "noise_draws": noise_draws,
             "noise_specs": [spec.name for spec in noise_specs],
             "aggregations": list(reward_functions),
