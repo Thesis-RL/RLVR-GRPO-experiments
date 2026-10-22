@@ -86,8 +86,12 @@ def test_fp_noise_is_applied_before_fractional_aggregation(tmp_path):
     assert _call_reward(reward) == [1.0, 1.0]
 
 
-def test_smoke_profile_is_resolved_and_main_is_blocked():
+def test_smoke_and_frozen_main_profiles_are_resolved():
     experiment = load_experiment_config("configs/priority_bridge.yaml")
+    expected_revision = "ea980cb0a6c2ae4b936e82123acc929f1cec04c1"
+
+    assert experiment.values["training"]["protocol_status"] == "frozen"
+    assert experiment.values["model"]["revision"] == expected_revision
 
     smoke = resolve_training_settings(experiment.values, smoke=True)
     assert smoke.group_size == 8
@@ -95,8 +99,15 @@ def test_smoke_profile_is_resolved_and_main_is_blocked():
     assert smoke.max_steps == 2
     assert smoke.kl_coefficient == 0.0
 
-    with pytest.raises(ConfigError, match="protocol_status"):
-        resolve_training_settings(experiment.values, smoke=False)
+    main = resolve_training_settings(experiment.values, smoke=False)
+    assert main.group_size == 16
+    assert main.gradient_accumulation_steps == main.group_size
+    assert main.max_steps == 374
+    assert main.learning_rate == pytest.approx(1.0e-6)
+    assert main.kl_coefficient == 0.0
+    assert main.logging_steps == 1
+    assert main.save_steps == 374
+    assert main.save_total_limit == 10
 
     invalid = deepcopy(experiment.values)
     invalid["training"]["scale_rewards"] = "batch"

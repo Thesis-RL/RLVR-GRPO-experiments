@@ -22,6 +22,7 @@ from rlvr.online.evaluation import (
     summarize_primary_metric,
 )
 from rlvr.online.lifecycle import prepare_run_directory
+from rlvr.online.progress import RunProgressCallback
 from rlvr.run_logging import RunContext, write_run_manifest
 
 
@@ -42,7 +43,13 @@ def _context() -> RunContext:
 
 def test_run_directory_rejects_accidental_reuse_and_validates_resume(tmp_path):
     out_dir = tmp_path / "run"
-    config = {"resolved_run": {"profile": "smoke"}}
+    config = {
+        "resolved_run": {
+            "profile": "smoke",
+            "test_fractions": (0.9, 1.0),
+            "lora_target_modules": ("q_proj", "v_proj"),
+        }
+    }
     context = _context()
 
     assert (
@@ -158,6 +165,7 @@ def test_evaluation_is_resumable_and_restores_train_mode(tmp_path, monkeypatch):
         split="test",
     )
     model = DummyModel()
+    progress_updates = []
     kwargs = {
         "few_shot": [],
         "context": _context(),
@@ -172,6 +180,7 @@ def test_evaluation_is_resumable_and_restores_train_mode(tmp_path, monkeypatch):
         "timeout_s": 0.5,
         "mem_limit": 64 * 1024 * 1024,
         "difficulty_by_task": {1: "easy"},
+        "progress_callback": lambda completed, total: progress_updates.append((completed, total)),
     }
 
     random.seed(123)
@@ -191,10 +200,58 @@ def test_evaluation_is_resumable_and_restores_train_mode(tmp_path, monkeypatch):
     assert first["pass_at_1"] == 1.0
     assert first["by_difficulty"]["easy"]["pass_at_1"] == 1.0
     assert calls == ["sample"]
+    assert progress_updates == [(0, 1), (1, 1), (1, 1)]
     assert model.training is True
     assert random.random() == expected_python
     assert np.random.random() == expected_numpy
     assert torch.equal(torch.rand(1), expected_torch)
+
+
+def test_run_progress_writes_atomic_training_and_evaluation_status(tmp_path):
+    progress = RunProgressCallback(tmp_path, context=_context(), total_steps=4)
+    state = SimpleNamespace(global_step=0, epoch=0.0)
+    control = SimpleNamespace()
+    progress.on_train_begin(None, state, control)
+
+    progress._last_step_recorded_at -= 2.0
+    state.global_step = 1
+    state.epoch = 0.25
+    progress.on_step_end(None, state, control)
+    progress.on_log(None, state, control, logs={"loss": 0.25, "reward": 0.5})
+
+    status = json.loads((tmp_path / "status.json").read_text())
+    assert status["status"] == "running"
+    assert status["stage"] == "training"
+    assert status["current_step"] == 1
+    assert status["total_steps"] == 4
+    assert status["steps_remaining"] == 3
+    assert status["progress_fraction"] == pytest.approx(0.25)
+    assert status["seconds_per_step"] >= 2.0
+    assert status["estimated_seconds_remaining"] >= 6.0
+    assert status["last_metrics"]["reward"] == 0.5
+
+    progress.begin_evaluation(
+        split="test",
+        checkpoint="checkpoint-1",
+        step=1,
+        completed=0,
+        total=2,
+    )
+    assert progress._evaluation_started is not None
+    progress._evaluation_started -= 2.0
+    progress.update_evaluation(1, 2)
+    status = json.loads((tmp_path / "status.json").read_text())
+    assert status["stage"] == "clean_evaluation_test"
+    assert status["eta_scope"] == "training_plus_current_evaluation"
+    assert status["evaluation"]["completed"] == 1
+    assert status["evaluation_estimated_seconds_remaining"] >= 2.0
+    assert status["estimated_seconds_remaining"] >= 8.0
+
+    progress.mark_complete(primary_metric={"mean": 1.0}, resource_report={"gpu": {}})
+    status = json.loads((tmp_path / "status.json").read_text())
+    assert status["status"] == "complete"
+    assert status["epoch"] == pytest.approx(0.25)
+    assert status["estimated_seconds_remaining"] == 0.0
 
 
 def test_evaluation_schedules_and_callback_force_save():
@@ -239,6 +296,10 @@ def test_primary_metric_averages_last_evaluations_by_difficulty(tmp_path):
 
 def test_load_difficulty_map_validates_coverage(tmp_path):
     path = tmp_path / "difficulty.json"
+    assert load_difficulty_map(path, allow_missing=True) == {}
+    with pytest.raises(FileNotFoundError, match="does not exist"):
+        load_difficulty_map(path)
+
     path.write_text(json.dumps({"1": {"stratum": "hard"}, "2": {"stratum": "easy"}}))
     assert load_difficulty_map(path, required_task_ids=[1, 2]) == {1: "hard", 2: "easy"}
     with pytest.raises(ValueError, match="missing"):

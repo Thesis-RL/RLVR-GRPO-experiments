@@ -93,7 +93,8 @@ def _validate_existing_run(
         )
 
     existing_config = yaml.safe_load(config_path.read_text())
-    if existing_config != resolved_config:
+    normalized_config = yaml.safe_load(yaml.safe_dump(resolved_config, sort_keys=False))
+    if existing_config != normalized_config:
         raise ConfigError(
             "Resolved configuration differs from the existing run; resume requires an exact match"
         )

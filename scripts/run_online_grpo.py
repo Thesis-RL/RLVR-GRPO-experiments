@@ -41,6 +41,7 @@ from rlvr.online.evaluation import (  # noqa: E402
     summarize_primary_metric,
 )
 from rlvr.online.lifecycle import prepare_run_directory  # noqa: E402
+from rlvr.online.progress import RunProgressCallback  # noqa: E402
 from rlvr.online.reward import MBPPNoisyReward  # noqa: E402
 from rlvr.online.settings import (  # noqa: E402
     EvaluationSettings,
@@ -233,8 +234,6 @@ def main() -> None:
     }
     environment = collect_environment_metadata(ROOT)
     git_state = environment.get("git", {})
-    if profile == "main" and (not git_state.get("commit") or git_state.get("dirty")):
-        raise ConfigError("Main runs require a clean Git worktree at a recorded commit")
     resume_checkpoint = prepare_run_directory(
         out_dir,
         context=context,
@@ -317,11 +316,18 @@ def _run_training(
     from trl import GRPOConfig, GRPOTrainer
 
     telemetry = RunTelemetry(out_dir)
+    progress = RunProgressCallback(
+        out_dir,
+        context=context,
+        total_steps=settings.max_steps,
+        resume_checkpoint=resume_checkpoint,
+    )
     trainer: Any | None = None
     train_metrics: dict[str, Any] = {}
     telemetry.reset_gpu_peak()
     try:
         revision = context.model_revision
+        progress.mark_stage("tokenizer_load")
         with telemetry.stage("tokenizer_load"):
             tokenizer = AutoTokenizer.from_pretrained(
                 model.id,
@@ -396,7 +402,8 @@ def _run_training(
             bias="none",
         )
         event_path = out_dir / "events.jsonl"
-        callbacks: list[Any] = [JsonlTrainerCallback(event_path, runtime_context)]
+        progress.context = runtime_context
+        callbacks: list[Any] = [JsonlTrainerCallback(event_path, runtime_context), progress]
 
         if settings.profile == "main":
             callbacks.append(
@@ -413,6 +420,7 @@ def _run_training(
                     mem_mb=mem_mb,
                     event_path=event_path,
                     telemetry=telemetry,
+                    progress=progress,
                 )
             )
 
@@ -426,6 +434,7 @@ def _run_training(
                 finally:
                     self.generation_and_scoring_seconds += time.perf_counter() - started
 
+        progress.mark_stage("trainer_initialization")
         with telemetry.stage("trainer_initialization"):
             trainer = InstrumentedGRPOTrainer(
                 model=model.id,
@@ -436,10 +445,12 @@ def _run_training(
                 peft_config=lora,
                 callbacks=callbacks,
             )
+        progress.mark_stage("training")
         with telemetry.stage("training"):
             train_result = trainer.train(resume_from_checkpoint=resume_checkpoint)
         train_metrics = dict(train_result.metrics)
 
+        progress.mark_stage("final_save")
         with telemetry.stage("final_save"):
             trainer.save_model(out_dir / "final_adapter")
             trainer.save_state()
@@ -457,8 +468,18 @@ def _run_training(
                     if model.id == experiment.model.id
                     else None
                 )
-                test_difficulty = load_difficulty_map(_repo_path(difficulty_path))
+                test_difficulty = load_difficulty_map(
+                    _repo_path(difficulty_path),
+                    allow_missing=True,
+                )
                 unwrapped = trainer.accelerator.unwrap_model(trainer.model)
+                progress.begin_evaluation(
+                    split="test",
+                    checkpoint="final_adapter",
+                    step=int(trainer.state.global_step),
+                    completed=0,
+                    total=len(problems),
+                )
                 with telemetry.stage("evaluation_test"):
                     evaluate_clean_pass_at_1(
                         unwrapped,
@@ -477,6 +498,7 @@ def _run_training(
                         timeout_s=timeout_s,
                         mem_limit=mem_mb * 1024 * 1024,
                         difficulty_by_task=test_difficulty,
+                        progress_callback=progress.update_evaluation,
                     )
                 primary_summary = summarize_primary_metric(
                     out_dir,
@@ -504,6 +526,10 @@ def _run_training(
             generated_tokens=condition_reward.generated_tokens,
             train_metrics=train_metrics,
         )
+        progress.mark_complete(
+            primary_metric=primary_summary,
+            resource_report=resource_report,
+        )
         append_jsonl(
             out_dir / "events.jsonl",
             {"event": "run_complete", "step": int(trainer.state.global_step)},
@@ -520,6 +546,7 @@ def _run_training(
             )
         )
     except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
         telemetry.write(
             status="failed",
             reward_seconds=condition_reward.reward_seconds,
@@ -531,11 +558,12 @@ def _run_training(
             ),
             generated_tokens=condition_reward.generated_tokens,
             train_metrics=train_metrics,
-            error=f"{type(exc).__name__}: {exc}",
+            error=error,
         )
+        progress.mark_failed(error)
         append_jsonl(
             out_dir / "events.jsonl",
-            {"event": "run_failed", "error": f"{type(exc).__name__}: {exc}"},
+            {"event": "run_failed", "error": error},
             context=condition_reward.context,
         )
         raise
@@ -555,6 +583,7 @@ def _scheduled_evaluation_callback(
     mem_mb: int,
     event_path: Path,
     telemetry: RunTelemetry,
+    progress: RunProgressCallback,
 ) -> ScheduledCleanEvalCallback:
     validation_split = resolve_mbpp_split(data_config["validation_split"])
     test_split = resolve_mbpp_split(data_config["test_split"])
@@ -580,25 +609,36 @@ def _scheduled_evaluation_callback(
     def run_evaluation(split_name: str, model: Any, step: int, checkpoint: str) -> dict[str, Any]:
         problems = validation_problems if split_name == "validation" else test_problems
         difficulties = {} if split_name == "validation" else test_difficulty
-        with telemetry.stage(f"evaluation_{split_name}"):
-            return evaluate_clean_pass_at_1(
-                model,
-                tokenizer,
-                problems,
-                few_shot=few_shot,
-                context=context,
-                out_dir=out_dir,
-                split_name=split_name,
-                checkpoint=checkpoint,
-                step=step,
-                seed=evaluation.seed,
-                temperature=float(generation["eval_temperature"]),
-                top_p=float(generation["top_p"]),
-                max_new_tokens=int(generation["max_new_tokens"]),
-                timeout_s=timeout_s,
-                mem_limit=mem_mb * 1024 * 1024,
-                difficulty_by_task=difficulties,
-            )
+        progress.begin_evaluation(
+            split=split_name,
+            checkpoint=checkpoint,
+            step=step,
+            completed=0,
+            total=len(problems),
+        )
+        try:
+            with telemetry.stage(f"evaluation_{split_name}"):
+                return evaluate_clean_pass_at_1(
+                    model,
+                    tokenizer,
+                    problems,
+                    few_shot=few_shot,
+                    context=context,
+                    out_dir=out_dir,
+                    split_name=split_name,
+                    checkpoint=checkpoint,
+                    step=step,
+                    seed=evaluation.seed,
+                    temperature=float(generation["eval_temperature"]),
+                    top_p=float(generation["top_p"]),
+                    max_new_tokens=int(generation["max_new_tokens"]),
+                    timeout_s=timeout_s,
+                    mem_limit=mem_mb * 1024 * 1024,
+                    difficulty_by_task=difficulties,
+                    progress_callback=progress.update_evaluation,
+                )
+        finally:
+            progress.mark_stage("training")
 
     return ScheduledCleanEvalCallback(
         validation_steps=validation_schedule,

@@ -123,6 +123,11 @@ def main() -> None:
     timeout_s = float(cfg["timeout_s"])
     noise_specs = resolve_noise_specs(cfg["noise_specs"])
     reward_functions = resolve_reward_functions(cfg["aggregations"])
+    resolved_cfg = dict(cfg)
+    resolved_cfg["batch_size"] = batch_size
+    resolved_cfg["dtype"] = dtype
+    resolved_cfg["split"] = split
+    resolved_cfg["model_revision"] = str(revision) if revision else None
 
     write_run_manifest(
         out_dir,
@@ -135,7 +140,7 @@ def main() -> None:
             profile=split,
             model_revision=str(revision) if revision else None,
         ),
-        config=cfg,
+        config=resolved_cfg,
         config_path=args.config,
         overrides={
             key: value
@@ -319,20 +324,24 @@ def main() -> None:
         for row in signal_rows:
             f.write(json.dumps(row) + "\n")
 
-    # Model screening (pre-registered rule)
+    # Descriptive difficulty statistics. Only the training split is eligible
+    # for the pre-registered model-screening decision.
     mean_frac = float(np.mean([d["mean_fractional"] for d in difficulty.values()]))
     frac_nonzero = float(np.mean([d["nonzero_variance_frac"] for d in difficulty.values()]))
-    screening = {
+    difficulty_summary = {
         "model": model_id,
         "role": model_role,
         "n_problems": len(difficulty),
         "mean_fractional_reward": mean_frac,
         "frac_problems_nonzero_variance": frac_nonzero,
-        "eligible_as_main": (0.05 <= mean_frac <= 0.60) and (frac_nonzero >= 0.15),
         "stratum_counts": {
             s: sum(1 for d in difficulty.values() if d["stratum"] == s)
             for s in ("easy", "medium", "hard")
         },
+    }
+    screening = {
+        **difficulty_summary,
+        "eligible_as_main": (0.05 <= mean_frac <= 0.60) and (frac_nonzero >= 0.15),
     }
 
     # Prop. 1 offline deltas
@@ -366,23 +375,32 @@ def main() -> None:
     report = {
         "model": model_id,
         "role": model_role,
+        "purpose": "model_screening" if split == "train" else "difficulty_stratification_only",
         "config": {
             "group_size": group_size,
             "split": split,
+            "model_revision": str(revision) if revision else None,
             "generation_seed": generation_seed,
+            "batch_size": batch_size,
+            "dtype": dtype,
             "noise_draws": noise_draws,
             "noise_specs": [spec.name for spec in noise_specs],
             "aggregations": list(reward_functions),
             "n_problems": len(difficulty),
         },
-        "screening": screening,
+        "difficulty_summary": difficulty_summary,
         "summaries": summaries,
-        "proposition1_offline": prop1,
-        "pre_registration": str(ROOT / "notes/pre_registration.md"),
+        "pre_registration": "notes/pre_registration.md",
     }
+    if split == "train":
+        report["screening"] = screening
+        report["proposition1_offline"] = prop1
     (out_dir / "report.json").write_text(json.dumps(report, indent=2))
     _write_markdown_report(out_dir / "report.md", report)
-    print(json.dumps({"out_dir": str(out_dir), "screening": screening, "prop1": prop1}, indent=2))
+    result = {"out_dir": str(out_dir), "difficulty_summary": difficulty_summary}
+    if split == "train":
+        result.update({"screening": screening, "prop1": prop1})
+    print(json.dumps(result, indent=2))
 
 
 def _sub(a, b):
@@ -426,6 +444,26 @@ def _mean_summaries(items: list[dict]) -> dict:
 
 
 def _write_markdown_report(path: Path, report: dict) -> None:
+    if report.get("purpose") == "difficulty_stratification_only":
+        summary = report["difficulty_summary"]
+        config = report["config"]
+        lines = [
+            f"# Frozen test difficulty map — `{report['model']}`",
+            "",
+            "This held-out test run is used only to freeze reporting strata. "
+            "It is not used for model selection, hyperparameter tuning, or training rewards.",
+            "",
+            f"- Model revision: `{config['model_revision']}`",
+            f"- Problems: **{summary['n_problems']}**",
+            f"- Group size: **{config['group_size']}**",
+            f"- Mean fractional reward: **{summary['mean_fractional_reward']:.4f}**",
+            "- Fraction with non-zero clean variance: "
+            f"**{summary['frac_problems_nonzero_variance']:.3f}**",
+            f"- Strata: {summary['stratum_counts']}",
+        ]
+        path.write_text("\n".join(lines) + "\n")
+        return
+
     s = report["screening"]
     lines = [
         f"# Offline diagnostic — `{report['model']}`",

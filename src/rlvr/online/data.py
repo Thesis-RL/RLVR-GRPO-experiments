@@ -56,12 +56,15 @@ def load_difficulty_map(
     expected_split: str | None = None,
     expected_group_size: int | None = None,
     require_metadata: bool = False,
+    allow_missing: bool = False,
 ) -> dict[int, str]:
     """Load the frozen offline difficulty strata used by later analyses."""
     if path is None:
         return {}
     source = Path(path)
     if not source.exists():
+        if allow_missing:
+            return {}
         raise FileNotFoundError(f"Difficulty file does not exist: {source}")
     raw = json.loads(source.read_text())
     if not isinstance(raw, dict):

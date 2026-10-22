@@ -1,0 +1,71 @@
+{
+  "model": "Qwen/Qwen3-1.7B-Base",
+  "role": "main_candidate",
+  "purpose": "difficulty_stratification_only",
+  "config": {
+    "group_size": 16,
+    "split": "test",
+    "model_revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+    "generation_seed": 0,
+    "batch_size": 16,
+    "dtype": "bfloat16",
+    "noise_draws": 1,
+    "noise_specs": [
+      "clean"
+    ],
+    "aggregations": [
+      "fractional",
+      "binary"
+    ],
+    "n_problems": 500
+  },
+  "difficulty_summary": {
+    "model": "Qwen/Qwen3-1.7B-Base",
+    "role": "main_candidate",
+    "n_problems": 500,
+    "mean_fractional_reward": 0.43579166666666663,
+    "frac_problems_nonzero_variance": 0.858,
+    "stratum_counts": {
+      "easy": 151,
+      "medium": 129,
+      "hard": 220
+    }
+  },
+  "summaries": {
+    "clean__fractional": {
+      "n_groups": 500.0,
+      "n_zero_variance_clean": 71.0,
+      "n_usable": 429.0,
+      "mean_advantage_sign_agreement": 1.0,
+      "mean_advantage_cosine": 1.0,
+      "mean_pairwise_fidelity": 1.0,
+      "mean_spearman": 1.0,
+      "mean_top1_preserved": 1.0,
+      "mean_clean_reward_all": 0.43579166666666663,
+      "mean_noisy_reward_all": 0.43579166666666663,
+      "frac_problems_nonzero_variance": 0.858,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    },
+    "clean__binary": {
+      "n_groups": 500.0,
+      "n_zero_variance_clean": 145.0,
+      "n_usable": 355.0,
+      "mean_advantage_sign_agreement": 1.0,
+      "mean_advantage_cosine": 1.0,
+      "mean_pairwise_fidelity": 1.0,
+      "mean_spearman": 1.0,
+      "mean_top1_preserved": 1.0,
+      "mean_clean_reward_all": 0.37375,
+      "mean_noisy_reward_all": 0.37375,
+      "frac_problems_nonzero_variance": 0.71,
+      "mean_advantage_sign_agreement_bucket": "survives",
+      "mean_advantage_cosine_bucket": "survives",
+      "mean_pairwise_fidelity_bucket": "survives",
+      "mean_top1_preserved_bucket": "survives"
+    }
+  },
+  "pre_registration": "notes/pre_registration.md"
+}

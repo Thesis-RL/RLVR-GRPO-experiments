@@ -1,8 +1,9 @@
 extends: offline_diagnostic.yaml
 
-# Freeze this to the same immutable commit as model.revision in shared.yaml.
-model_revision: null
+# Must match model.revision in shared.yaml.
+model_revision: ea980cb0a6c2ae4b936e82123acc929f1cec04c1
 split: test
+batch_size: 16  # Generate the complete 16-answer group in one GPU batch.
 
 # The test pass@1 difficulty strata only need clean initial-checkpoint groups.
 noise_draws: 1

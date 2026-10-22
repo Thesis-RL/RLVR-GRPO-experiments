@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-22T17:39:29.928155+00:00",
+  "run_id": "offline_diagnostic__test",
+  "context": {
+    "pipeline": "offline_diagnostic",
+    "experiment": "offline_diagnostic",
+    "study": "shared",
+    "model": "Qwen/Qwen3-1.7B-Base",
+    "model_role": "main_candidate",
+    "condition": null,
+    "reward": null,
+    "noise": null,
+    "seed": null,
+    "profile": "test",
+    "model_revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1"
+  },
+  "source_config": "/home/ubuntu/RLVR-GRPO-experiments/configs/test_difficulty.yaml",
+  "overrides": {
+    "batch_size": 16
+  },
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "hostname": "rlvr-grpo-smoke",
+    "packages": {
+      "torch": "2.14.1",
+      "transformers": "5.19.0",
+      "datasets": "5.1.0",
+      "trl": "1.16.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "numpy": "2.5.4"
+    },
+    "git": {
+      "commit": "f6bbd5bad6b273cdf26115934c2caf509dc6e4c0",
+      "branch": "feat/rlvr-grpo-pipeline",
+      "dirty": true
+    },
+    "cuda": {
+      "available": true,
+      "torch_cuda_version": "13.0",
+      "cudnn_version": 92400,
+      "device_count": 1,
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 3090",
+          "capability": [
+            8,
+            6
+          ],
+          "total_memory_bytes": 25351356416
+        }
+      ]
+    }
+  },
+  "resolved_model_revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1"
+}

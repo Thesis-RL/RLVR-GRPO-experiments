@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model": "Qwen/Qwen3-1.7B-Base",
+  "model_revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+  "split": "test",
+  "group_size": 16,
+  "strata_definition": "fractional_thresholds_v1",
+  "generation_seed": 0,
+  "batch_size": 16,
+  "dtype": "bfloat16"
+}

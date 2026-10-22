@@ -38,6 +38,8 @@ RLVR-GRPO-experiments/
 │
 ├── scripts/
 │   ├── run_online_grpo.py           # one online condition / seed, smoke and resume
+│   ├── run_online_matrix.py         # sequential condition matrix + aggregate status
+│   ├── show_progress.py             # readable run / matrix progress snapshots
 │   ├── run_offline_diagnostic.py      # end-to-end: generate (+ optional grade/noise)
 │   ├── grade_and_analyze_offline.py   # safe grade / analyze over saved rollouts (CPU)
 │   └── _grade_one_problem_worker.py   # isolated child: exec one candidate under resource caps
@@ -45,7 +47,8 @@ RLVR-GRPO-experiments/
 ├── tests/
 │   ├── test_offline_core.py    # noise / rewards / Prop.1 sanity (no GPU)
 │   ├── test_online_reward.py   # online reward path and config guards (no GPU)
-│   └── test_online_runtime.py  # resume, evaluation, difficulty, schedules (no GPU)
+│   ├── test_online_runtime.py  # resume, evaluation, difficulty, schedules (no GPU)
+│   └── test_online_matrix.py   # completed-run reuse and matrix ETA scope (no GPU)
 │
 └── outputs/                    # frozen diagnostics + gitignored online runs
     └── offline_diagnostic/
@@ -55,7 +58,7 @@ RLVR-GRPO-experiments/
             ├── difficulty.json        # per-problem difficulty buckets
             ├── signal_by_group.jsonl  # per-group metrics under each noise draw
             ├── report.json            # machine-readable summary
-            └── report.md              # human summary (screening + Prop.1)
+            └── report.md              # human screening or difficulty summary
 ```
 
 ### What each package module does
@@ -195,10 +198,11 @@ uv run python scripts/run_offline_diagnostic.py \
 
 ### Freeze test difficulty before main runs
 
-After the clean GPU pilot has fixed the exact model revision, copy the same
-immutable revision into `model.revision` in `configs/shared.yaml` and
-`model_revision` in `configs/test_difficulty.yaml`. Then generate the initial
-checkpoint's 16-answer groups on the held-out split:
+The frozen map for the current Qwen3-1.7B-Base revision is already present and
+validated for all 500 held-out test problems. If the model revision changes,
+copy the new immutable revision into `model.revision` in `configs/shared.yaml`
+and `model_revision` in `configs/test_difficulty.yaml`, then generate a new
+initial-checkpoint map from 16-answer groups:
 
 ```bash
 uv run python scripts/run_offline_diagnostic.py \
@@ -319,13 +323,11 @@ directory fails instead of appending mixed observations. `--resume` validates
 the saved context and resolved config, locates the latest checkpoint, preserves
 the original manifest, and appends a resume event.
 
-The non-smoke profile is intentionally blocked while
-`training.protocol_status: pilot_not_frozen`. After the clean smoke run, set
-the reviewed `training.main` values in `configs/shared.yaml`, pin the model
-revision, and change the status to `frozen` before launching the six-condition
-matrix and additional seeds. Main runs additionally require a clean Git
-worktree and the frozen test-set difficulty map configured at
-`data.test_difficulty_path`.
+The main profile is frozen to the immutable Qwen3-1.7B-Base revision and a
+374-step budget (one 16-completion group per MBPP train problem). Main runs
+record the current Git commit and dirty state for provenance, but do not require
+a clean worktree. They do require the frozen test-set difficulty map configured
+at `data.test_difficulty_path`.
 
 Each run writes its resolved config and metadata before training, then records
 rollouts, clean/noisy test outcomes, corruption masks, both reward variants,
@@ -342,6 +344,37 @@ subprocess CPU time, generated completion tokens, disk size, and stage timings;
 `resource_report_attempts.jsonl` preserves every failed or resumed attempt.
 Every rollout includes a policy step and verifier-call index; evaluation writes
 one resumable JSONL row per task without changing the training RNG stream.
+
+Each online run also atomically refreshes `status.json`. It records the current
+stage, optimizer step, total steps, epoch, elapsed time, observed seconds per
+step, scoped ETA, expected finish time, latest checkpoint, recent metrics, and
+task-level clean-evaluation progress. The ETA is explicitly labelled as
+training-only or training plus the evaluation currently in progress; future
+scheduled evaluations are not silently included. Read the latest run with:
+
+```bash
+uv run python scripts/show_progress.py
+```
+
+Use `--out-dir <run-directory>` for one known run or `--all` to list every
+recorded run. The command also reports whether the recorded process is still
+alive on the current host.
+
+Run a condition matrix sequentially with an aggregate `matrix_status.json`:
+
+```bash
+uv run python scripts/run_online_matrix.py \
+  --config configs/priority_bridge.yaml \
+  --seed 0
+```
+
+The matrix status records completed, current, and pending conditions plus an
+explicitly scoped ETA projection. `--resume` resumes an interrupted condition
+from its latest valid checkpoint and reuses a completed condition only after
+its experiment, profile, condition, seed, metadata, and Git commit have been
+validated. In a remote session, launch this command through a persistent
+process manager (`tmux`, `systemd`, or equivalent) so an SSH disconnect cannot
+stop the experiment.
 
 For a frozen main run, clean validation runs every 10% of the optimizer budget.
 Clean test evaluation runs at 90% and 100%; `primary_metric_summary.json`
@@ -376,9 +409,10 @@ outputs/offline_diagnostic/Qwen__Qwen3-1.7B-Base/
   report.json / report.md
 ```
 
-The priority GRPO runner is implemented. The next operational step is the
-clean GPU smoke pilot; the full matrix remains blocked until its
-hyperparameters are reviewed and frozen.
+The priority GRPO runner and main hyperparameters are frozen, and the
+initial-checkpoint test difficulty map has been generated and validated for all
+500 test problems. The next operational step is seed 0 of the six-condition
+priority matrix.
 
 ---
 

@@ -17,3 +17,5 @@ hf_cache/
 *.safetensors
 outputs/online_grpo/
 outputs/dry_run/
+outputs/smoke_validation/
+outputs/online_matrix/

@@ -9,6 +9,8 @@ from rlvr.data.mbpp import resolve_mbpp_split
 from rlvr.metrics.signal import group_signal_stats, summarize_groups
 from rlvr.noise.corruption import PLANNED_SPECS, apply_noise
 from rlvr.rewards.aggregation import binary_rewards, fractional_rewards, grpo_advantages
+from scripts.grade_and_analyze_offline import _write_markdown as _write_analysis_report
+from scripts.run_offline_diagnostic import _write_markdown_report
 
 
 def test_fractional_and_binary():
@@ -62,3 +64,26 @@ def test_mbpp_split_validation():
     assert resolve_mbpp_split("test") == "test"
     with pytest.raises(ValueError, match="Unknown MBPP split"):
         resolve_mbpp_split("dev")
+
+
+def test_test_difficulty_report_is_not_presented_as_model_screening(tmp_path):
+    report = {
+        "model": "test-model",
+        "purpose": "difficulty_stratification_only",
+        "config": {"model_revision": "abc123", "group_size": 16},
+        "difficulty_summary": {
+            "n_problems": 500,
+            "mean_fractional_reward": 0.4,
+            "frac_problems_nonzero_variance": 0.8,
+            "stratum_counts": {"easy": 100, "medium": 200, "hard": 200},
+        },
+    }
+
+    for index, writer in enumerate((_write_markdown_report, _write_analysis_report)):
+        path = tmp_path / f"report-{index}.md"
+        writer(path, report)
+        rendered = path.read_text()
+        assert "Frozen test difficulty map" in rendered
+        assert "not used for model selection" in rendered
+        assert "Model screening" not in rendered
+        assert "Proposition 1" not in rendered

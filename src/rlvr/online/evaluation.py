@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import random
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -38,6 +38,7 @@ def evaluate_clean_pass_at_1(
     timeout_s: float,
     mem_limit: int,
     difficulty_by_task: dict[int, str] | None = None,
+    progress_callback: Callable[[int, int], None] | None = None,
 ) -> dict[str, Any]:
     """Generate one program per task, resuming safely at task granularity."""
     output = Path(out_dir) / "evaluations" / split_name / f"step-{step}"
@@ -46,6 +47,9 @@ def evaluate_clean_pass_at_1(
     summary_path = output / "summary.json"
     existing = _read_predictions(predictions_path, step=step, checkpoint=checkpoint)
     expected_ids = {problem.task_id for problem in problems}
+    completed = len(expected_ids.intersection(existing))
+    if progress_callback is not None:
+        progress_callback(completed, len(problems))
 
     if summary_path.exists() and expected_ids.issubset(existing):
         return json.loads(summary_path.read_text())
@@ -99,6 +103,9 @@ def evaluate_clean_pass_at_1(
                 }
                 append_jsonl(predictions_path, row, context=context)
                 existing[problem.task_id] = row
+                completed += 1
+                if progress_callback is not None:
+                    progress_callback(completed, len(problems))
         finally:
             if was_training:
                 model.train()
