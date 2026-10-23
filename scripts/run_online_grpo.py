@@ -393,6 +393,7 @@ def _run_training(
             logging_steps=settings.logging_steps,
             logging_first_step=True,
             log_completions=True,
+            num_completions_to_print=0,
             save_strategy="steps",
             save_steps=settings.save_steps,
             save_total_limit=settings.save_total_limit,
