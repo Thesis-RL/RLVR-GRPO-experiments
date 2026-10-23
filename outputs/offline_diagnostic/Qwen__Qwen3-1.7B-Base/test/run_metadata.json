@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-10-22T17:39:29.928155+00:00",
+  "created_at_utc": "2026-10-22T22:31:40.038859+00:00",
   "run_id": "offline_diagnostic__test",
   "context": {
     "pipeline": "offline_diagnostic",
@@ -17,7 +17,10 @@
   },
   "source_config": "/home/ubuntu/RLVR-GRPO-experiments/configs/test_difficulty.yaml",
   "overrides": {
-    "batch_size": 16
+    "model": "Qwen/Qwen3-1.7B-Base",
+    "role": "main_candidate",
+    "revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+    "out_dir": "/home/ubuntu/rlvr-difficulty-512/test"
   },
   "environment": {
     "python": "3.12.3",
@@ -33,9 +36,9 @@
       "numpy": "2.5.4"
     },
     "git": {
-      "commit": "f6bbd5bad6b273cdf26115934c2caf509dc6e4c0",
+      "commit": "b7043a414e22c39a2b4d7e511c1b0ad6f611179f",
       "branch": "feat/rlvr-grpo-pipeline",
-      "dirty": true
+      "dirty": false
     },
     "cuda": {
       "available": true,

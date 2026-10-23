@@ -1,7 +1,8 @@
 group_size: 16
 temperature: 1.0
 top_p: 0.95
-max_new_tokens: 256
+max_new_tokens: 512
+stop_sequence: '[DONE]'
 batch_size: 16
 timeout_s: 1.0
 noise_draws: 1
@@ -11,6 +12,7 @@ few_shot_task_ids:
 - 2
 - 3
 - 4
+model_revision: ea980cb0a6c2ae4b936e82123acc929f1cec04c1
 noise_specs:
 - clean
 aggregations:
@@ -23,4 +25,3 @@ models:
   role: pipeline_debug
 dtype: bfloat16
 split: test
-model_revision: ea980cb0a6c2ae4b936e82123acc929f1cec04c1

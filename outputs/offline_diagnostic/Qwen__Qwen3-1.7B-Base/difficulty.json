@@ -1,21 +1,21 @@
 {
   "601": {
-    "mean_fractional": 0.10416666666666666,
+    "mean_fractional": 0.0625,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "602": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.25,
-    "stratum": "easy",
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "603": {
-    "mean_fractional": 0.0,
+    "mean_fractional": 0.020833333333333332,
     "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "604": {
     "mean_fractional": 0.5,
@@ -25,115 +25,115 @@
   },
   "605": {
     "mean_fractional": 0.75,
-    "mean_binary": 0.625,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "606": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "607": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "608": {
-    "mean_fractional": 0.125,
+    "mean_fractional": 0.0625,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "609": {
-    "mean_fractional": 0.22916666666666666,
+    "mean_fractional": 0.1875,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "610": {
-    "mean_fractional": 0.47916666666666663,
-    "mean_binary": 0.3125,
-    "stratum": "medium",
+    "mean_fractional": 0.2708333333333333,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "611": {
-    "mean_fractional": 0.5208333333333334,
-    "mean_binary": 0.5,
-    "stratum": "medium",
+    "mean_fractional": 0.7708333333333333,
+    "mean_binary": 0.75,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "612": {
-    "mean_fractional": 0.08333333333333333,
+    "mean_fractional": 0.0,
     "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "613": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "614": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
-    "stratum": "medium",
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "615": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "616": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "617": {
-    "mean_fractional": 0.14583333333333331,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "618": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "619": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "620": {
     "mean_fractional": 0.041666666666666664,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
-  "621": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
+  "618": {
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
-  "622": {
-    "mean_fractional": 0.08333333333333333,
+  "619": {
+    "mean_fractional": 0.10416666666666666,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
+  "620": {
+    "mean_fractional": 0.125,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "621": {
+    "mean_fractional": 0.35416666666666663,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "622": {
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
   "623": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -144,33 +144,33 @@
     "nonzero_variance_frac": true
   },
   "625": {
-    "mean_fractional": 0.7708333333333333,
-    "mean_binary": 0.6875,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "626": {
-    "mean_fractional": 0.4583333333333333,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.5416666666666666,
+    "mean_binary": 0.25,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "627": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.0,
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "628": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "629": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
+    "mean_fractional": 0.6041666666666666,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "630": {
@@ -180,44 +180,44 @@
     "nonzero_variance_frac": false
   },
   "631": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "632": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.4375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "633": {
-    "mean_fractional": 0.3958333333333333,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "634": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "635": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "636": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.24999999999999997,
+    "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "637": {
-    "mean_fractional": 0.7291666666666666,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.4375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -228,9 +228,9 @@
     "nonzero_variance_frac": false
   },
   "639": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "640": {
@@ -240,27 +240,27 @@
     "nonzero_variance_frac": false
   },
   "641": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "642": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "643": {
-    "mean_fractional": 0.35416666666666663,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.5833333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "644": {
-    "mean_fractional": 0.3958333333333333,
-    "mean_binary": 0.375,
-    "stratum": "medium",
+    "mean_fractional": 0.29166666666666663,
+    "mean_binary": 0.25,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "645": {
@@ -270,14 +270,14 @@
     "nonzero_variance_frac": true
   },
   "646": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.0,
-    "stratum": "hard",
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "647": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.125,
+    "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -288,21 +288,21 @@
     "nonzero_variance_frac": true
   },
   "649": {
-    "mean_fractional": 0.5416666666666666,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.35416666666666663,
+    "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "650": {
-    "mean_fractional": 0.6666666666666666,
+    "mean_fractional": 0.6458333333333333,
     "mean_binary": 0.1875,
-    "stratum": "easy",
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "651": {
-    "mean_fractional": 0.2708333333333333,
-    "mean_binary": 0.125,
-    "stratum": "hard",
+    "mean_fractional": 0.47916666666666663,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "652": {
@@ -312,16 +312,16 @@
     "nonzero_variance_frac": false
   },
   "653": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "654": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 1.0,
+    "mean_binary": 1.0,
     "stratum": "easy",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "655": {
     "mean_fractional": 0.8125,
@@ -330,31 +330,31 @@
     "nonzero_variance_frac": true
   },
   "656": {
-    "mean_fractional": 0.3333333333333333,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
+    "mean_fractional": 0.4166666666666667,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "657": {
-    "mean_fractional": 0.41666666666666663,
-    "mean_binary": 0.375,
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "658": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.6875,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "659": {
-    "mean_fractional": 0.2708333333333333,
+    "mean_fractional": 0.29166666666666663,
     "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "660": {
-    "mean_fractional": 0.0625,
+    "mean_fractional": 0.12499999999999999,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
@@ -366,27 +366,27 @@
     "nonzero_variance_frac": false
   },
   "662": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "663": {
-    "mean_fractional": 0.22916666666666666,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.125,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "664": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.4583333333333333,
+    "mean_binary": 0.4375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "665": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "666": {
@@ -408,103 +408,103 @@
     "nonzero_variance_frac": false
   },
   "669": {
-    "mean_fractional": 0.5833333333333333,
-    "mean_binary": 0.1875,
-    "stratum": "medium",
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.375,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "670": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.25,
+    "mean_binary": 0.25,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "671": {
-    "mean_fractional": 0.125,
+    "mean_fractional": 0.08333333333333333,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "672": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "673": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "674": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "675": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.125,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "676": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "677": {
-    "mean_fractional": 0.3333333333333333,
-    "mean_binary": 0.0625,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "678": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "679": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "680": {
-    "mean_fractional": 0.7916666666666666,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "681": {
-    "mean_fractional": 0.8333333333333333,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "682": {
     "mean_fractional": 0.875,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
-  "683": {
-    "mean_fractional": 0.7708333333333333,
-    "mean_binary": 0.5625,
+  "673": {
+    "mean_fractional": 1.0,
+    "mean_binary": 1.0,
+    "stratum": "easy",
+    "nonzero_variance_frac": false
+  },
+  "674": {
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "675": {
+    "mean_fractional": 0.24999999999999997,
+    "mean_binary": 0.125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "676": {
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "677": {
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "678": {
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "679": {
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "680": {
+    "mean_fractional": 0.9583333333333333,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "681": {
+    "mean_fractional": 0.47916666666666663,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "682": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "683": {
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
   "684": {
-    "mean_fractional": 0.0,
+    "mean_fractional": 0.020833333333333332,
     "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "685": {
-    "mean_fractional": 0.8125,
+    "mean_fractional": 0.8333333333333333,
     "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
@@ -516,62 +516,62 @@
     "nonzero_variance_frac": true
   },
   "687": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "688": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "689": {
-    "mean_fractional": 0.5208333333333333,
-    "mean_binary": 0.375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "690": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "691": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "692": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "693": {
     "mean_fractional": 0.8125,
     "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "688": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "689": {
+    "mean_fractional": 0.22916666666666666,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "690": {
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "691": {
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "692": {
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.625,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "693": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
   "694": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.14583333333333331,
+    "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "695": {
-    "mean_fractional": 0.7291666666666666,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "696": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.25,
+    "mean_binary": 0.25,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -582,31 +582,31 @@
     "nonzero_variance_frac": true
   },
   "698": {
-    "mean_fractional": 0.375,
-    "mean_binary": 0.375,
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "699": {
-    "mean_fractional": 0.08333333333333333,
-    "mean_binary": 0.0,
+    "mean_fractional": 0.10416666666666666,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "700": {
-    "mean_fractional": 0.9166666666666666,
+    "mean_fractional": 0.8958333333333333,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "701": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5,
-    "stratum": "medium",
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "702": {
-    "mean_fractional": 0.10416666666666666,
+    "mean_fractional": 0.08333333333333333,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
@@ -618,32 +618,32 @@
     "nonzero_variance_frac": true
   },
   "704": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "705": {
-    "mean_fractional": 0.43749999999999994,
-    "mean_binary": 0.375,
-    "stratum": "medium",
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "706": {
-    "mean_fractional": 0.41666666666666663,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.35416666666666663,
+    "mean_binary": 0.125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "707": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "708": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -660,26 +660,26 @@
     "nonzero_variance_frac": true
   },
   "711": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.6666666666666666,
+    "mean_binary": 0.4375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "712": {
-    "mean_fractional": 0.375,
+    "mean_fractional": 0.29166666666666663,
     "mean_binary": 0.0,
-    "stratum": "medium",
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "713": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.25,
-    "stratum": "medium",
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.5,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "714": {
     "mean_fractional": 0.22916666666666666,
-    "mean_binary": 0.0,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -690,33 +690,33 @@
     "nonzero_variance_frac": true
   },
   "716": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "717": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.25,
+    "mean_binary": 0.25,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "718": {
-    "mean_fractional": 0.875,
+    "mean_fractional": 0.9166666666666666,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "719": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.45833333333333326,
+    "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "720": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "721": {
@@ -726,39 +726,39 @@
     "nonzero_variance_frac": false
   },
   "722": {
-    "mean_fractional": 0.3958333333333333,
+    "mean_fractional": 0.35416666666666663,
     "mean_binary": 0.25,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "723": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.14583333333333334,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "724": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "725": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "726": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "727": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "728": {
@@ -768,38 +768,38 @@
     "nonzero_variance_frac": true
   },
   "729": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "730": {
-    "mean_fractional": 0.4583333333333333,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "731": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.5416666666666666,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "732": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
+    "mean_fractional": 0.16666666666666666,
+    "mean_binary": 0.125,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "733": {
-    "mean_fractional": 1.0,
-    "mean_binary": 1.0,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "734": {
-    "mean_fractional": 0.20833333333333334,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.125,
+    "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -810,14 +810,14 @@
     "nonzero_variance_frac": false
   },
   "736": {
-    "mean_fractional": 0.6458333333333333,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
+    "mean_fractional": 0.75,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "737": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.625,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -828,56 +828,56 @@
     "nonzero_variance_frac": false
   },
   "739": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "740": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "741": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "742": {
-    "mean_fractional": 0.125,
+    "mean_fractional": 0.14583333333333334,
     "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
+  "740": {
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "741": {
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "742": {
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
   "743": {
-    "mean_fractional": 0.0625,
+    "mean_fractional": 0.08333333333333333,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "744": {
-    "mean_fractional": 0.7708333333333333,
+    "mean_fractional": 0.75,
     "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "745": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "746": {
-    "mean_fractional": 0.10416666666666666,
+    "mean_fractional": 0.0625,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "747": {
-    "mean_fractional": 0.12499999999999999,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -888,50 +888,50 @@
     "nonzero_variance_frac": true
   },
   "749": {
-    "mean_fractional": 0.0,
-    "mean_binary": 0.0,
+    "mean_fractional": 0.10416666666666666,
+    "mean_binary": 0.0625,
     "stratum": "hard",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "750": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
-    "stratum": "easy",
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "751": {
-    "mean_fractional": 0.41666666666666663,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.5833333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "752": {
-    "mean_fractional": 0.16666666666666666,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.22916666666666663,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "753": {
-    "mean_fractional": 0.41666666666666663,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.4583333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "754": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.10416666666666666,
+    "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "755": {
-    "mean_fractional": 0.5416666666666666,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.45833333333333326,
+    "mean_binary": 0.1875,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "756": {
-    "mean_fractional": 0.4583333333333333,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.35416666666666663,
+    "mean_binary": 0.25,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -942,21 +942,21 @@
     "nonzero_variance_frac": false
   },
   "758": {
-    "mean_fractional": 0.29166666666666663,
-    "mean_binary": 0.25,
-    "stratum": "hard",
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "759": {
-    "mean_fractional": 0.5208333333333333,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.5833333333333333,
+    "mean_binary": 0.0625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "760": {
-    "mean_fractional": 0.37499999999999994,
-    "mean_binary": 0.25,
-    "stratum": "medium",
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.125,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "761": {
@@ -966,20 +966,20 @@
     "nonzero_variance_frac": true
   },
   "762": {
-    "mean_fractional": 0.4583333333333333,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.5416666666666666,
+    "mean_binary": 0.1875,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "763": {
-    "mean_fractional": 0.2708333333333333,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.0625,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "764": {
-    "mean_fractional": 0.9583333333333333,
-    "mean_binary": 0.875,
+    "mean_fractional": 0.9166666666666666,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -990,62 +990,62 @@
     "nonzero_variance_frac": true
   },
   "766": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
-    "stratum": "medium",
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "767": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.08333333333333333,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "768": {
-    "mean_fractional": 0.8958333333333333,
+    "mean_fractional": 0.875,
     "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "769": {
-    "mean_fractional": 0.29166666666666663,
+    "mean_fractional": 0.3125,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "770": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
-    "stratum": "medium",
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "771": {
-    "mean_fractional": 0.7708333333333333,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
+    "mean_fractional": 0.5,
+    "mean_binary": 0.375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "772": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.75,
-    "stratum": "easy",
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "773": {
-    "mean_fractional": 0.3125,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.0625,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "774": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
+    "mean_fractional": 0.625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "775": {
-    "mean_fractional": 0.5416666666666666,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.4583333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -1056,68 +1056,68 @@
     "nonzero_variance_frac": true
   },
   "777": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "778": {
-    "mean_fractional": 0.375,
-    "mean_binary": 0.375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "779": {
-    "mean_fractional": 0.33333333333333337,
-    "mean_binary": 0.25,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "780": {
     "mean_fractional": 0.0625,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
-  "781": {
-    "mean_fractional": 0.47916666666666663,
-    "mean_binary": 0.4375,
+  "779": {
+    "mean_fractional": 0.5208333333333333,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
+  "780": {
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "781": {
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
   "782": {
-    "mean_fractional": 0.33333333333333337,
+    "mean_fractional": 0.41666666666666663,
     "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "783": {
-    "mean_fractional": 0.1875,
+    "mean_fractional": 0.125,
     "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "784": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.3958333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "785": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "786": {
-    "mean_fractional": 0.625,
+    "mean_fractional": 0.6041666666666666,
     "mean_binary": 0.5625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "787": {
-    "mean_fractional": 0.6041666666666666,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.25,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -1128,69 +1128,69 @@
     "nonzero_variance_frac": true
   },
   "789": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "790": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "791": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "792": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "793": {
-    "mean_fractional": 0.3958333333333333,
-    "mean_binary": 0.375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "794": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "795": {
-    "mean_fractional": 0.6041666666666666,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "796": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "797": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "798": {
     "mean_fractional": 0.8125,
     "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
-  "799": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
+  "790": {
+    "mean_fractional": 0.7708333333333333,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "791": {
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": false
+  },
+  "792": {
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "793": {
+    "mean_fractional": 0.4375,
+    "mean_binary": 0.3125,
     "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "794": {
+    "mean_fractional": 0.375,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "795": {
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "796": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "797": {
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "798": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "799": {
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "800": {
@@ -1200,157 +1200,157 @@
     "nonzero_variance_frac": true
   },
   "801": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.4375,
-    "stratum": "easy",
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.5,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "802": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.18749999999999997,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "803": {
-    "mean_fractional": 0.7083333333333333,
-    "mean_binary": 0.625,
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "804": {
-    "mean_fractional": 0.3333333333333333,
-    "mean_binary": 0.3125,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "805": {
     "mean_fractional": 0.6875,
     "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "805": {
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
   "806": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "807": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "808": {
+    "mean_fractional": 0.8958333333333333,
+    "mean_binary": 0.875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "809": {
+    "mean_fractional": 0.45833333333333326,
+    "mean_binary": 0.125,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "810": {
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": false
+  },
+  "811": {
+    "mean_fractional": 0.8958333333333333,
+    "mean_binary": 0.875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "812": {
+    "mean_fractional": 0.25,
+    "mean_binary": 0.25,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "813": {
     "mean_fractional": 1.0,
     "mean_binary": 1.0,
     "stratum": "easy",
     "nonzero_variance_frac": false
   },
-  "808": {
+  "814": {
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "815": {
     "mean_fractional": 0.75,
     "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
-  "809": {
-    "mean_fractional": 0.3958333333333333,
-    "mean_binary": 0.0625,
+  "816": {
+    "mean_fractional": 0.125,
+    "mean_binary": 0.125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "817": {
+    "mean_fractional": 0.625,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
-  "810": {
-    "mean_fractional": 0.0625,
+  "818": {
+    "mean_fractional": 1.0,
+    "mean_binary": 1.0,
+    "stratum": "easy",
+    "nonzero_variance_frac": false
+  },
+  "819": {
+    "mean_fractional": 0.10416666666666666,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
-  "811": {
-    "mean_fractional": 0.9791666666666666,
-    "mean_binary": 0.9375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "812": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
+  "820": {
+    "mean_fractional": 0.47916666666666663,
+    "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
-  "813": {
+  "821": {
+    "mean_fractional": 0.8333333333333333,
+    "mean_binary": 0.8125,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "822": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.5625,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "823": {
+    "mean_fractional": 0.5416666666666666,
+    "mean_binary": 0.375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "824": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "825": {
     "mean_fractional": 0.875,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
-  "814": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "815": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "816": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "817": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "818": {
-    "mean_fractional": 0.9583333333333333,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "819": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "820": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "821": {
-    "mean_fractional": 0.7916666666666667,
-    "mean_binary": 0.75,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "822": {
-    "mean_fractional": 0.7291666666666666,
-    "mean_binary": 0.4375,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "823": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "824": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "825": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
   "826": {
-    "mean_fractional": 0.20833333333333331,
+    "mean_fractional": 0.14583333333333331,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
@@ -1362,62 +1362,62 @@
     "nonzero_variance_frac": true
   },
   "828": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "829": {
-    "mean_fractional": 0.5833333333333333,
-    "mean_binary": 0.5,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "830": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.125,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "831": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.4375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "832": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "833": {
     "mean_fractional": 0.875,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "829": {
+    "mean_fractional": 0.39583333333333337,
+    "mean_binary": 0.375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "830": {
+    "mean_fractional": 0.22916666666666666,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "831": {
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "832": {
+    "mean_fractional": 0.375,
+    "mean_binary": 0.375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "833": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
   "834": {
-    "mean_fractional": 0.14583333333333334,
-    "mean_binary": 0.125,
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "835": {
-    "mean_fractional": 0.8958333333333333,
+    "mean_fractional": 0.9166666666666666,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "836": {
-    "mean_fractional": 0.1875,
+    "mean_fractional": 0.22916666666666663,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "837": {
-    "mean_fractional": 0.75,
-    "mean_binary": 0.75,
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -1428,93 +1428,93 @@
     "nonzero_variance_frac": true
   },
   "839": {
-    "mean_fractional": 0.6875,
-    "mean_binary": 0.6875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "840": {
-    "mean_fractional": 0.35416666666666663,
-    "mean_binary": 0.0625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "841": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "842": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "843": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "844": {
-    "mean_fractional": 0.2708333333333333,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "845": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "846": {
-    "mean_fractional": 0.08333333333333333,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "847": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "848": {
-    "mean_fractional": 0.6458333333333334,
-    "mean_binary": 0.625,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "849": {
-    "mean_fractional": 0.45833333333333337,
-    "mean_binary": 0.375,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "850": {
-    "mean_fractional": 0.6458333333333333,
-    "mean_binary": 0.3125,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "851": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "852": {
     "mean_fractional": 1.0,
     "mean_binary": 1.0,
     "stratum": "easy",
     "nonzero_variance_frac": false
   },
-  "853": {
-    "mean_fractional": 0.29166666666666663,
-    "mean_binary": 0.25,
+  "840": {
+    "mean_fractional": 0.24999999999999997,
+    "mean_binary": 0.0625,
     "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "841": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "842": {
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "843": {
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": false
+  },
+  "844": {
+    "mean_fractional": 0.2708333333333333,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "845": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "846": {
+    "mean_fractional": 0.22916666666666666,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "847": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "848": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "849": {
+    "mean_fractional": 0.29166666666666663,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "850": {
+    "mean_fractional": 0.7083333333333333,
+    "mean_binary": 0.5,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "851": {
+    "mean_fractional": 0.0625,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "852": {
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "853": {
+    "mean_fractional": 0.47916666666666663,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "854": {
@@ -1524,56 +1524,56 @@
     "nonzero_variance_frac": true
   },
   "855": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.7708333333333333,
+    "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "856": {
-    "mean_fractional": 0.2708333333333333,
+    "mean_fractional": 0.10416666666666666,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "857": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.625,
-    "stratum": "medium",
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.75,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "858": {
-    "mean_fractional": 0.4375,
-    "mean_binary": 0.4375,
+    "mean_fractional": 0.3958333333333333,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "859": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.0,
+    "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "860": {
-    "mean_fractional": 0.8541666666666666,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.9166666666666666,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "861": {
-    "mean_fractional": 0.5416666666666666,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.625,
+    "mean_binary": 0.5625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "862": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "863": {
-    "mean_fractional": 0.35416666666666663,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.3958333333333333,
+    "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -1584,14 +1584,14 @@
     "nonzero_variance_frac": true
   },
   "865": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "866": {
-    "mean_fractional": 0.39583333333333337,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.6041666666666666,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -1602,81 +1602,81 @@
     "nonzero_variance_frac": true
   },
   "868": {
-    "mean_fractional": 0.6041666666666666,
+    "mean_fractional": 0.6875,
     "mean_binary": 0.4375,
-    "stratum": "medium",
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "869": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "870": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "871": {
-    "mean_fractional": 0.9583333333333333,
-    "mean_binary": 0.875,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "872": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.0625,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "873": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "874": {
-    "mean_fractional": 0.47916666666666663,
-    "mean_binary": 0.1875,
-    "stratum": "medium",
-    "nonzero_variance_frac": true
-  },
-  "875": {
     "mean_fractional": 0.16666666666666666,
     "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
+  "870": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "871": {
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.4375,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
+  "872": {
+    "mean_fractional": 0.20833333333333334,
+    "mean_binary": 0.125,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "873": {
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
+  "874": {
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "875": {
+    "mean_fractional": 0.2708333333333333,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
   "876": {
-    "mean_fractional": 0.7083333333333334,
-    "mean_binary": 0.6875,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "877": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "878": {
-    "mean_fractional": 0.45833333333333326,
+    "mean_fractional": 0.375,
     "mean_binary": 0.125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "879": {
-    "mean_fractional": 0.8333333333333333,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
+    "mean_fractional": 0.5208333333333333,
+    "mean_binary": 0.375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "880": {
-    "mean_fractional": 0.8333333333333333,
-    "mean_binary": 0.75,
-    "stratum": "easy",
+    "mean_fractional": 0.6458333333333333,
+    "mean_binary": 0.625,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "881": {
@@ -1698,133 +1698,133 @@
     "nonzero_variance_frac": true
   },
   "884": {
-    "mean_fractional": 0.35416666666666663,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.0,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "885": {
-    "mean_fractional": 0.7083333333333333,
-    "mean_binary": 0.375,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.5,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "886": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "887": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 1.0,
+    "mean_binary": 1.0,
     "stratum": "easy",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "888": {
-    "mean_fractional": 0.0625,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "889": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "890": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "891": {
     "mean_fractional": 0.875,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "890": {
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "891": {
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
   "892": {
-    "mean_fractional": 0.7083333333333333,
+    "mean_fractional": 0.6666666666666666,
     "mean_binary": 0.625,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "893": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
-    "stratum": "easy",
-    "nonzero_variance_frac": true
-  },
-  "894": {
     "mean_fractional": 0.9375,
     "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "894": {
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
+    "stratum": "easy",
+    "nonzero_variance_frac": true
+  },
   "895": {
-    "mean_fractional": 0.2708333333333333,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.29166666666666663,
+    "mean_binary": 0.25,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "896": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "897": {
-    "mean_fractional": 0.8541666666666666,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.7916666666666666,
+    "mean_binary": 0.5,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "898": {
-    "mean_fractional": 0.0,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": false
-  },
-  "899": {
-    "mean_fractional": 0.10416666666666666,
+    "mean_fractional": 0.08333333333333333,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
+  "899": {
+    "mean_fractional": 0.08333333333333333,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
   "900": {
-    "mean_fractional": 0.5833333333333333,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.45833333333333326,
+    "mean_binary": 0.1875,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "901": {
-    "mean_fractional": 0.5833333333333333,
-    "mean_binary": 0.25,
-    "stratum": "medium",
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.125,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "902": {
-    "mean_fractional": 0.6041666666666666,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
+    "mean_fractional": 0.6875,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "903": {
-    "mean_fractional": 0.10416666666666666,
+    "mean_fractional": 0.16666666666666666,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "904": {
-    "mean_fractional": 0.9791666666666666,
+    "mean_fractional": 0.9375,
     "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "905": {
-    "mean_fractional": 0.20833333333333331,
+    "mean_fractional": 0.1875,
     "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
@@ -1836,32 +1836,32 @@
     "nonzero_variance_frac": true
   },
   "907": {
-    "mean_fractional": 0.14583333333333334,
+    "mean_fractional": 0.16666666666666666,
     "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "908": {
-    "mean_fractional": 0.6041666666666666,
-    "mean_binary": 0.5625,
-    "stratum": "medium",
+    "mean_fractional": 0.7083333333333333,
+    "mean_binary": 0.6875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "909": {
-    "mean_fractional": 0.16666666666666666,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.1875,
+    "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "910": {
-    "mean_fractional": 0.22916666666666663,
+    "mean_fractional": 0.25,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "911": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.25,
+    "mean_binary": 0.25,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -1872,13 +1872,13 @@
     "nonzero_variance_frac": true
   },
   "913": {
-    "mean_fractional": 0.8333333333333333,
-    "mean_binary": 0.75,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "914": {
-    "mean_fractional": 0.5,
+    "mean_fractional": 0.5833333333333333,
     "mean_binary": 0.0625,
     "stratum": "medium",
     "nonzero_variance_frac": true
@@ -1890,9 +1890,9 @@
     "nonzero_variance_frac": true
   },
   "916": {
-    "mean_fractional": 0.4583333333333333,
-    "mean_binary": 0.3125,
-    "stratum": "medium",
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.1875,
+    "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "917": {
@@ -1903,13 +1903,13 @@
   },
   "918": {
     "mean_fractional": 0.16666666666666666,
-    "mean_binary": 0.0625,
+    "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "919": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -1920,37 +1920,37 @@
     "nonzero_variance_frac": false
   },
   "921": {
-    "mean_fractional": 0.7708333333333333,
-    "mean_binary": 0.6875,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "922": {
-    "mean_fractional": 0.041666666666666664,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "923": {
     "mean_fractional": 0.0,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": false
   },
+  "923": {
+    "mean_fractional": 0.0625,
+    "mean_binary": 0.0625,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
   "924": {
-    "mean_fractional": 1.0,
-    "mean_binary": 1.0,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "925": {
-    "mean_fractional": 0.6458333333333334,
-    "mean_binary": 0.625,
-    "stratum": "medium",
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
+    "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "926": {
-    "mean_fractional": 0.14583333333333331,
+    "mean_fractional": 0.10416666666666666,
     "mean_binary": 0.0,
     "stratum": "hard",
     "nonzero_variance_frac": true
@@ -1962,26 +1962,26 @@
     "nonzero_variance_frac": false
   },
   "928": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.41666666666666663,
+    "mean_binary": 0.375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "929": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "930": {
-    "mean_fractional": 0.3333333333333333,
-    "mean_binary": 0.25,
-    "stratum": "hard",
+    "mean_fractional": 0.47916666666666663,
+    "mean_binary": 0.3125,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "931": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -1992,8 +1992,8 @@
     "nonzero_variance_frac": true
   },
   "933": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
@@ -2004,19 +2004,19 @@
     "nonzero_variance_frac": true
   },
   "935": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.875,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.9375,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "936": {
-    "mean_fractional": 0.0625,
+    "mean_fractional": 0.2708333333333333,
     "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "937": {
-    "mean_fractional": 0.8125,
+    "mean_fractional": 0.8541666666666666,
     "mean_binary": 0.8125,
     "stratum": "easy",
     "nonzero_variance_frac": true
@@ -2028,10 +2028,10 @@
     "nonzero_variance_frac": false
   },
   "939": {
-    "mean_fractional": 0.0,
-    "mean_binary": 0.0,
+    "mean_fractional": 0.14583333333333334,
+    "mean_binary": 0.125,
     "stratum": "hard",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "940": {
     "mean_fractional": 0.5,
@@ -2040,28 +2040,28 @@
     "nonzero_variance_frac": true
   },
   "941": {
-    "mean_fractional": 0.6875,
+    "mean_fractional": 0.7083333333333333,
     "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "942": {
-    "mean_fractional": 0.7708333333333333,
-    "mean_binary": 0.75,
+    "mean_fractional": 1.0,
+    "mean_binary": 1.0,
     "stratum": "easy",
-    "nonzero_variance_frac": true
+    "nonzero_variance_frac": false
   },
   "943": {
-    "mean_fractional": 0.25,
-    "mean_binary": 0.25,
-    "stratum": "hard",
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "944": {
-    "mean_fractional": 0.0,
+    "mean_fractional": 0.020833333333333332,
     "mean_binary": 0.0,
     "stratum": "hard",
-    "nonzero_variance_frac": false
+    "nonzero_variance_frac": true
   },
   "945": {
     "mean_fractional": 0.875,
@@ -2070,8 +2070,8 @@
     "nonzero_variance_frac": true
   },
   "946": {
-    "mean_fractional": 0.5,
-    "mean_binary": 0.5,
+    "mean_fractional": 0.39583333333333326,
+    "mean_binary": 0.3125,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -2082,7 +2082,7 @@
     "nonzero_variance_frac": true
   },
   "948": {
-    "mean_fractional": 0.75,
+    "mean_fractional": 0.7708333333333333,
     "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
@@ -2094,8 +2094,8 @@
     "nonzero_variance_frac": false
   },
   "950": {
-    "mean_fractional": 0.20833333333333331,
-    "mean_binary": 0.1875,
+    "mean_fractional": 0.125,
+    "mean_binary": 0.125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
@@ -2106,86 +2106,86 @@
     "nonzero_variance_frac": true
   },
   "952": {
-    "mean_fractional": 0.45833333333333326,
-    "mean_binary": 0.25,
+    "mean_fractional": 0.3958333333333333,
+    "mean_binary": 0.1875,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "953": {
-    "mean_fractional": 0.125,
-    "mean_binary": 0.0,
+    "mean_fractional": 0.16666666666666666,
+    "mean_binary": 0.0625,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "954": {
-    "mean_fractional": 0.24999999999999997,
-    "mean_binary": 0.1875,
-    "stratum": "hard",
+    "mean_fractional": 0.5416666666666667,
+    "mean_binary": 0.5,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "955": {
-    "mean_fractional": 0.875,
-    "mean_binary": 0.6875,
+    "mean_fractional": 0.9375,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "956": {
-    "mean_fractional": 0.10416666666666666,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.3125,
+    "mean_binary": 0.3125,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "957": {
-    "mean_fractional": 0.1875,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.3333333333333333,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   },
   "958": {
     "mean_fractional": 0.625,
-    "mean_binary": 0.5625,
+    "mean_binary": 0.625,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "959": {
-    "mean_fractional": 0.8125,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.875,
+    "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "960": {
-    "mean_fractional": 0.10416666666666666,
-    "mean_binary": 0.0625,
-    "stratum": "hard",
+    "mean_fractional": 0.375,
+    "mean_binary": 0.375,
+    "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "961": {
     "mean_fractional": 0.7916666666666666,
-    "mean_binary": 0.75,
+    "mean_binary": 0.6875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "962": {
-    "mean_fractional": 0.9375,
-    "mean_binary": 0.9375,
+    "mean_fractional": 0.8125,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "963": {
     "mean_fractional": 0.3958333333333333,
-    "mean_binary": 0.25,
+    "mean_binary": 0.1875,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "964": {
-    "mean_fractional": 0.5625,
-    "mean_binary": 0.5625,
+    "mean_fractional": 0.5,
+    "mean_binary": 0.5,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
   "965": {
-    "mean_fractional": 0.41666666666666663,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.45833333333333337,
+    "mean_binary": 0.4375,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -2196,8 +2196,8 @@
     "nonzero_variance_frac": false
   },
   "967": {
-    "mean_fractional": 0.625,
-    "mean_binary": 0.0625,
+    "mean_fractional": 0.5416666666666666,
+    "mean_binary": 0.0,
     "stratum": "medium",
     "nonzero_variance_frac": true
   },
@@ -2214,32 +2214,32 @@
     "nonzero_variance_frac": false
   },
   "970": {
-    "mean_fractional": 1.0,
-    "mean_binary": 1.0,
-    "stratum": "easy",
-    "nonzero_variance_frac": false
-  },
-  "971": {
-    "mean_fractional": 0.08333333333333333,
-    "mean_binary": 0.0,
-    "stratum": "hard",
-    "nonzero_variance_frac": true
-  },
-  "972": {
     "mean_fractional": 0.875,
     "mean_binary": 0.875,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
+  "971": {
+    "mean_fractional": 0.020833333333333332,
+    "mean_binary": 0.0,
+    "stratum": "hard",
+    "nonzero_variance_frac": true
+  },
+  "972": {
+    "mean_fractional": 0.5625,
+    "mean_binary": 0.5625,
+    "stratum": "medium",
+    "nonzero_variance_frac": true
+  },
   "973": {
-    "mean_fractional": 0.8333333333333333,
-    "mean_binary": 0.8125,
+    "mean_fractional": 0.75,
+    "mean_binary": 0.75,
     "stratum": "easy",
     "nonzero_variance_frac": true
   },
   "974": {
-    "mean_fractional": 0.3333333333333333,
-    "mean_binary": 0.3125,
+    "mean_fractional": 0.22916666666666666,
+    "mean_binary": 0.1875,
     "stratum": "hard",
     "nonzero_variance_frac": true
   }
