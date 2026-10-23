@@ -94,7 +94,7 @@ def test_smoke_and_frozen_main_profiles_are_resolved():
     assert experiment.values["model"]["revision"] == expected_revision
 
     smoke = resolve_training_settings(experiment.values, smoke=True)
-    assert smoke.group_size == 8
+    assert smoke.group_size == 16
     assert smoke.gradient_accumulation_steps == smoke.group_size
     assert smoke.max_steps == 2
     assert smoke.kl_coefficient == 0.0

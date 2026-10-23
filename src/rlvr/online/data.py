@@ -55,6 +55,8 @@ def load_difficulty_map(
     expected_revision: str | None = None,
     expected_split: str | None = None,
     expected_group_size: int | None = None,
+    expected_max_new_tokens: int | None = None,
+    expected_stop_sequence: str | None = None,
     require_metadata: bool = False,
     allow_missing: bool = False,
 ) -> dict[int, str]:
@@ -89,6 +91,8 @@ def load_difficulty_map(
             "model_revision": expected_revision,
             "split": expected_split,
             "group_size": expected_group_size,
+            "max_new_tokens": expected_max_new_tokens,
+            "stop_sequence": expected_stop_sequence,
         }
         mismatches = {
             key: (metadata.get(key), value)

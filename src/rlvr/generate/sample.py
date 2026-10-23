@@ -13,13 +13,16 @@ from transformers import (
     PreTrainedTokenizerBase,
 )
 
+from rlvr.generate.stopping import append_stopping_criteria, done_stopping_criteria
+
 
 @dataclass
 class GenerationConfig:
     temperature: float = 1.0
     top_p: float = 0.95
-    max_new_tokens: int = 256
+    max_new_tokens: int = 512
     do_sample: bool = True
+    stop_sequence: str | None = "[DONE]"
 
 
 def load_model(
@@ -72,6 +75,7 @@ def sample_completions(
     """Sample n completions for one prompt (chunked num_return_sequences)."""
     outputs: list[str] = []
     device = next(model.parameters()).device
+    stop_criterion = done_stopping_criteria(tokenizer, gen.stop_sequence)
 
     for start in range(0, n, batch_size):
         b = min(batch_size, n - start)
@@ -86,6 +90,7 @@ def sample_completions(
             num_return_sequences=b,
             pad_token_id=tokenizer.pad_token_id,
             eos_token_id=tokenizer.eos_token_id,
+            stopping_criteria=append_stopping_criteria(None, stop_criterion),
         )
         for seq in generated:
             new_tokens = seq[input_len:]

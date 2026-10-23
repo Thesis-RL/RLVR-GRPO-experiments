@@ -6,6 +6,10 @@ import numpy as np
 import pytest
 
 from rlvr.data.mbpp import resolve_mbpp_split
+from rlvr.generate.stopping import (
+    append_stopping_criteria,
+    inject_generate_stopping_criteria,
+)
 from rlvr.metrics.signal import group_signal_stats, summarize_groups
 from rlvr.noise.corruption import PLANNED_SPECS, apply_noise
 from rlvr.rewards.aggregation import binary_rewards, fractional_rewards, grpo_advantages
@@ -66,11 +70,42 @@ def test_mbpp_split_validation():
         resolve_mbpp_split("dev")
 
 
+def test_generate_stopping_criteria_injection_is_temporary():
+    class DummyModel:
+        @staticmethod
+        def generate(**kwargs):
+            return kwargs
+
+    model = DummyModel()
+    criterion = object()
+    with inject_generate_stopping_criteria(model, criterion):
+        result = model.generate()
+        assert len(result["stopping_criteria"]) == 1
+        assert result["stopping_criteria"][0] is criterion
+
+    assert model.generate() == {}
+
+
+def test_stopping_criteria_append_does_not_mutate_existing_list():
+    existing = [object()]
+    criterion = object()
+
+    combined = append_stopping_criteria(existing, criterion)
+
+    assert combined == [existing[0], criterion]
+    assert len(existing) == 1
+
+
 def test_test_difficulty_report_is_not_presented_as_model_screening(tmp_path):
     report = {
         "model": "test-model",
         "purpose": "difficulty_stratification_only",
-        "config": {"model_revision": "abc123", "group_size": 16},
+        "config": {
+            "model_revision": "abc123",
+            "group_size": 16,
+            "max_new_tokens": 512,
+            "stop_sequence": "[DONE]",
+        },
         "difficulty_summary": {
             "n_problems": 500,
             "mean_fractional_reward": 0.4,

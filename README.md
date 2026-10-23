@@ -185,8 +185,9 @@ uv run python scripts/run_offline_diagnostic.py \
 |---|---|---|
 | `group_size` | `16` | Rollouts per problem (`G`) |
 | `temperature` / `top_p` | `1.0` / `0.95` | Train-time sampling |
-| `max_new_tokens` | `256` | Generation length |
-| `batch_size` | `4` | Default chunk size (CLI overrides) |
+| `max_new_tokens` | `512` | Maximum generation length; generation ends earlier after `[DONE]` or EOS |
+| `stop_sequence` | `[DONE]` | Completion marker; generation stops after this marker or EOS |
+| `batch_size` | `16` | Generate one complete 16-answer group per GPU batch |
 | `noise_draws` | `3` | Independent noise resamples for offline metrics |
 | `noise_base_seed` | `0` | Base seed for noise RNGs |
 | `generation_seed` | `0` | Per-task deterministic generation seed base |

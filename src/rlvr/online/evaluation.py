@@ -35,6 +35,7 @@ def evaluate_clean_pass_at_1(
     temperature: float,
     top_p: float,
     max_new_tokens: int,
+    stop_sequence: str,
     timeout_s: float,
     mem_limit: int,
     difficulty_by_task: dict[int, str] | None = None,
@@ -58,6 +59,7 @@ def evaluate_clean_pass_at_1(
         temperature=temperature,
         top_p=top_p,
         max_new_tokens=max_new_tokens,
+        stop_sequence=stop_sequence,
     )
     with _preserve_rng_state():
         was_training = bool(model.training)

@@ -25,6 +25,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from rlvr.config import ConfigError, load_experiment_config  # noqa: E402
 from rlvr.data.mbpp import load_mbpp, resolve_mbpp_split  # noqa: E402
+from rlvr.generate.stopping import (  # noqa: E402
+    done_stopping_criteria,
+    inject_generate_stopping_criteria,
+)
 from rlvr.online.callbacks import (  # noqa: E402
     JsonlTrainerCallback,
     ScheduledCleanEvalCallback,
@@ -210,11 +214,13 @@ def main() -> None:
             raise ConfigError(
                 "The main step budget collapses scheduled test evaluations onto too few steps"
             )
-        _validate_main_test_difficulty(
+        _validate_main_difficulty_maps(
             data_config=data_config,
             model_id=model.id,
             model_revision=revision,
             expected_group_size=int(generation["group_size"]),
+            expected_max_new_tokens=int(generation["max_new_tokens"]),
+            expected_stop_sequence=str(generation["stop_sequence"]),
         )
 
     resolved = deepcopy(experiment.values)
@@ -381,6 +387,9 @@ def _run_training(
             scale_rewards=settings.scale_rewards,
             loss_type=settings.loss_type,
             use_vllm=settings.use_vllm,
+            generation_kwargs={"stop": [str(generation["stop_sequence"])]}
+            if settings.use_vllm
+            else None,
             logging_steps=settings.logging_steps,
             logging_first_step=True,
             log_completions=True,
@@ -427,6 +436,18 @@ def _run_training(
         class InstrumentedGRPOTrainer(GRPOTrainer):
             generation_and_scoring_seconds = 0.0
 
+            def _generate_single_turn(self, *call_args, **call_kwargs):
+                if self.use_vllm:
+                    return super()._generate_single_turn(*call_args, **call_kwargs)
+                if getattr(self, "use_transformers_continuous_batching", False):
+                    raise RuntimeError(
+                        "The configured textual stop sequence is not implemented for "
+                        "Transformers continuous batching"
+                    )
+                unwrapped_model = self.accelerator.unwrap_model(self.model_wrapped)
+                with inject_generate_stopping_criteria(unwrapped_model, stop_criterion):
+                    return super()._generate_single_turn(*call_args, **call_kwargs)
+
             def _generate_and_score_completions(self, *call_args, **call_kwargs):
                 started = time.perf_counter()
                 try:
@@ -434,6 +455,7 @@ def _run_training(
                 finally:
                     self.generation_and_scoring_seconds += time.perf_counter() - started
 
+        stop_criterion = done_stopping_criteria(tokenizer, str(generation["stop_sequence"]))
         progress.mark_stage("trainer_initialization")
         with telemetry.stage("trainer_initialization"):
             trainer = InstrumentedGRPOTrainer(
@@ -495,6 +517,7 @@ def _run_training(
                         temperature=float(generation["eval_temperature"]),
                         top_p=float(generation["top_p"]),
                         max_new_tokens=int(generation["max_new_tokens"]),
+                        stop_sequence=str(generation["stop_sequence"]),
                         timeout_s=timeout_s,
                         mem_limit=mem_mb * 1024 * 1024,
                         difficulty_by_task=test_difficulty,
@@ -599,6 +622,8 @@ def _scheduled_evaluation_callback(
         expected_revision=context.model_revision,
         expected_split=test_split,
         expected_group_size=int(generation["group_size"]),
+        expected_max_new_tokens=int(generation["max_new_tokens"]),
+        expected_stop_sequence=str(generation["stop_sequence"]),
         require_metadata=True,
     )
     validation_schedule = set(
@@ -632,6 +657,7 @@ def _scheduled_evaluation_callback(
                     temperature=float(generation["eval_temperature"]),
                     top_p=float(generation["top_p"]),
                     max_new_tokens=int(generation["max_new_tokens"]),
+                    stop_sequence=str(generation["stop_sequence"]),
                     timeout_s=timeout_s,
                     mem_limit=mem_mb * 1024 * 1024,
                     difficulty_by_task=difficulties,
@@ -743,6 +769,8 @@ def _validate_generation(generation: dict[str, Any], group_size: int) -> None:
         raise ConfigError("generation.top_p must be in (0, 1]")
     if int(generation.get("max_new_tokens", 0)) <= 0:
         raise ConfigError("generation.max_new_tokens must be positive")
+    if not str(generation.get("stop_sequence", "")):
+        raise ConfigError("generation.stop_sequence must be a non-empty string")
 
 
 def _validate_cli_for_profile(args: argparse.Namespace, *, profile: str) -> None:
@@ -775,30 +803,35 @@ def _validate_single_gpu(*, profile: str) -> None:
         raise ConfigError("The current reward logger supports exactly one GPU/process per run")
 
 
-def _validate_main_test_difficulty(
+def _validate_main_difficulty_maps(
     *,
     data_config: dict[str, Any],
     model_id: str,
     model_revision: str | None,
     expected_group_size: int,
+    expected_max_new_tokens: int,
+    expected_stop_sequence: str,
 ) -> None:
-    test_split = resolve_mbpp_split(data_config["test_split"])
-    problems = load_mbpp(test_split)
-    path = _repo_path(data_config.get("test_difficulty_path"))
-    if path is None:
-        raise ConfigError("data.test_difficulty_path must be frozen before a main run")
-    try:
-        load_difficulty_map(
-            path,
-            required_task_ids=[problem.task_id for problem in problems],
-            expected_model=model_id,
-            expected_revision=model_revision,
-            expected_split=test_split,
-            expected_group_size=expected_group_size,
-            require_metadata=True,
-        )
-    except (FileNotFoundError, ValueError) as exc:
-        raise ConfigError(str(exc)) from exc
+    for label in ("train", "test"):
+        split = resolve_mbpp_split(data_config[f"{label}_split"])
+        problems = load_mbpp(split)
+        path = _repo_path(data_config.get(f"{label}_difficulty_path"))
+        if path is None:
+            raise ConfigError(f"data.{label}_difficulty_path must be frozen before a main run")
+        try:
+            load_difficulty_map(
+                path,
+                required_task_ids=[problem.task_id for problem in problems],
+                expected_model=model_id,
+                expected_revision=model_revision,
+                expected_split=split,
+                expected_group_size=expected_group_size,
+                expected_max_new_tokens=expected_max_new_tokens,
+                expected_stop_sequence=expected_stop_sequence,
+                require_metadata=True,
+            )
+        except (FileNotFoundError, ValueError) as exc:
+            raise ConfigError(str(exc)) from exc
 
 
 def _non_null_cli_overrides(args: argparse.Namespace) -> dict[str, Any]:

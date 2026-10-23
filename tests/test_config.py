@@ -20,6 +20,8 @@ def test_priority_bridge_expands_to_six_conditions():
 
     assert cfg.model.id == "Qwen/Qwen3-1.7B-Base"
     assert cfg.seeds == (0, 1, 2)
+    assert cfg.values["generation"]["max_new_tokens"] == 512
+    assert cfg.values["generation"]["stop_sequence"] == "[DONE]"
     assert [condition.name for condition in cfg.conditions] == [
         "clean__binary",
         "clean__fractional",

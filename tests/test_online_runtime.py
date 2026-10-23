@@ -177,6 +177,7 @@ def test_evaluation_is_resumable_and_restores_train_mode(tmp_path, monkeypatch):
         "temperature": 0.7,
         "top_p": 0.95,
         "max_new_tokens": 32,
+        "stop_sequence": "[DONE]",
         "timeout_s": 0.5,
         "mem_limit": 64 * 1024 * 1024,
         "difficulty_by_task": {1: "easy"},
@@ -313,6 +314,8 @@ def test_load_difficulty_map_validates_coverage(tmp_path):
         "model_revision": "abc123",
         "split": "test",
         "group_size": 16,
+        "max_new_tokens": 512,
+        "stop_sequence": "[DONE]",
     }
     (tmp_path / "difficulty_metadata.json").write_text(json.dumps(metadata))
     assert load_difficulty_map(
@@ -321,6 +324,8 @@ def test_load_difficulty_map_validates_coverage(tmp_path):
         expected_revision="abc123",
         expected_split="test",
         expected_group_size=16,
+        expected_max_new_tokens=512,
+        expected_stop_sequence="[DONE]",
         require_metadata=True,
     ) == {1: "hard", 2: "easy"}
     with pytest.raises(ValueError, match="metadata mismatch"):

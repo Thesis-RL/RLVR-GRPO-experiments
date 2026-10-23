@@ -201,6 +201,8 @@ def main() -> None:
                 "model_revision": str(revision) if revision else None,
                 "split": split,
                 "group_size": int(cfg["group_size"]),
+                "max_new_tokens": int(cfg["max_new_tokens"]),
+                "stop_sequence": str(cfg["stop_sequence"]),
                 "strata_definition": "fractional_thresholds_v1",
                 "generation_seed": int(cfg.get("generation_seed", 0)),
             },
@@ -294,6 +296,8 @@ def main() -> None:
         "purpose": "model_screening" if split == "train" else "difficulty_stratification_only",
         "config": {
             "group_size": cfg["group_size"],
+            "max_new_tokens": cfg["max_new_tokens"],
+            "stop_sequence": cfg["stop_sequence"],
             "split": split,
             "model_revision": str(revision) if revision else None,
             "generation_seed": int(cfg.get("generation_seed", 0)),
@@ -355,6 +359,8 @@ def _write_markdown(path: Path, report: dict) -> None:
             f"- Model revision: `{config['model_revision']}`",
             f"- Problems: **{summary['n_problems']}**",
             f"- Group size: **{config['group_size']}**",
+            f"- Maximum completion length: **{config['max_new_tokens']} tokens**",
+            f"- Stop sequence: `{config['stop_sequence']}` (generation also stops at EOS)",
             f"- Mean fractional reward: **{summary['mean_fractional_reward']:.4f}**",
             "- Fraction with non-zero clean variance: "
             f"**{summary['frac_problems_nonzero_variance']:.3f}**",

@@ -2,13 +2,15 @@
 group_size: 16
 temperature: 1.0
 top_p: 0.95
-max_new_tokens: 256
-batch_size: 4
+max_new_tokens: 512
+stop_sequence: "[DONE]"
+batch_size: 16
 timeout_s: 1.0
 noise_draws: 3
 noise_base_seed: 0
 generation_seed: 0
 few_shot_task_ids: [2, 3, 4]
+model_revision: ea980cb0a6c2ae4b936e82123acc929f1cec04c1
 
 # Priority + Study A schedules from the testbed
 noise_specs:
