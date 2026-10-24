@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="690" viewBox="0 0 980 690">
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<text x="55.0" y="38.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="26" font-weight="700" fill="#0f172a">Test Pass@1 by frozen difficulty stratum</text>
+<text x="55.0" y="67.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="400" fill="#475569">Base estimate plus trained mean at checkpoints 337 and 374; one seed.</text>
+<text x="387.5" y="119.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Hard</text>
+<text x="387.5" y="137.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">n=220</text>
+<text x="592.5" y="119.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Medium</text>
+<text x="592.5" y="137.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">n=130</text>
+<text x="797.5" y="119.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#0f172a">Easy</text>
+<text x="797.5" y="137.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">n=150</text>
+<text x="270.0" y="180.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">pretraining estimate*</text>
+<rect x="288.0" y="148.0" width="199.0" height="54.0" rx="5" fill="#e1eafa"/>
+<text x="387.5" y="181.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.066</text>
+<rect x="493.0" y="148.0" width="199.0" height="54.0" rx="5" fill="#9aacde"/>
+<text x="592.5" y="181.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.407</text>
+<rect x="698.0" y="148.0" width="199.0" height="54.0" rx="5" fill="#4764bf"/>
+<text x="797.5" y="181.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.802</text>
+<line x1="50" y1="209.0" x2="900" y2="209.0" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="270.0" y="240.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">clean__binary</text>
+<rect x="288.0" y="208.0" width="199.0" height="54.0" rx="5" fill="#d6e0f6"/>
+<text x="387.5" y="241.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.118</text>
+<rect x="493.0" y="208.0" width="199.0" height="54.0" rx="5" fill="#798fd2"/>
+<text x="592.5" y="241.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.565</text>
+<rect x="698.0" y="208.0" width="199.0" height="54.0" rx="5" fill="#3453b7"/>
+<text x="797.5" y="241.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.897</text>
+<text x="270.0" y="300.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">clean__fractional</text>
+<rect x="288.0" y="268.0" width="199.0" height="54.0" rx="5" fill="#d6e0f5"/>
+<text x="387.5" y="301.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.120</text>
+<rect x="493.0" y="268.0" width="199.0" height="54.0" rx="5" fill="#778ed1"/>
+<text x="592.5" y="301.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.573</text>
+<rect x="698.0" y="268.0" width="199.0" height="54.0" rx="5" fill="#3252b7"/>
+<text x="797.5" y="301.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.903</text>
+<text x="270.0" y="360.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">fp_only__binary</text>
+<rect x="288.0" y="328.0" width="199.0" height="54.0" rx="5" fill="#d7e1f6"/>
+<text x="387.5" y="361.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.114</text>
+<rect x="493.0" y="328.0" width="199.0" height="54.0" rx="5" fill="#7b91d3"/>
+<text x="592.5" y="361.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.554</text>
+<rect x="698.0" y="328.0" width="199.0" height="54.0" rx="5" fill="#3453b7"/>
+<text x="797.5" y="361.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.897</text>
+<text x="270.0" y="420.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">fp_only__fractional</text>
+<rect x="288.0" y="388.0" width="199.0" height="54.0" rx="5" fill="#d4dff5"/>
+<text x="387.5" y="421.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.127</text>
+<rect x="493.0" y="388.0" width="199.0" height="54.0" rx="5" fill="#7b91d3"/>
+<text x="592.5" y="421.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.554</text>
+<rect x="698.0" y="388.0" width="199.0" height="54.0" rx="5" fill="#3352b7"/>
+<text x="797.5" y="421.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.900</text>
+<text x="270.0" y="480.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">fn_only__binary</text>
+<rect x="288.0" y="448.0" width="199.0" height="54.0" rx="5" fill="#d4dff5"/>
+<text x="387.5" y="481.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.127</text>
+<rect x="493.0" y="448.0" width="199.0" height="54.0" rx="5" fill="#7a90d2"/>
+<text x="592.5" y="481.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.562</text>
+<rect x="698.0" y="448.0" width="199.0" height="54.0" rx="5" fill="#3655b8"/>
+<text x="797.5" y="481.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.887</text>
+<text x="270.0" y="540.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" fill="#0f172a">fn_only__fractional</text>
+<rect x="288.0" y="508.0" width="199.0" height="54.0" rx="5" fill="#d4dff5"/>
+<text x="387.5" y="541.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#0f172a">0.127</text>
+<rect x="493.0" y="508.0" width="199.0" height="54.0" rx="5" fill="#7a90d2"/>
+<text x="592.5" y="541.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.558</text>
+<rect x="698.0" y="508.0" width="199.0" height="54.0" rx="5" fill="#3150b6"/>
+<text x="797.5" y="541.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="700" fill="#ffffff">0.910</text>
+<text x="285.0" y="600.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#475569">Pass@1</text>
+<rect x="355.0" y="587.0" width="4.2" height="14" fill="#eff6ff"/>
+<rect x="359.0" y="587.0" width="4.2" height="14" fill="#edf4fe"/>
+<rect x="363.0" y="587.0" width="4.2" height="14" fill="#ebf2fd"/>
+<rect x="367.0" y="587.0" width="4.2" height="14" fill="#e9f1fd"/>
+<rect x="371.0" y="587.0" width="4.2" height="14" fill="#e7effc"/>
+<rect x="375.0" y="587.0" width="4.2" height="14" fill="#e5edfb"/>
+<rect x="379.0" y="587.0" width="4.2" height="14" fill="#e2ebfa"/>
+<rect x="383.0" y="587.0" width="4.2" height="14" fill="#e0e9f9"/>
+<rect x="387.0" y="587.0" width="4.2" height="14" fill="#dee7f9"/>
+<rect x="391.0" y="587.0" width="4.2" height="14" fill="#dce6f8"/>
+<rect x="395.0" y="587.0" width="4.2" height="14" fill="#dae4f7"/>
+<rect x="399.0" y="587.0" width="4.2" height="14" fill="#d8e2f6"/>
+<rect x="403.0" y="587.0" width="4.2" height="14" fill="#d6e0f5"/>
+<rect x="407.0" y="587.0" width="4.2" height="14" fill="#d4def5"/>
+<rect x="411.0" y="587.0" width="4.2" height="14" fill="#d2ddf4"/>
+<rect x="415.0" y="587.0" width="4.2" height="14" fill="#d0dbf3"/>
+<rect x="419.0" y="587.0" width="4.2" height="14" fill="#ced9f2"/>
+<rect x="423.0" y="587.0" width="4.2" height="14" fill="#cbd7f1"/>
+<rect x="427.0" y="587.0" width="4.2" height="14" fill="#c9d5f1"/>
+<rect x="431.0" y="587.0" width="4.2" height="14" fill="#c7d3f0"/>
+<rect x="435.0" y="587.0" width="4.2" height="14" fill="#c5d2ef"/>
+<rect x="439.0" y="587.0" width="4.2" height="14" fill="#c3d0ee"/>
+<rect x="443.0" y="587.0" width="4.2" height="14" fill="#c1ceed"/>
+<rect x="447.0" y="587.0" width="4.2" height="14" fill="#bfcced"/>
+<rect x="451.0" y="587.0" width="4.2" height="14" fill="#bdcaec"/>
+<rect x="455.0" y="587.0" width="4.2" height="14" fill="#bbc8eb"/>
+<rect x="459.0" y="587.0" width="4.2" height="14" fill="#b9c7ea"/>
+<rect x="463.0" y="587.0" width="4.2" height="14" fill="#b7c5e9"/>
+<rect x="467.0" y="587.0" width="4.2" height="14" fill="#b4c3e9"/>
+<rect x="471.0" y="587.0" width="4.2" height="14" fill="#b2c1e8"/>
+<rect x="475.0" y="587.0" width="4.2" height="14" fill="#b0bfe7"/>
+<rect x="479.0" y="587.0" width="4.2" height="14" fill="#aebee6"/>
+<rect x="483.0" y="587.0" width="4.2" height="14" fill="#acbce5"/>
+<rect x="487.0" y="587.0" width="4.2" height="14" fill="#aabae5"/>
+<rect x="491.0" y="587.0" width="4.2" height="14" fill="#a8b8e4"/>
+<rect x="495.0" y="587.0" width="4.2" height="14" fill="#a6b6e3"/>
+<rect x="499.0" y="587.0" width="4.2" height="14" fill="#a4b4e2"/>
+<rect x="503.0" y="587.0" width="4.2" height="14" fill="#a2b3e1"/>
+<rect x="507.0" y="587.0" width="4.2" height="14" fill="#a0b1e1"/>
+<rect x="511.0" y="587.0" width="4.2" height="14" fill="#9dafe0"/>
+<rect x="515.0" y="587.0" width="4.2" height="14" fill="#9baddf"/>
+<rect x="519.0" y="587.0" width="4.2" height="14" fill="#99abde"/>
+<rect x="523.0" y="587.0" width="4.2" height="14" fill="#97aadd"/>
+<rect x="527.0" y="587.0" width="4.2" height="14" fill="#95a8dd"/>
+<rect x="531.0" y="587.0" width="4.2" height="14" fill="#93a6dc"/>
+<rect x="535.0" y="587.0" width="4.2" height="14" fill="#91a4db"/>
+<rect x="539.0" y="587.0" width="4.2" height="14" fill="#8fa2da"/>
+<rect x="543.0" y="587.0" width="4.2" height="14" fill="#8da0d9"/>
+<rect x="547.0" y="587.0" width="4.2" height="14" fill="#8b9fd9"/>
+<rect x="551.0" y="587.0" width="4.2" height="14" fill="#899dd8"/>
+<rect x="555.0" y="587.0" width="4.2" height="14" fill="#869bd7"/>
+<rect x="559.0" y="587.0" width="4.2" height="14" fill="#8499d6"/>
+<rect x="563.0" y="587.0" width="4.2" height="14" fill="#8297d5"/>
+<rect x="567.0" y="587.0" width="4.2" height="14" fill="#8096d5"/>
+<rect x="571.0" y="587.0" width="4.2" height="14" fill="#7e94d4"/>
+<rect x="575.0" y="587.0" width="4.2" height="14" fill="#7c92d3"/>
+<rect x="579.0" y="587.0" width="4.2" height="14" fill="#7a90d2"/>
+<rect x="583.0" y="587.0" width="4.2" height="14" fill="#788ed1"/>
+<rect x="587.0" y="587.0" width="4.2" height="14" fill="#768cd1"/>
+<rect x="591.0" y="587.0" width="4.2" height="14" fill="#748bd0"/>
+<rect x="595.0" y="587.0" width="4.2" height="14" fill="#7289cf"/>
+<rect x="599.0" y="587.0" width="4.2" height="14" fill="#7087ce"/>
+<rect x="603.0" y="587.0" width="4.2" height="14" fill="#6d85cd"/>
+<rect x="607.0" y="587.0" width="4.2" height="14" fill="#6b83cd"/>
+<rect x="611.0" y="587.0" width="4.2" height="14" fill="#6982cc"/>
+<rect x="615.0" y="587.0" width="4.2" height="14" fill="#6780cb"/>
+<rect x="619.0" y="587.0" width="4.2" height="14" fill="#657eca"/>
+<rect x="623.0" y="587.0" width="4.2" height="14" fill="#637cc9"/>
+<rect x="627.0" y="587.0" width="4.2" height="14" fill="#617ac9"/>
+<rect x="631.0" y="587.0" width="4.2" height="14" fill="#5f78c8"/>
+<rect x="635.0" y="587.0" width="4.2" height="14" fill="#5d77c7"/>
+<rect x="639.0" y="587.0" width="4.2" height="14" fill="#5b75c6"/>
+<rect x="643.0" y="587.0" width="4.2" height="14" fill="#5973c5"/>
+<rect x="647.0" y="587.0" width="4.2" height="14" fill="#5671c5"/>
+<rect x="651.0" y="587.0" width="4.2" height="14" fill="#546fc4"/>
+<rect x="655.0" y="587.0" width="4.2" height="14" fill="#526ec3"/>
+<rect x="659.0" y="587.0" width="4.2" height="14" fill="#506cc2"/>
+<rect x="663.0" y="587.0" width="4.2" height="14" fill="#4e6ac1"/>
+<rect x="667.0" y="587.0" width="4.2" height="14" fill="#4c68c1"/>
+<rect x="671.0" y="587.0" width="4.2" height="14" fill="#4a66c0"/>
+<rect x="675.0" y="587.0" width="4.2" height="14" fill="#4864bf"/>
+<rect x="679.0" y="587.0" width="4.2" height="14" fill="#4663be"/>
+<rect x="683.0" y="587.0" width="4.2" height="14" fill="#4461bd"/>
+<rect x="687.0" y="587.0" width="4.2" height="14" fill="#425fbd"/>
+<rect x="691.0" y="587.0" width="4.2" height="14" fill="#3f5dbc"/>
+<rect x="695.0" y="587.0" width="4.2" height="14" fill="#3d5bbb"/>
+<rect x="699.0" y="587.0" width="4.2" height="14" fill="#3b59ba"/>
+<rect x="703.0" y="587.0" width="4.2" height="14" fill="#3958b9"/>
+<rect x="707.0" y="587.0" width="4.2" height="14" fill="#3756b9"/>
+<rect x="711.0" y="587.0" width="4.2" height="14" fill="#3554b8"/>
+<rect x="715.0" y="587.0" width="4.2" height="14" fill="#3352b7"/>
+<rect x="719.0" y="587.0" width="4.2" height="14" fill="#3150b6"/>
+<rect x="723.0" y="587.0" width="4.2" height="14" fill="#2f4fb5"/>
+<rect x="727.0" y="587.0" width="4.2" height="14" fill="#2d4db5"/>
+<rect x="731.0" y="587.0" width="4.2" height="14" fill="#2b4bb4"/>
+<rect x="735.0" y="587.0" width="4.2" height="14" fill="#2849b3"/>
+<rect x="739.0" y="587.0" width="4.2" height="14" fill="#2647b2"/>
+<rect x="743.0" y="587.0" width="4.2" height="14" fill="#2445b1"/>
+<rect x="747.0" y="587.0" width="4.2" height="14" fill="#2244b1"/>
+<rect x="751.0" y="587.0" width="4.2" height="14" fill="#2042b0"/>
+<rect x="755.0" y="587.0" width="4.2" height="14" fill="#1e40af"/>
+<text x="350.0" y="618.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#64748b">0</text>
+<text x="765.0" y="618.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#64748b">1</text>
+<text x="55.0" y="672.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">* Base: 16 samples/task at T=1.0; trained evaluation: 1 sample/task at T=0.7.</text>
+</svg>

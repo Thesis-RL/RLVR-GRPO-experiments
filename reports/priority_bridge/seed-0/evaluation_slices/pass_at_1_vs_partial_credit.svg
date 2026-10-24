@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="650" viewBox="0 0 1320 650">
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<text x="65.0" y="38.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="26" font-weight="700" fill="#0f172a">Strict task success vs partial test success</text>
+<text x="65.0" y="67.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="400" fill="#475569">Base estimate at T=1.0; trained mean over steps 337/374 at T=0.7.</text>
+<line x1="65" y1="98" x2="93" y2="98" stroke="#0f766e" stroke-width="4"/><text x="101.0" y="103.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="400" fill="#334155">Pass@1</text><line x1="245" y1="98" x2="273" y2="98" stroke="#f59e0b" stroke-width="4"/><text x="281.0" y="103.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="400" fill="#334155">Mean test pass rate</text>
+<line x1="85" y1="525.0" x2="1290" y2="525.0" stroke="#e2e8f0"/>
+<text x="75.0" y="529.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.0</text>
+<line x1="85" y1="456.7" x2="1290" y2="456.7" stroke="#e2e8f0"/>
+<text x="75.0" y="460.7" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.1</text>
+<line x1="85" y1="388.3" x2="1290" y2="388.3" stroke="#e2e8f0"/>
+<text x="75.0" y="392.3" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.2</text>
+<line x1="85" y1="320.0" x2="1290" y2="320.0" stroke="#e2e8f0"/>
+<text x="75.0" y="324.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.3</text>
+<line x1="85" y1="251.7" x2="1290" y2="251.7" stroke="#e2e8f0"/>
+<text x="75.0" y="255.7" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.4</text>
+<line x1="85" y1="183.3" x2="1290" y2="183.3" stroke="#e2e8f0"/>
+<text x="75.0" y="187.3" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.5</text>
+<line x1="85" y1="115.0" x2="1290" y2="115.0" stroke="#e2e8f0"/>
+<text x="75.0" y="119.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">0.6</text>
+<rect x="124.1" y="268.6" width="44" height="256.4" rx="4" fill="#0f766e"/>
+<text x="146.1" y="261.6" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.375</text>
+<rect x="174.1" y="225.7" width="44" height="299.3" rx="4" fill="#f59e0b"/>
+<text x="196.1" y="218.7" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.438</text>
+<text x="171.1" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">pretraining*</text>
+<text x="171.1" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">base model</text>
+<rect x="296.2" y="205.2" width="44" height="319.8" rx="4" fill="#0f766e"/>
+<text x="318.2" y="198.2" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.468</text>
+<rect x="346.2" y="161.9" width="44" height="363.1" rx="4" fill="#f59e0b"/>
+<text x="368.2" y="154.9" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.531</text>
+<text x="343.2" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">clean</text>
+<text x="343.2" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">binary</text>
+<rect x="468.4" y="201.8" width="44" height="323.2" rx="4" fill="#0f766e"/>
+<text x="490.4" y="194.8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.473</text>
+<rect x="518.4" y="160.3" width="44" height="364.7" rx="4" fill="#f59e0b"/>
+<text x="540.4" y="153.3" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.534</text>
+<text x="515.4" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">clean</text>
+<text x="515.4" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">fractional</text>
+<rect x="640.5" y="208.6" width="44" height="316.4" rx="4" fill="#0f766e"/>
+<text x="662.5" y="201.6" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.463</text>
+<rect x="690.5" y="164.0" width="44" height="361.0" rx="4" fill="#f59e0b"/>
+<text x="712.5" y="157.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.528</text>
+<text x="687.5" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">fp_only</text>
+<text x="687.5" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">binary</text>
+<rect x="812.6" y="203.8" width="44" height="321.2" rx="4" fill="#0f766e"/>
+<text x="834.6" y="196.8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.470</text>
+<rect x="862.6" y="161.0" width="44" height="364.0" rx="4" fill="#f59e0b"/>
+<text x="884.6" y="154.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.533</text>
+<text x="859.6" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">fp_only</text>
+<text x="859.6" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">fractional</text>
+<rect x="984.8" y="205.2" width="44" height="319.8" rx="4" fill="#0f766e"/>
+<text x="1006.8" y="198.2" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.468</text>
+<rect x="1034.8" y="160.8" width="44" height="364.2" rx="4" fill="#f59e0b"/>
+<text x="1056.8" y="153.8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.533</text>
+<text x="1031.8" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">fn_only</text>
+<text x="1031.8" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">binary</text>
+<rect x="1156.9" y="201.1" width="44" height="323.9" rx="4" fill="#0f766e"/>
+<text x="1178.9" y="194.1" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.474</text>
+<rect x="1206.9" y="155.8" width="44" height="369.2" rx="4" fill="#f59e0b"/>
+<text x="1228.9" y="148.8" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10" font-weight="400" fill="#334155">0.540</text>
+<text x="1203.9" y="553.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="600" fill="#0f172a">fn_only</text>
+<text x="1203.9" y="571.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">fractional</text>
+<text x="24.0" y="320.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#475569" transform="rotate(-90 24.0 320.0)">score</text>
+<text x="65.0" y="624.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#64748b">* Approximate context only: sampling temperature and completions per task differ.</text>
+</svg>
