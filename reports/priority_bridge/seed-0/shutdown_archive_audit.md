@@ -12,7 +12,7 @@ Local archive root:
 - Server Hugging Face cache versus local `hf_cache/`: 0 checksum mismatches.
 - Server RLVR home directories and logs versus the local auxiliary archive: 0 checksum mismatches.
 - Server `.git` versus the local server Git copy: 0 checksum mismatches.
-- Local SHA-256 manifest: 3,581 files verified, 0 failures.
+- Local SHA-256 manifest: 3,582 files verified, 0 failures.
 - Local seed analyzer: 6 conditions complete, 6 valid, 0 errors, 0 warnings.
 - The GPU server was not stopped, deleted, or modified through the provider panel.
 
@@ -69,3 +69,7 @@ shasum -a 256 -c reports/priority_bridge/seed-0/local_archive_SHA256SUMS.txt
 ```
 
 Raw outputs and the model cache are intentionally ignored by Git. The checksum manifest and this audit report are tracked in `feat/rlvr-grpo-pipeline`.
+
+## Intentionally excluded runtime data
+
+The server operating system, `.venv`, `.jupytervenv`, and pip, uv, and Triton caches were not copied. They are replaceable runtime data rather than experiment artifacts. Exact package versions are recorded in each run's metadata, while `pyproject.toml` and `uv.lock` are tracked in Git.
