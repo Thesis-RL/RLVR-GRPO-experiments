@@ -377,6 +377,21 @@ validated. In a remote session, launch this command through a persistent
 process manager (`tmux`, `systemd`, or equivalent) so an SSH disconnect cannot
 stop the experiment.
 
+Validate and summarize a completed seed matrix without loading a model:
+
+```bash
+uv run python scripts/analyze_online_seed.py \
+  --matrix-dir outputs/online_matrix/priority_bridge/main/seed-0 \
+  --report-dir reports/priority_bridge/seed-0
+```
+
+The analyzer verifies run status, all optimizer steps and scheduled
+checkpoints, adapter updates, rollout group sizes, rewards, advantages,
+zero-variance groups, clean evaluations, resource reports, and artifact
+hashes. It writes machine-readable validation, CSV/Markdown tables, and SVG
+plots. Seed-level reports are descriptive; multi-seed inference belongs in a
+separate analysis after the preregistered seeds are complete.
+
 For a frozen main run, clean validation runs every 10% of the optimizer budget.
 Clean test evaluation runs at 90% and 100%; `primary_metric_summary.json`
 averages these last two Pass@1 values. Difficulty-stratified test scores are

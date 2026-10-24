@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="90" y="36" font-family="sans-serif" font-size="24" font-weight="700" fill="#111827">Clean test Pass@1 — priority_bridge seed 0</text>
+<text x="90" y="62" font-family="sans-serif" font-size="14" fill="#4b5563">Mean of checkpoints 337 and 374; one seed, descriptive only</text>
+<line x1="90" y1="445.0" x2="970" y2="445.0" stroke="#e5e7eb"/>
+<text x="80" y="450.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.00</text>
+<line x1="90" y1="375.0" x2="970" y2="375.0" stroke="#e5e7eb"/>
+<text x="80" y="380.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.11</text>
+<line x1="90" y1="305.0" x2="970" y2="305.0" stroke="#e5e7eb"/>
+<text x="80" y="310.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.22</text>
+<line x1="90" y1="235.0" x2="970" y2="235.0" stroke="#e5e7eb"/>
+<text x="80" y="240.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.33</text>
+<line x1="90" y1="165.0" x2="970" y2="165.0" stroke="#e5e7eb"/>
+<text x="80" y="170.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.44</text>
+<line x1="90" y1="95.0" x2="970" y2="95.0" stroke="#e5e7eb"/>
+<text x="80" y="100.0" text-anchor="end" font-family="sans-serif" font-size="12" fill="#6b7280">0.55</text>
+<rect x="139.3" y="147.2" width="48.0" height="297.8" rx="3" fill="#2563eb"/>
+<text x="163.3" y="141.2" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.468</text>
+<text x="163.3" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">clean</text>
+<text x="163.3" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">binary</text>
+<rect x="286.0" y="144.0" width="48.0" height="301.0" rx="3" fill="#f97316"/>
+<text x="310.0" y="138.0" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.473</text>
+<text x="310.0" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">clean</text>
+<text x="310.0" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">fractional</text>
+<rect x="432.7" y="150.4" width="48.0" height="294.6" rx="3" fill="#2563eb"/>
+<text x="456.7" y="144.4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.463</text>
+<text x="456.7" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">fp_only</text>
+<text x="456.7" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">binary</text>
+<rect x="579.3" y="145.9" width="48.0" height="299.1" rx="3" fill="#f97316"/>
+<text x="603.3" y="139.9" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.470</text>
+<text x="603.3" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">fp_only</text>
+<text x="603.3" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">fractional</text>
+<rect x="726.0" y="147.2" width="48.0" height="297.8" rx="3" fill="#2563eb"/>
+<text x="750.0" y="141.2" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.468</text>
+<text x="750.0" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">fn_only</text>
+<text x="750.0" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">binary</text>
+<rect x="872.7" y="143.4" width="48.0" height="301.6" rx="3" fill="#f97316"/>
+<text x="896.7" y="137.4" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#374151">0.474</text>
+<text x="896.7" y="471" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#111827">fn_only</text>
+<text x="896.7" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4b5563">fractional</text>
+<rect x="90" y="519" width="14" height="14" rx="2" fill="#2563eb"/>
+<text x="112" y="530" font-family="sans-serif" font-size="13" fill="#374151">Pass@1</text>
+</svg>

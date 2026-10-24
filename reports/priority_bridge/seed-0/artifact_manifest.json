@@ -1,0 +1,590 @@
+{
+  "clean__binary": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 472426,
+        "sha256": "5d7cd027ef7c2909348a036d76d93a1fc63cf56aa745f3381a54d25d1d4f6738"
+      },
+      "primary_metric_summary.json": {
+        "size": 675,
+        "sha256": "6d6842ee9f58c2d9009ba02ce26a68690d27ad3cea5c94398d02bf57f1fc19d7"
+      },
+      "resolved_config.yaml": {
+        "size": 3502,
+        "sha256": "3b78040250a6e7c68c2c0a127d0a1e8134d4b5c45a8881a0e5b292e5182392d1"
+      },
+      "resource_report.json": {
+        "size": 1419,
+        "sha256": "94e14710cd6ffb12920dfbe51e63ef9318998fca6d746cd69d6d1f203ef9e90c"
+      },
+      "rollouts.jsonl": {
+        "size": 27253903,
+        "sha256": "833d260c615bfb4140b476f80a4d15c489b958a2605b6a4a16ad05e8e31a0c09"
+      },
+      "run_metadata.json": {
+        "size": 1805,
+        "sha256": "5349a4a432b458d0a313e135f3804fcaf2eb16e67caa8498a38e6b29f09f8c32"
+      },
+      "status.json": {
+        "size": 2250,
+        "sha256": "7f6e13f50e66fc95f3b71b167f06d086a7695f239b4e7b7af0ccc7e69c0e8aa9"
+      },
+      "trainer_state.json": {
+        "size": 398197,
+        "sha256": "a0b1bdc9d405c408b0147073232538aaf2f12cf68119274123655e6dd2b74207"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 39893,
+        "trainer_state_sha256": "c3d25c24254efc41c62b12f982abd5de43fa0700ba7a71edf09b3b951016201c",
+        "adapter_size": 12859984,
+        "adapter_sha256": "537d5d8e02fa6604141e3482c5714d73a595157dd76f2701da6dd60eedc5ca22"
+      },
+      "75": {
+        "trainer_state_size": 80363,
+        "trainer_state_sha256": "7c57b907cd0459ce0c03635683c5bac2c9bbe7454145c732072c6482a2ede19f",
+        "adapter_size": 12859984,
+        "adapter_sha256": "4c8e709fbf576a5d24923f712a80b06688d1fd43be73f339bf573051d8d8344d"
+      },
+      "112": {
+        "trainer_state_size": 119633,
+        "trainer_state_sha256": "01efa9effb371e97886f6ef4490cec2b94894a4ab836c384d15393cc5e7e0ec3",
+        "adapter_size": 12859984,
+        "adapter_sha256": "70364aefe712ca26b7983751a00f09c3b0a4981db6b568d88382c11a97232d01"
+      },
+      "150": {
+        "trainer_state_size": 160149,
+        "trainer_state_sha256": "d26bcf13b6a20e3c378e0cb8ee03ad38e634d131b9741aa5ebdfaf11871af69b",
+        "adapter_size": 12859984,
+        "adapter_sha256": "4520f0f37223d8b87538a267afefd7d40cb4f89b429185040cd9023de91ed2fe"
+      },
+      "187": {
+        "trainer_state_size": 199417,
+        "trainer_state_sha256": "0356d0fc9c06c40201d6e9e06918dbfa6f3544760c56b0a1afc0485c92fbcea9",
+        "adapter_size": 12859984,
+        "adapter_sha256": "548cadb4280a7e2cd340ecdd537bb78a826eb167ed151f4acad7887d13f876d8"
+      },
+      "224": {
+        "trainer_state_size": 238583,
+        "trainer_state_sha256": "5c1ae0565bf03f4a79459f73a6ba3087a6f8c13091502b4d77d2242931835193",
+        "adapter_size": 12859984,
+        "adapter_sha256": "de0bceeefd38527f0b9092673dfb27e6fcef22eb828f5415f201042705b79c10"
+      },
+      "262": {
+        "trainer_state_size": 278631,
+        "trainer_state_sha256": "9ff40b2f1ff2526cb67f951f474f4280b338b97ff765b95343e3a1e2d9ac73a8",
+        "adapter_size": 12859984,
+        "adapter_sha256": "51710b8b5c2612e8e514f49c6c2fb9ee82c729112efb5bb362d4d8a29b4d9d7a"
+      },
+      "299": {
+        "trainer_state_size": 318210,
+        "trainer_state_sha256": "3e5859d44e891f5719650c4fa0e946e1df72e10d9228afad199f0efc072dee2b",
+        "adapter_size": 12859984,
+        "adapter_sha256": "f02c203cd20da4c18bd4ae2473391e9fb801993cbcfe6ef2ba7ec2c50509f083"
+      },
+      "337": {
+        "trainer_state_size": 358898,
+        "trainer_state_sha256": "21bf84135ea5ee91fea9347a4fd234587e90fc7a0a4102e7e94d22ac29e720ba",
+        "adapter_size": 12859984,
+        "adapter_sha256": "6755835a83ac1776398b3afbfc83097a73465fa3904475aadfdec7f76e706c78"
+      },
+      "374": {
+        "trainer_state_size": 397966,
+        "trainer_state_sha256": "910549e7c19be88647b3085630a12907580e0ebc14a53af133590be7823b159d",
+        "adapter_size": 12859984,
+        "adapter_sha256": "de7ed08c78d186fa918e9e570199c50bb9b139e3a73a7547b7b6d9fcb9bc0c8f"
+      }
+    }
+  },
+  "clean__fractional": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 483725,
+        "sha256": "f6bffd5399d5fa5d8b1cdc378200f0f8e73fb459beecb0fed4f367997ad60ac1"
+      },
+      "primary_metric_summary.json": {
+        "size": 660,
+        "sha256": "2e43d05f285c8b255609db2a95a57c6a633cd6395ccbcf0415bf929075bf32a8"
+      },
+      "resolved_config.yaml": {
+        "size": 3506,
+        "sha256": "1151e26da5e5a934a34894525d6950906aa09e054e7766584a1c3fcab409f8c7"
+      },
+      "resource_report.json": {
+        "size": 1396,
+        "sha256": "3a7856d1f132686f332e21af1f227f34ae8fbac007ff3ae6ba4382ce57e7ea79"
+      },
+      "rollouts.jsonl": {
+        "size": 27402455,
+        "sha256": "bfed320f0a5a8178abb97c887bca413a38ad6fef7ee10b7ef1e673b12a059066"
+      },
+      "run_metadata.json": {
+        "size": 1825,
+        "sha256": "a5a2ab8f3ac13b3db49ee625303827aa1cd87fefc053b7598ec3ea0cc37a5971"
+      },
+      "status.json": {
+        "size": 2244,
+        "sha256": "2d451b5e7eefc7d84e554544b621cf84246debb1d8ca4eff22fd9e40cf561c27"
+      },
+      "trainer_state.json": {
+        "size": 406159,
+        "sha256": "7ac12cd847010129889cdbc6d356352f0c0759867f54bfde4ff05139e39308e4"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 40764,
+        "trainer_state_sha256": "9ee73c7702e123b648928d960b0f53c60af15488cf0742802fa8f79bb21d2e58",
+        "adapter_size": 12859984,
+        "adapter_sha256": "d132cf4e672b2d6f0af8b325c1bb822a09e382e4354ce39ebbbda412a9a0b1ea"
+      },
+      "75": {
+        "trainer_state_size": 81826,
+        "trainer_state_sha256": "0d8430f66b064b553bbda7e46d4a5ad66e374218a8f365f3b5e9981eba341e20",
+        "adapter_size": 12859984,
+        "adapter_sha256": "2ab74c90359edd1f63e19c90794c60219355ca05518f0effc724b7b60fb87712"
+      },
+      "112": {
+        "trainer_state_size": 121945,
+        "trainer_state_sha256": "5bf9ecf375070c3488a90e316f31385c7aa2a2ee65d36a2b9c8f396d8a0a85d4",
+        "adapter_size": 12859984,
+        "adapter_sha256": "a824e71140462e1c1d074ddcc368dda18903f99489dc17a081161ed3b41e464b"
+      },
+      "150": {
+        "trainer_state_size": 163330,
+        "trainer_state_sha256": "a4f98497ef41548a879ed6006343139b9a6a0b36c2a249a2ac8e67fed738d84e",
+        "adapter_size": 12859984,
+        "adapter_sha256": "c309a28343c57cfc8f40aff3495881ed0249a53d0a4a6e1a700b2eea897323aa"
+      },
+      "187": {
+        "trainer_state_size": 203156,
+        "trainer_state_sha256": "902149f06fb71ecfa3f2ea6f48b081bde08a0e43fe0488e4b9a2ccc44b814883",
+        "adapter_size": 12859984,
+        "adapter_sha256": "c5087d142c82fb8a7e57dd42bceb161bea6b3628731d9e7359bfcfb45604ac3b"
+      },
+      "224": {
+        "trainer_state_size": 242985,
+        "trainer_state_sha256": "bcae404ec27d49e8bcf0da7b5b81a7def037f21080ee8dadc949d5fcc9f5ec9d",
+        "adapter_size": 12859984,
+        "adapter_sha256": "e6c7de3b78b68cab6c0a96987e2929559240dd94eb7dd47df139fc3b82541f52"
+      },
+      "262": {
+        "trainer_state_size": 284144,
+        "trainer_state_sha256": "6b56c8a5c41c88c057533e87da626a29d2762d97be91807801b5ad56cc97fbbf",
+        "adapter_size": 12859984,
+        "adapter_sha256": "a0c9894c0d4daaa5b2fc07834b7d5df508642d2806f968a5927de10d97139860"
+      },
+      "299": {
+        "trainer_state_size": 324427,
+        "trainer_state_sha256": "3e867364c34728475a91d2b6a7bb3ded88f8530af9cdc4ac911e5564e71cf531",
+        "adapter_size": 12859984,
+        "adapter_sha256": "f28de5c27cca069d7bd38a687df753d42685d4b62b02dd3c5375440fc9ae954b"
+      },
+      "337": {
+        "trainer_state_size": 365992,
+        "trainer_state_sha256": "596bbedc8acb32e92aaeaf4632a7b8e010b0e39c81c0f44d1a351c43961a7719",
+        "adapter_size": 12859984,
+        "adapter_sha256": "de2c897b93f4af80db9eeb46b1c965b1df99396577f40540f5980e6bd84148c7"
+      },
+      "374": {
+        "trainer_state_size": 405928,
+        "trainer_state_sha256": "7f1cd5cd58c6524b8361f4ffa28ae3ca88702d3ee868b94aa496b49bc098d72b",
+        "adapter_size": 12859984,
+        "adapter_sha256": "1db9142cdbeafb8da96e03d2827047a3f613a5113bf38c90c19c742e7bdd4856"
+      }
+    }
+  },
+  "fp_only__binary": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 480900,
+        "sha256": "5a5a8f0f65e644369ffce8addb3026d6a299a4dedb7766d839379f57b60bf352"
+      },
+      "primary_metric_summary.json": {
+        "size": 689,
+        "sha256": "219df2e668c76dbd731aa37a9b7533b479456c5991456638482a1a5eb22e5841"
+      },
+      "resolved_config.yaml": {
+        "size": 3504,
+        "sha256": "64c41273e511315a993a89dee0adfcddad557e32b12bbdf627068b1b45778c37"
+      },
+      "resource_report.json": {
+        "size": 1402,
+        "sha256": "3c27ef327db5688a584b79bb96b675117501286307a986b5a61c644b66b38a72"
+      },
+      "rollouts.jsonl": {
+        "size": 27593430,
+        "sha256": "8f41205b9f56d68aa42357a1ca7d221d381eb67e6965e875f90a4bfeef47cd32"
+      },
+      "run_metadata.json": {
+        "size": 1815,
+        "sha256": "90a4e6bfe38576eacfcd189714f015f6b7b42beb5aa9b819d40d45f4312ea4a5"
+      },
+      "status.json": {
+        "size": 2272,
+        "sha256": "85883a8abfce0fc68693be6ba1dbbd7a59433f444cbb739044b4918ece8ffe86"
+      },
+      "trainer_state.json": {
+        "size": 404953,
+        "sha256": "4ff293a1794084962e9a8fe0fb0613ed9fff907cf4726a935d44c527546b5526"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 40748,
+        "trainer_state_sha256": "a3e8a77e2dd2e7f7f9fa45615671548bce31dc7b066d001b58cdea6bd47680b0",
+        "adapter_size": 12859984,
+        "adapter_sha256": "79d8dbd6b44c7410a095923658fdf690d6449a29c55997f8577bb8758bb8ace6"
+      },
+      "75": {
+        "trainer_state_size": 81761,
+        "trainer_state_sha256": "eb54021b17da720db7170f325e08d215f50d57f744b3c9dba48db0ea91418277",
+        "adapter_size": 12859984,
+        "adapter_sha256": "f003216ee5e209a88cf65d716836e49e1f5bb4dae1409f4389b1475a0c79ac53"
+      },
+      "112": {
+        "trainer_state_size": 121737,
+        "trainer_state_sha256": "42f3e5c542f4d301d9adfb00ea5b0f0523c9aa8424b08e916b63f350d412d48f",
+        "adapter_size": 12859984,
+        "adapter_sha256": "073f30f839823156e16c57544068f6bb45332558eb6f70d7917846b96edbaab2"
+      },
+      "150": {
+        "trainer_state_size": 162886,
+        "trainer_state_sha256": "55aa2c3ed21d85c6c6e0b083cfadf0a091456809e9c14cde721af8a6bbc03e2e",
+        "adapter_size": 12859984,
+        "adapter_sha256": "ceb7362045a012111246cba7c8b9742bdcc604efdb807ef592206928625d04fe"
+      },
+      "187": {
+        "trainer_state_size": 202779,
+        "trainer_state_sha256": "a0a118da322e7fff845e32e66ea093fb972f58a4bf7474f390b801bea772bcd7",
+        "adapter_size": 12859984,
+        "adapter_sha256": "e5e164d48bbcf97046028a83c093bc9550659e29e42eda36fe4f21d3d31254b1"
+      },
+      "224": {
+        "trainer_state_size": 242629,
+        "trainer_state_sha256": "a5078403e3c74ac225e26d82622553700d24aa4c4ddc8dd6218512f1155bb91d",
+        "adapter_size": 12859984,
+        "adapter_sha256": "9569b3ab0467f25e4c35d175aad1757ebfc05e5085dd26a79e74c81ba07aee12"
+      },
+      "262": {
+        "trainer_state_size": 283860,
+        "trainer_state_sha256": "a78f9303babae46d2ae46ae939490c648da4560ccc86262769220566f6c995e6",
+        "adapter_size": 12859984,
+        "adapter_sha256": "e5aecb910ca01b2a5bb85fafae248754a94a8cc556e3f5902b01e7b392969a02"
+      },
+      "299": {
+        "trainer_state_size": 323955,
+        "trainer_state_sha256": "80d32370b9d74d187e03b8c0e0a0d7ed51f72677c2c6e3592c309515c81a535c",
+        "adapter_size": 12859984,
+        "adapter_sha256": "b1ee0259d6385434917d3188a8c2ff6b913d4916d83e0c68eeb6ec154a5acd76"
+      },
+      "337": {
+        "trainer_state_size": 364698,
+        "trainer_state_sha256": "f8ba88748629b7bf25a3b935a0e800d7e19fd244670a5afd010f120fcbd3b3c8",
+        "adapter_size": 12859984,
+        "adapter_sha256": "e809e1bcde5316f790e0093d72809bccecf67b7ce44aa18c4b6cd122c5575109"
+      },
+      "374": {
+        "trainer_state_size": 404721,
+        "trainer_state_sha256": "2c358c934eebb424e5c5835c54ee2bd207520a5296d0cb458a8eae6e4d2e9561",
+        "adapter_size": 12859984,
+        "adapter_sha256": "28853b3c60de95de83aaa85d6df26fd3066cd67c08d6acb32674bc21a515c0df"
+      }
+    }
+  },
+  "fp_only__fractional": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 494762,
+        "sha256": "f83029fd3b4564d1082328c8658c0cada3622e5bdf10b5ba817ab0ad274adbd8"
+      },
+      "primary_metric_summary.json": {
+        "size": 674,
+        "sha256": "b0773eb20c09faf403583f4a2d56415a03e7bfe7535e4a4ada975fa0b9b2835d"
+      },
+      "resolved_config.yaml": {
+        "size": 3508,
+        "sha256": "4565c693a4df7c2200c6a1dd6526acec4b9dd7ecdda5b0ac788e178f877922f0"
+      },
+      "resource_report.json": {
+        "size": 1397,
+        "sha256": "b26d0169085f59657e2de185497cb74fd8a137486c7f86e4cc26fb1c3b620eda"
+      },
+      "rollouts.jsonl": {
+        "size": 27935057,
+        "sha256": "0f11ee5af27bba5d3401ddef98b6e316124fe4f3a3b2ee2872804520f7e51686"
+      },
+      "run_metadata.json": {
+        "size": 1835,
+        "sha256": "ec2649c9df5684cd5c69841b9af60ac021cb1d1cf077c8f557ebcdb691f9e6ee"
+      },
+      "status.json": {
+        "size": 2266,
+        "sha256": "e5cff464328d7a194d6279e69f2235037144f32db47bce4dabb7d4f4277cedf7"
+      },
+      "trainer_state.json": {
+        "size": 415511,
+        "sha256": "8064a66b6dd8df855688d157455cdfe38a4f80b257f7cd20bc531ac630888902"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 41872,
+        "trainer_state_sha256": "0c5632f991ef41eaab4eed31d1ae1abca45177da8e45416eb8ad6ade408f47d1",
+        "adapter_size": 12859984,
+        "adapter_sha256": "9f36add1979f9da748949da10dac1ef7931618ed332ccec0100a94b11635188f"
+      },
+      "75": {
+        "trainer_state_size": 83742,
+        "trainer_state_sha256": "55874c1f64c1c12f4e538ecd75176fd7b43adc7bec1b57311358d3cef5de0559",
+        "adapter_size": 12859984,
+        "adapter_sha256": "64331df8704677cbc712a09ef827d0dd1e49bfcc46ccdd38c5d2c357a6651841"
+      },
+      "112": {
+        "trainer_state_size": 125061,
+        "trainer_state_sha256": "8ce2c8353286b4534858921283da6834616b2dc740c44501bd3d17fa0ab33247",
+        "adapter_size": 12859984,
+        "adapter_sha256": "8f951e261e28401beb00f8a4e6bddbedf572b95541027467ed075b8160cdd803"
+      },
+      "150": {
+        "trainer_state_size": 167243,
+        "trainer_state_sha256": "2f0601c9435c88b7d44326d57a95fcdb5396927041b9144edea6e7a8957e39bd",
+        "adapter_size": 12859984,
+        "adapter_sha256": "26d3a30dec97be529d7a31a2009f58ac79d8db519a926135797360a3507e2707"
+      },
+      "187": {
+        "trainer_state_size": 208094,
+        "trainer_state_sha256": "2681c97966da3262b96b26bbb45d3091f9f1e39b78896fd8fe4ac52776d6d0a1",
+        "adapter_size": 12859984,
+        "adapter_sha256": "204f40a39a47eaec6285b0875fd8b4ff01b4d83f74c69d2282c0bee32501ace4"
+      },
+      "224": {
+        "trainer_state_size": 249090,
+        "trainer_state_sha256": "43aefed7d5d0df55d202582b59f343e5a8ce67b5eee6315eebde1f3aa2b7a368",
+        "adapter_size": 12859984,
+        "adapter_sha256": "275d68c9384c1ab007a4ed9187583a6f8f7c2d82b86ab50c3b2f5d16e39a10ea"
+      },
+      "262": {
+        "trainer_state_size": 291085,
+        "trainer_state_sha256": "44677cbd4cd77a526679135e91587de83b7d374f842d1f97439b54f3c3ec5855",
+        "adapter_size": 12859984,
+        "adapter_sha256": "0f93f8ddf5d45f364003230e914c4edc139fee53ecae0df04f51e87b9245e24a"
+      },
+      "299": {
+        "trainer_state_size": 332058,
+        "trainer_state_sha256": "e36f75d117dcc32e8b7d67694801ef3d1685bb2083f72912c9c84719d2c66c67",
+        "adapter_size": 12859984,
+        "adapter_sha256": "4f8c55aeaddb8677fbd0acd05496f4cda1456c858487c4a828cdf9ecc32fe10a"
+      },
+      "337": {
+        "trainer_state_size": 374166,
+        "trainer_state_sha256": "af1686799f7143293236632d3575dd95759e527b83b4dd4ed18d56c0a45caf95",
+        "adapter_size": 12859984,
+        "adapter_sha256": "8d91fd3c542b75190cc52bc80e96ffb4e82cc79c68de2c7cdef7d917b117a372"
+      },
+      "374": {
+        "trainer_state_size": 415279,
+        "trainer_state_sha256": "d810a672f9419cc4434afc1202c3d4cc78a96de788abdc30f47232d3d4f7d5e2",
+        "adapter_size": 12859984,
+        "adapter_sha256": "0f4ea775b461df4a2a4b5369781ca7e6d561277d65d6a409e71ee4a9e308dadb"
+      }
+    }
+  },
+  "fn_only__binary": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 475553,
+        "sha256": "809ba633d8c77a38352e1186a77fdbc46fb88136becf1a000a60a82710acf474"
+      },
+      "primary_metric_summary.json": {
+        "size": 690,
+        "sha256": "842ebe35a2d28e26041b7311cf51b83aecb9305a3fcec8c611ac93f83b2fde4e"
+      },
+      "resolved_config.yaml": {
+        "size": 3504,
+        "sha256": "e0d848e91da833e68178dc430f2d5a2b27c2bdbbf0684a6b99b99fe34d00bfe9"
+      },
+      "resource_report.json": {
+        "size": 1408,
+        "sha256": "c16b0b7eadd8caf1f11ec121ebacb27a17b65f19b4734b432ec813b2104d9f55"
+      },
+      "rollouts.jsonl": {
+        "size": 27638194,
+        "sha256": "7bf534b47e27005ecf435e8d52f1c83e33b19d97cedc9328555de7c0db29d888"
+      },
+      "run_metadata.json": {
+        "size": 1815,
+        "sha256": "b689074dc412ebb963de88a9ba74e4e7bd68f7ca5dbcbc58082fbb9a392f0315"
+      },
+      "status.json": {
+        "size": 2269,
+        "sha256": "1a0d150a5686ee4c53f42e813233f418996bcf0e55fd2b651859cf08723719bb"
+      },
+      "trainer_state.json": {
+        "size": 399606,
+        "sha256": "641e9ef3edf866cc76dd8275a37db190c705d4c5529c9a6020737da8a90f7b3a"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 39856,
+        "trainer_state_sha256": "e64e371aabc6b42617c687a383b55f6f24a108b75b93f4cefd3c6a00d5a46366",
+        "adapter_size": 12859984,
+        "adapter_sha256": "cab0752fc00712cc77df5a883a73c49aaeb418a3d0b4746a08855b52f41b3735"
+      },
+      "75": {
+        "trainer_state_size": 80549,
+        "trainer_state_sha256": "a25ef7936e248837f1a42770408fddccf083135e5dd42f13c5aaceb84e999e8a",
+        "adapter_size": 12859984,
+        "adapter_sha256": "c9b34460497cfd82e0dd5e216d67d66adad9ca1b3f55966ddbd93c30a1c5def8"
+      },
+      "112": {
+        "trainer_state_size": 119887,
+        "trainer_state_sha256": "0573bc8ad8eb12a82d4fabd971313bc29b686074a26cf1d8403ca8fadd2f2aac",
+        "adapter_size": 12859984,
+        "adapter_sha256": "d067d3e4828399f3072dcf9ba3095f5afae6da430ef16ce6275b7f60e55e6db6"
+      },
+      "150": {
+        "trainer_state_size": 160631,
+        "trainer_state_sha256": "bc9da74e6d8a25ac168e7bf586f3ff772ef97026e51637d3e5f772b58e9be6c5",
+        "adapter_size": 12859984,
+        "adapter_sha256": "97a2d6b33307853659857d0c370d4807982d20f7d27f5bc5a34e83315e188b24"
+      },
+      "187": {
+        "trainer_state_size": 200053,
+        "trainer_state_sha256": "32ebbb1f6c343471b5f9c1c1543349cf83f9c410278db381055c6afad1e33191",
+        "adapter_size": 12859984,
+        "adapter_sha256": "8631bade35167c11af60fd4c6022a19091b38a184be27c8cb8e2d6c7ee8cdbab"
+      },
+      "224": {
+        "trainer_state_size": 239341,
+        "trainer_state_sha256": "b60a2ea1a473d4fcb9d01daa2cf4d774e8f07e1485f2b16442b2469ad7ef0e8f",
+        "adapter_size": 12859984,
+        "adapter_sha256": "f2ebfabed7b15effd9b4a397f0bd3362de6a6906bb582dbfd898ddfc193cfeaf"
+      },
+      "262": {
+        "trainer_state_size": 279656,
+        "trainer_state_sha256": "ece0bff5a9b6b4a6d8ebf5941b3b54d9a35f4ac059354261eda538ff4eaca030",
+        "adapter_size": 12859984,
+        "adapter_sha256": "92fc031b8ba6b258bf239c600eb52dcdc52140f1a07975b918f2d78147540806"
+      },
+      "299": {
+        "trainer_state_size": 319520,
+        "trainer_state_sha256": "b9ce84aa4894417c23ba98af87dddf3d0dad1dd7bb921618ffe4190e4b4c1463",
+        "adapter_size": 12859984,
+        "adapter_sha256": "e48f53a7abbcc7bc640f96594439b51cc9666c97ad55627029390b48a9db430d"
+      },
+      "337": {
+        "trainer_state_size": 360096,
+        "trainer_state_sha256": "ab4b407c0cda2763e95ada0827413b1a28a7ae11c4f4bf623ab23a10f59099f7",
+        "adapter_size": 12859984,
+        "adapter_sha256": "974122fd2ce2c52635f7322bfdda140fc65bf3e8e03164752f32c74c1b99d0e6"
+      },
+      "374": {
+        "trainer_state_size": 399375,
+        "trainer_state_sha256": "0ef42784bd9dd579bbe966df56a07fb20a28dc4d99b5c03ea2b408a81594b638",
+        "adapter_size": 12859984,
+        "adapter_sha256": "1930b1d738e7dcfe9128ae123f3c17ec4bb65ba67a8ae3b2008969b445c91250"
+      }
+    }
+  },
+  "fn_only__fractional": {
+    "root_artifacts": {
+      "events.jsonl": {
+        "size": 493116,
+        "sha256": "130552a9a741062a3902f1588eb53ec6d82175a45bbe5f229753a31a663c65a3"
+      },
+      "primary_metric_summary.json": {
+        "size": 676,
+        "sha256": "274f78a4edfd631ecfb122671dff2823387ee04896a51d13f68419e4b0388cee"
+      },
+      "resolved_config.yaml": {
+        "size": 3508,
+        "sha256": "896b92139f83b5c265880d16d9d5ff0320a4ac4823bdfe7f8700973fa0ba4f85"
+      },
+      "resource_report.json": {
+        "size": 1406,
+        "sha256": "52fdf6c410a030ecd004f66b766df77c3e53893b84d0ae1f44471bdf9855dbe0"
+      },
+      "rollouts.jsonl": {
+        "size": 27947415,
+        "sha256": "7bbc486f4adb84aa6d00e50f224827670935dc27a8024ec8f2fd6a696c668c24"
+      },
+      "run_metadata.json": {
+        "size": 1835,
+        "sha256": "618d15d3857df11b0c2c81900090d43b1f577b97f250f25349ec2b1c24e007ae"
+      },
+      "status.json": {
+        "size": 2269,
+        "sha256": "81ec4e0f7baa403108ff4a5f737078a8d8e56c69d7e8586200c3dcc9178c5da7"
+      },
+      "trainer_state.json": {
+        "size": 413864,
+        "sha256": "a81930e8bc8b348e3eb47f5fd035e124b4d64dbf887b458ebc484551e4b862d7"
+      }
+    },
+    "checkpoints": {
+      "37": {
+        "trainer_state_size": 41473,
+        "trainer_state_sha256": "0cbe78a7dd9ad978dda8e57589788570ec2232161d20154459574a0cec5226d5",
+        "adapter_size": 12859984,
+        "adapter_sha256": "64983c2f36d5f397ffd2b23275458249761dec8642b300f32840570a7071cf2d"
+      },
+      "75": {
+        "trainer_state_size": 83514,
+        "trainer_state_sha256": "db56edb4f44d4931d96edc3c98eb71365470a8ddfbc9cb8e52e620523c77f582",
+        "adapter_size": 12859984,
+        "adapter_sha256": "05a67edcdb5f43f402a0eb1f6df1dae2f1548f1ddf7bffee8d2a70cec99b832b"
+      },
+      "112": {
+        "trainer_state_size": 124370,
+        "trainer_state_sha256": "31aadca7ad7529b49daf81706e423a4cc0e0f33824882ebbeee7d2415a701d4e",
+        "adapter_size": 12859984,
+        "adapter_sha256": "da1f6e8e9069e2d4bca6312240e3833101ae267931c23f4a913c0bc4f11b9f62"
+      },
+      "150": {
+        "trainer_state_size": 166293,
+        "trainer_state_sha256": "7b154bda1da2110fe0f9f47d08ae57b7190717ad9524c9ebfbd612a75ba453c3",
+        "adapter_size": 12859984,
+        "adapter_sha256": "970d64e837b4fa12be82c5ae1481f1e566699694136a69f696c7913e1375db57"
+      },
+      "187": {
+        "trainer_state_size": 206809,
+        "trainer_state_sha256": "a0dec0c6246ddd93efc4a75f4053b21149c694f3e4c2e7d10f7486496bdbd64c",
+        "adapter_size": 12859984,
+        "adapter_sha256": "1109f30adcea2bbfa847db5fe69c861f761152344fd55bbd2d36d2903497f07a"
+      },
+      "224": {
+        "trainer_state_size": 247812,
+        "trainer_state_sha256": "006c2e712c58b647e67938014652e9b0baee3f9e68c42d0fb6f708c1abe284c9",
+        "adapter_size": 12859984,
+        "adapter_sha256": "c664c27f171508341b7805012041d9a1bef7467e14bf66a015d81c1a339bf0c3"
+      },
+      "262": {
+        "trainer_state_size": 289566,
+        "trainer_state_sha256": "db93ace3974f5e0fcdd1695a7cc8861eef5ae17c583fbdb6d54df34f9af1e421",
+        "adapter_size": 12859984,
+        "adapter_sha256": "330c5173683a8e29fca551c039925b6657006a91f54b2654626df83fe542724f"
+      },
+      "299": {
+        "trainer_state_size": 330662,
+        "trainer_state_sha256": "b4c378fae85119049103cb59c0f1cf43d43a8753fc9eae35e36635145c99cd4a",
+        "adapter_size": 12859984,
+        "adapter_sha256": "4a58943ea732c53a42c5df7679c06821052602064c6aac514a3439096aa3e106"
+      },
+      "337": {
+        "trainer_state_size": 372777,
+        "trainer_state_sha256": "3657b4aa4297007cbd60facdb6941351f54962e4541d44f7bbf9f2a51773b0a8",
+        "adapter_size": 12859984,
+        "adapter_sha256": "964f68351fc4f8a05772320531a1f1661078ade3b47302e4f4fbf0d2fc9ca4a2"
+      },
+      "374": {
+        "trainer_state_size": 413632,
+        "trainer_state_sha256": "d59bdf3fc46412ce96d7a6a8b63152841460cd4f5dbc8a6cb489dbf8c01472a5",
+        "adapter_size": 12859984,
+        "adapter_sha256": "b21ea89c09996bb76e32fef3b1e6a7cd51ff2e1ec35737c3a4147a325588e8cb"
+      }
+    }
+  }
+}
