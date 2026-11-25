@@ -1,0 +1,1063 @@
+{
+  "kind": "priority_bridge_v2_fp_vs_fn_contrasts",
+  "schema_version": 1,
+  "question": "At matched J=0.7, how do FN-only and FP-only differ under binary vs fractional reward aggregation?",
+  "sources": {
+    "analysis_json": {
+      "path": "analyses/priority_bridge_v2_2026-11-25/analysis.json",
+      "sha256": "8519f7cc27ec77624e67669ef727fc26123fab0ba3d331acdf40f86112e3575b"
+    },
+    "stage6_multiseed_reference": {
+      "path": "analyses/priority_bridge_v2_2026-11-25/provenance/stage6_multiseed_reference.json",
+      "sha256": "1b21b0aed6b3b93d53fe83fa09e119f9e9eaca1ca755a069eb779184b0803856"
+    },
+    "extractor": "scripts/extract_fp_vs_fn_contrasts.py",
+    "upstream_scripts": {
+      "stage6": "scripts/analyze_priority_bridge_multiseed.py",
+      "offline": "scripts/analyze_priority_bridge_offline.py"
+    },
+    "notes": "Endpoint Pass@1 contrasts and per-condition training-signal means come from Stage 6 (analyze_priority_bridge_multiseed.py). Within-group erasure / pairwise preservation and LoRA audit cosines come from the offline reanalysis (analyze_priority_bridge_offline.py \u2192 analysis.json). This script only re-aggregates those published artifacts; it does not re-read raw rollouts."
+  },
+  "endpoint": {
+    "planned_contrasts": {
+      "binary_fn_minus_fp": {
+        "weights": {
+          "fn_only__binary": 1.0,
+          "fp_only__binary": -1.0
+        },
+        "metrics": {
+          "pass_at_1": {
+            "estimate": -0.00175,
+            "two_way_bootstrap_ci95": [
+              -0.00925,
+              0.00625
+            ],
+            "seed_t_ci95": [
+              -0.016194892334164643,
+              0.012694892334164641
+            ],
+            "by_seed": {
+              "0": -0.007,
+              "1": 0.0045,
+              "2": -0.00275
+            }
+          },
+          "mean_test_pass_rate": {
+            "estimate": -0.0017777777777777774,
+            "two_way_bootstrap_ci95": [
+              -0.008416666666666666,
+              0.005194444444444445
+            ],
+            "seed_t_ci95": [
+              -0.013699074835178477,
+              0.010143519279622922
+            ],
+            "by_seed": {
+              "0": -0.006416666666666666,
+              "1": 0.003166666666666666,
+              "2": -0.002083333333333333
+            }
+          }
+        }
+      },
+      "fractional_fn_minus_fp": {
+        "weights": {
+          "fn_only__fractional": 1.0,
+          "fp_only__fractional": -1.0
+        },
+        "metrics": {
+          "pass_at_1": {
+            "estimate": 8.333333333333333e-05,
+            "two_way_bootstrap_ci95": [
+              -0.00525,
+              0.005333333333333333
+            ],
+            "seed_t_ci95": [
+              -0.006168276146277549,
+              0.006334942812944217
+            ],
+            "by_seed": {
+              "0": 0.00275,
+              "1": -0.00225,
+              "2": -0.00025
+            }
+          },
+          "mean_test_pass_rate": {
+            "estimate": -0.0003055555555555552,
+            "two_way_bootstrap_ci95": [
+              -0.005749999999999997,
+              0.0049166666666666655
+            ],
+            "seed_t_ci95": [
+              -0.008216355851453524,
+              0.007605244740342413
+            ],
+            "by_seed": {
+              "0": 0.0026666666666666657,
+              "1": -0.0036666666666666653,
+              "2": 8.33333333333326e-05
+            }
+          }
+        }
+      },
+      "fn_vs_fp_aggregation_interaction": {
+        "weights": {
+          "fn_only__fractional": 1.0,
+          "fp_only__fractional": -1.0,
+          "fn_only__binary": -1.0,
+          "fp_only__binary": 1.0
+        },
+        "metrics": {
+          "pass_at_1": {
+            "estimate": 0.0018333333333333333,
+            "two_way_bootstrap_ci95": [
+              -0.00875,
+              0.011833333333333333
+            ],
+            "seed_t_ci95": [
+              -0.01871092609535723,
+              0.022377592762023894
+            ],
+            "by_seed": {
+              "0": 0.00975,
+              "1": -0.00675,
+              "2": 0.0025
+            }
+          },
+          "mean_test_pass_rate": {
+            "estimate": 0.001472222222222222,
+            "two_way_bootstrap_ci95": [
+              -0.00855625,
+              0.011111111111111106
+            ],
+            "seed_t_ci95": [
+              -0.0183537428362871,
+              0.021298187280731545
+            ],
+            "by_seed": {
+              "0": 0.009083333333333332,
+              "1": -0.006833333333333331,
+              "2": 0.0021666666666666666
+            }
+          }
+        }
+      }
+    },
+    "pass_at_1_gains_vs_base": {
+      "fp_only__binary": {
+        "estimate": 0.009333333333333334,
+        "seed_t_ci95": [
+          0.000499496063066783,
+          0.018167170603599885
+        ],
+        "by_seed": {
+          "0": 0.011,
+          "1": 0.00525,
+          "2": 0.01175
+        }
+      },
+      "fn_only__binary": {
+        "estimate": 0.007583333333333333,
+        "seed_t_ci95": [
+          -0.00018166685499654191,
+          0.015348333521663208
+        ],
+        "by_seed": {
+          "0": 0.004,
+          "1": 0.00975,
+          "2": 0.009
+        }
+      },
+      "fp_only__fractional": {
+        "estimate": 0.012166666666666666,
+        "seed_t_ci95": [
+          0.0071086344939127475,
+          0.01722469883942059
+        ],
+        "by_seed": {
+          "0": 0.01125,
+          "1": 0.0145,
+          "2": 0.01075
+        }
+      },
+      "fn_only__fractional": {
+        "estimate": 0.01225,
+        "seed_t_ci95": [
+          0.007902759004273435,
+          0.01659724099572657
+        ],
+        "by_seed": {
+          "0": 0.014,
+          "1": 0.01225,
+          "2": 0.0105
+        }
+      },
+      "clean__binary": {
+        "estimate": 0.011916666666666667,
+        "seed_t_ci95": [
+          0.008277737000156871,
+          0.015555596333176464
+        ],
+        "by_seed": {
+          "0": 0.013,
+          "1": 0.0125,
+          "2": 0.01025
+        }
+      },
+      "clean__fractional": {
+        "estimate": 0.00975,
+        "seed_t_ci95": [
+          0.0054473472700887265,
+          0.014052652729911273
+        ],
+        "by_seed": {
+          "0": 0.01075,
+          "1": 0.01075,
+          "2": 0.00775
+        }
+      }
+    }
+  },
+  "training_signal": {
+    "condition_means": {
+      "fp_only__binary": {
+        "mean_pairwise_fidelity": {
+          "mean": 0.9376456764688855,
+          "seed_t_ci95": [
+            0.9286342071185583,
+            0.9466571458192128
+          ]
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": 0.9665849987917818,
+          "seed_t_ci95": [
+            0.9635236371432607,
+            0.969646360440303
+          ]
+        },
+        "mean_advantage_cosine": {
+          "mean": 0.9158316095038629,
+          "seed_t_ci95": [
+            0.9106757025862462,
+            0.9209875164214796
+          ]
+        },
+        "mean_top1_preserved": {
+          "mean": 1.0,
+          "seed_t_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "mean_spearman": {
+          "mean": 0.9158316095038629,
+          "seed_t_ci95": [
+            0.9106757025862462,
+            0.9209875164214796
+          ]
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.11556743909685085,
+          "seed_t_ci95": [
+            0.10297795160207783,
+            0.12815692659162387
+          ]
+        },
+        "nonzero_train_advantage": {
+          "mean": 0.8844325609031491,
+          "seed_t_ci95": [
+            0.8718430734083762,
+            0.8970220483979221
+          ]
+        },
+        "mean_changed_label_rate": {
+          "mean": 0.15056199247375715,
+          "seed_t_ci95": [
+            0.14926937926553863,
+            0.15185460568197567
+          ]
+        }
+      },
+      "fn_only__binary": {
+        "mean_pairwise_fidelity": {
+          "mean": 0.3465951851610043,
+          "seed_t_ci95": [
+            0.3379097879748056,
+            0.355280582347203
+          ]
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": 0.6538224691371722,
+          "seed_t_ci95": [
+            0.6372470009623438,
+            0.6703979373120007
+          ]
+        },
+        "mean_advantage_cosine": {
+          "mean": 0.4548947759664972,
+          "seed_t_ci95": [
+            0.44272836047825137,
+            0.467061191454743
+          ]
+        },
+        "mean_top1_preserved": {
+          "mean": 0.49377859558175397,
+          "seed_t_ci95": [
+            0.4686657368625717,
+            0.5188914543009363
+          ]
+        },
+        "mean_spearman": {
+          "mean": 0.4548947759664972,
+          "seed_t_ci95": [
+            0.44272836047825137,
+            0.467061191454743
+          ]
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.28342245989304815,
+          "seed_t_ci95": [
+            0.25080781322551465,
+            0.31603710656058165
+          ]
+        },
+        "nonzero_train_advantage": {
+          "mean": 0.7165775401069517,
+          "seed_t_ci95": [
+            0.6839628934394183,
+            0.7491921867744852
+          ]
+        },
+        "mean_changed_label_rate": {
+          "mean": 0.14432313329372154,
+          "seed_t_ci95": [
+            0.14063299306483315,
+            0.14801327352260993
+          ]
+        }
+      },
+      "fp_only__fractional": {
+        "mean_pairwise_fidelity": {
+          "mean": 0.876689834812467,
+          "seed_t_ci95": [
+            0.8718384678697438,
+            0.8815412017551901
+          ]
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": 0.8718054847828677,
+          "seed_t_ci95": [
+            0.8660553964175888,
+            0.8775555731481466
+          ]
+        },
+        "mean_advantage_cosine": {
+          "mean": 0.8107730253566112,
+          "seed_t_ci95": [
+            0.8071788181794525,
+            0.81436723253377
+          ]
+        },
+        "mean_top1_preserved": {
+          "mean": 0.9408233185081389,
+          "seed_t_ci95": [
+            0.9347717551281217,
+            0.9468748818881562
+          ]
+        },
+        "mean_spearman": {
+          "mean": 0.805028993590335,
+          "seed_t_ci95": [
+            0.8006717384153116,
+            0.8093862487653584
+          ]
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.04070112893642305,
+          "seed_t_ci95": [
+            0.03175324744225226,
+            0.049649010430593846
+          ]
+        },
+        "nonzero_train_advantage": {
+          "mean": 0.9432932263814617,
+          "seed_t_ci95": [
+            0.932678735693393,
+            0.9539077170695305
+          ]
+        },
+        "mean_changed_label_rate": {
+          "mean": 0.15168845315904136,
+          "seed_t_ci95": [
+            0.14795532178087187,
+            0.15542158453721086
+          ]
+        }
+      },
+      "fn_only__fractional": {
+        "mean_pairwise_fidelity": {
+          "mean": 0.8862343047529541,
+          "seed_t_ci95": [
+            0.8814274817669931,
+            0.891041127738915
+          ]
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": 0.8606670402626487,
+          "seed_t_ci95": [
+            0.8557801859827086,
+            0.8655538945425889
+          ]
+        },
+        "mean_advantage_cosine": {
+          "mean": 0.8118052189772329,
+          "seed_t_ci95": [
+            0.8044810533342276,
+            0.8191293846202382
+          ]
+        },
+        "mean_top1_preserved": {
+          "mean": 0.4823047673808561,
+          "seed_t_ci95": [
+            0.4506909834928268,
+            0.5139185512688853
+          ]
+        },
+        "mean_spearman": {
+          "mean": 0.7939313494331985,
+          "seed_t_ci95": [
+            0.7888136235613534,
+            0.7990490753050437
+          ]
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.06625074272133095,
+          "seed_t_ci95": [
+            0.055787661779802794,
+            0.07671382366285912
+          ]
+        },
+        "nonzero_train_advantage": {
+          "mean": 0.9197303921568628,
+          "seed_t_ci95": [
+            0.9038098588090556,
+            0.93565092550467
+          ]
+        },
+        "mean_changed_label_rate": {
+          "mean": 0.15032060804119626,
+          "seed_t_ci95": [
+            0.14436963720498072,
+            0.1562715788774118
+          ]
+        }
+      }
+    },
+    "fn_minus_fp": {
+      "binary": {
+        "mean_pairwise_fidelity": {
+          "mean": -0.5910504913078812,
+          "by_seed": {
+            "0": -0.5945839686339274,
+            "1": -0.5955225945966159,
+            "2": -0.5830449106931004
+          }
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": -0.3127625296546096,
+          "by_seed": {
+            "0": -0.3183423259021906,
+            "1": -0.3157309932049178,
+            "2": -0.30421426985672073
+          }
+        },
+        "mean_advantage_cosine": {
+          "mean": -0.4609368335373657,
+          "by_seed": {
+            "0": -0.46551284442643714,
+            "1": -0.46377157612628883,
+            "2": -0.453526080059371
+          }
+        },
+        "mean_top1_preserved": {
+          "mean": -0.506221404418246,
+          "by_seed": {
+            "0": -0.5176211453744494,
+            "1": -0.4983461962513782,
+            "2": -0.5026968716289104
+          }
+        },
+        "mean_spearman": {
+          "mean": -0.4609368335373657,
+          "by_seed": {
+            "0": -0.46551284442643714,
+            "1": -0.46377157612628883,
+            "2": -0.453526080059371
+          }
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.1678550207961973,
+          "by_seed": {
+            "0": 0.17736185383244207,
+            "1": 0.17914438502673796,
+            "2": 0.14705882352941174
+          }
+        },
+        "nonzero_train_advantage": {
+          "mean": -0.1678550207961974,
+          "by_seed": {
+            "0": -0.17736185383244207,
+            "1": -0.1791443850267379,
+            "2": -0.1470588235294118
+          }
+        },
+        "mean_changed_label_rate": {
+          "mean": -0.006238859180035611,
+          "by_seed": {
+            "0": -0.004010695187165764,
+            "1": -0.007334373143196626,
+            "2": -0.007371509209744498
+          }
+        }
+      },
+      "fractional": {
+        "mean_pairwise_fidelity": {
+          "mean": 0.009544469940487077,
+          "by_seed": {
+            "0": 0.012367007237311767,
+            "1": 0.008310829026131783,
+            "2": 0.007955573558017903
+          }
+        },
+        "mean_advantage_sign_agreement": {
+          "mean": -0.011138444520218949,
+          "by_seed": {
+            "0": -0.012860333191073603,
+            "1": -0.008470242329056465,
+            "2": -0.012084758040526666
+          }
+        },
+        "mean_advantage_cosine": {
+          "mean": 0.0010321936206216797,
+          "by_seed": {
+            "0": -0.0007191990563565342,
+            "1": 0.0013738975229663497,
+            "2": 0.0024418823952552238
+          }
+        },
+        "mean_top1_preserved": {
+          "mean": -0.45851855112728285,
+          "by_seed": {
+            "0": -0.4732250079651006,
+            "1": -0.45466987770311795,
+            "2": -0.44766076771363017
+          }
+        },
+        "mean_spearman": {
+          "mean": -0.011097644157136433,
+          "by_seed": {
+            "0": -0.011402520769205782,
+            "1": -0.010712195314197204,
+            "2": -0.011178216388006201
+          }
+        },
+        "zero_variance_group_fraction": {
+          "mean": 0.0255496137849079,
+          "by_seed": {
+            "0": 0.026737967914438505,
+            "1": 0.024955436720142603,
+            "2": 0.024955436720142603
+          }
+        },
+        "nonzero_train_advantage": {
+          "mean": -0.023562834224598928,
+          "by_seed": {
+            "0": -0.023395721925133728,
+            "1": -0.027183600713012512,
+            "2": -0.020109180035650542
+          }
+        },
+        "mean_changed_label_rate": {
+          "mean": -0.0013678451178451012,
+          "by_seed": {
+            "0": 0.002766636957813401,
+            "1": -0.0018939393939393645,
+            "2": -0.004976232917409368
+          }
+        }
+      }
+    },
+    "fn_minus_fp_threshold_checks": {
+      "margin": 0.05,
+      "rule": "Under fractional, |FN\u2212FP| \u2264 0.05 on advantage agreement and pairwise fidelity counts as near-equal. Under binary, FN worse than FP by \u2265 0.05 on at least one of those two counts as a clear asymmetry.",
+      "by_aggregation": {
+        "binary": {
+          "mean_advantage_sign_agreement": {
+            "fn_minus_fp": -0.3127625296546096,
+            "abs_delta": 0.3127625296546096,
+            "within_0_05": false,
+            "fn_worse_by_at_least_0_05": true
+          },
+          "mean_pairwise_fidelity": {
+            "fn_minus_fp": -0.5910504913078812,
+            "abs_delta": 0.5910504913078812,
+            "within_0_05": false,
+            "fn_worse_by_at_least_0_05": true
+          },
+          "mean_top1_preserved": {
+            "fn_minus_fp": -0.506221404418246,
+            "abs_delta": 0.506221404418246,
+            "within_0_05": false,
+            "fn_worse_by_at_least_0_05": true
+          }
+        },
+        "fractional": {
+          "mean_advantage_sign_agreement": {
+            "fn_minus_fp": -0.011138444520218949,
+            "abs_delta": 0.011138444520218949,
+            "within_0_05": true,
+            "fn_worse_by_at_least_0_05": false
+          },
+          "mean_pairwise_fidelity": {
+            "fn_minus_fp": 0.009544469940487077,
+            "abs_delta": 0.009544469940487077,
+            "within_0_05": true,
+            "fn_worse_by_at_least_0_05": false
+          },
+          "mean_top1_preserved": {
+            "fn_minus_fp": -0.45851855112728285,
+            "abs_delta": 0.45851855112728285,
+            "within_0_05": false,
+            "fn_worse_by_at_least_0_05": true
+          }
+        }
+      }
+    }
+  },
+  "rollout_groups": {
+    "overall": [
+      {
+        "noise": "fn_only",
+        "aggregation": "binary",
+        "groups": 6732,
+        "clean_variable_groups": 5440,
+        "erased_among_clean_variable": 832,
+        "erased_rate": 0.15294117647058825,
+        "created_among_clean_constant": 223,
+        "pairwise_preserved_rate": 0.34514536290408915,
+        "sign_agreement_rate": 0.6474880642361112,
+        "distinct_clean_pairs": 233519,
+        "preserved_pairs": 80598
+      },
+      {
+        "noise": "fn_only",
+        "aggregation": "fractional",
+        "groups": 6732,
+        "clean_variable_groups": 6095,
+        "erased_among_clean_variable": 37,
+        "erased_rate": 0.006070549630844955,
+        "created_among_clean_constant": 223,
+        "pairwise_preserved_rate": 0.8710715909161669,
+        "sign_agreement_rate": 0.8643545400993016,
+        "distinct_clean_pairs": 321186,
+        "preserved_pairs": 279776
+      },
+      {
+        "noise": "fp_only",
+        "aggregation": "binary",
+        "groups": 6732,
+        "clean_variable_groups": 5442,
+        "erased_among_clean_variable": 20,
+        "erased_rate": 0.003675119441381845,
+        "created_among_clean_constant": 546,
+        "pairwise_preserved_rate": 0.9353650585294029,
+        "sign_agreement_rate": 0.9662370896348211,
+        "distinct_clean_pairs": 231593,
+        "preserved_pairs": 216624
+      },
+      {
+        "noise": "fp_only",
+        "aggregation": "fractional",
+        "groups": 6732,
+        "clean_variable_groups": 6057,
+        "erased_among_clean_variable": 20,
+        "erased_rate": 0.003301964668978042,
+        "created_among_clean_constant": 416,
+        "pairwise_preserved_rate": 0.8604871846265628,
+        "sign_agreement_rate": 0.8736684297764968,
+        "distinct_clean_pairs": 319304,
+        "preserved_pairs": 274757
+      }
+    ],
+    "by_difficulty": [
+      {
+        "difficulty": "easy",
+        "noise": "fn_only",
+        "aggregation": "binary",
+        "erased": 45,
+        "clean_variable": 2157,
+        "erased_rate": 0.02086230876216968,
+        "pairwise_preserved_rate": 0.3446170734712623
+      },
+      {
+        "difficulty": "easy",
+        "noise": "fn_only",
+        "aggregation": "fractional",
+        "erased": 0,
+        "clean_variable": 2157,
+        "erased_rate": 0.0,
+        "pairwise_preserved_rate": 0.8962985148617107
+      },
+      {
+        "difficulty": "hard",
+        "noise": "fn_only",
+        "aggregation": "binary",
+        "erased": 557,
+        "clean_variable": 1543,
+        "erased_rate": 0.3609850939727803,
+        "pairwise_preserved_rate": 0.34390867579908674
+      },
+      {
+        "difficulty": "hard",
+        "noise": "fn_only",
+        "aggregation": "fractional",
+        "erased": 35,
+        "clean_variable": 2161,
+        "erased_rate": 0.016196205460434984,
+        "pairwise_preserved_rate": 0.8489417688929275
+      },
+      {
+        "difficulty": "medium",
+        "noise": "fn_only",
+        "aggregation": "binary",
+        "erased": 230,
+        "clean_variable": 1740,
+        "erased_rate": 0.13218390804597702,
+        "pairwise_preserved_rate": 0.3464288906766783
+      },
+      {
+        "difficulty": "medium",
+        "noise": "fn_only",
+        "aggregation": "fractional",
+        "erased": 2,
+        "clean_variable": 1777,
+        "erased_rate": 0.0011254924029262803,
+        "pairwise_preserved_rate": 0.8701900397600917
+      },
+      {
+        "difficulty": "easy",
+        "noise": "fp_only",
+        "aggregation": "binary",
+        "erased": 19,
+        "clean_variable": 2124,
+        "erased_rate": 0.008945386064030132,
+        "pairwise_preserved_rate": 0.925416623478331
+      },
+      {
+        "difficulty": "easy",
+        "noise": "fp_only",
+        "aggregation": "fractional",
+        "erased": 19,
+        "clean_variable": 2124,
+        "erased_rate": 0.008945386064030132,
+        "pairwise_preserved_rate": 0.907459266802444
+      },
+      {
+        "difficulty": "hard",
+        "noise": "fp_only",
+        "aggregation": "binary",
+        "erased": 0,
+        "clean_variable": 1579,
+        "erased_rate": 0.0,
+        "pairwise_preserved_rate": 0.9573853897919786
+      },
+      {
+        "difficulty": "hard",
+        "noise": "fp_only",
+        "aggregation": "fractional",
+        "erased": 0,
+        "clean_variable": 2155,
+        "erased_rate": 0.0,
+        "pairwise_preserved_rate": 0.8093767546322291
+      },
+      {
+        "difficulty": "medium",
+        "noise": "fp_only",
+        "aggregation": "binary",
+        "erased": 1,
+        "clean_variable": 1739,
+        "erased_rate": 0.0005750431282346176,
+        "pairwise_preserved_rate": 0.9313722197969486
+      },
+      {
+        "difficulty": "medium",
+        "noise": "fp_only",
+        "aggregation": "fractional",
+        "erased": 1,
+        "clean_variable": 1778,
+        "erased_rate": 0.0005624296962879641,
+        "pairwise_preserved_rate": 0.8692329824323867
+      }
+    ]
+  },
+  "gradient_audit": {
+    "summaries_all_difficulty_phase": [
+      {
+        "noise": "fp_only",
+        "difficulty": "all",
+        "phase": "all",
+        "groups": 18,
+        "advantage": {
+          "actual": {
+            "binary": {
+              "groups": 9,
+              "defined": 7,
+              "mean_cosine": 0.9134046697806065,
+              "clean_zero": 2,
+              "noisy_zero": 2,
+              "erased": 0,
+              "negative": 0
+            },
+            "fractional": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.8386567658932774,
+              "clean_zero": 3,
+              "noisy_zero": 2,
+              "erased": 0,
+              "negative": 0
+            }
+          },
+          "defined_pairs": 13,
+          "mean_paired_delta": -0.041291335903312784,
+          "fractional_higher": 2
+        },
+        "gradient": {
+          "actual": {
+            "binary": {
+              "groups": 9,
+              "defined": 7,
+              "mean_cosine": 0.9039360105799769,
+              "clean_zero": 2,
+              "noisy_zero": 2,
+              "erased": 0,
+              "negative": 0
+            },
+            "fractional": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.9071334684376312,
+              "clean_zero": 3,
+              "noisy_zero": 2,
+              "erased": 0,
+              "negative": 0
+            }
+          },
+          "defined_pairs": 13,
+          "mean_paired_delta": -0.038275251506074484,
+          "fractional_higher": 4
+        }
+      },
+      {
+        "noise": "fn_only",
+        "difficulty": "all",
+        "phase": "all",
+        "groups": 18,
+        "advantage": {
+          "actual": {
+            "binary": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.4227923023441405,
+              "clean_zero": 2,
+              "noisy_zero": 2,
+              "erased": 1,
+              "negative": 0
+            },
+            "fractional": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.8049199461439436,
+              "clean_zero": 3,
+              "noisy_zero": 1,
+              "erased": 0,
+              "negative": 0
+            }
+          },
+          "defined_pairs": 11,
+          "mean_paired_delta": 0.36831513432996893,
+          "fractional_higher": 10
+        },
+        "gradient": {
+          "actual": {
+            "binary": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.47937818101653296,
+              "clean_zero": 2,
+              "noisy_zero": 2,
+              "erased": 1,
+              "negative": 1
+            },
+            "fractional": {
+              "groups": 9,
+              "defined": 6,
+              "mean_cosine": 0.861432564200347,
+              "clean_zero": 3,
+              "noisy_zero": 1,
+              "erased": 0,
+              "negative": 0
+            }
+          },
+          "defined_pairs": 11,
+          "mean_paired_delta": 0.33682709942820055,
+          "fractional_higher": 10
+        }
+      }
+    ],
+    "actual_train_aggregation": {
+      "fn_only__binary": {
+        "advantage_cosine": {
+          "n_defined": 6,
+          "mean": 0.4227923023441405,
+          "values": [
+            0.3721042037676254,
+            0.447213595499958,
+            0.5091750772173155,
+            0.09759000729485331,
+            0.7867957924694432,
+            0.3238751378156478
+          ]
+        },
+        "gradient_cosine": {
+          "n_defined": 6,
+          "mean": 0.47937818101653296,
+          "values": [
+            0.39748324709757227,
+            0.6560052335391615,
+            0.6740088738748966,
+            -0.04283969564577125,
+            0.37621905170998504,
+            0.8153923755233534
+          ]
+        }
+      },
+      "fn_only__fractional": {
+        "advantage_cosine": {
+          "n_defined": 6,
+          "mean": 0.8049199461439436,
+          "values": [
+            0.7117509055897306,
+            0.9343531843023134,
+            0.7883561227922861,
+            0.8819171036881971,
+            0.5131423604911343,
+            1.0
+          ]
+        },
+        "gradient_cosine": {
+          "n_defined": 6,
+          "mean": 0.861432564200347,
+          "values": [
+            0.8472752739485964,
+            0.9315426507665383,
+            0.8476696082843899,
+            0.9565681649492294,
+            0.5855396872534172,
+            0.9999999999999107
+          ]
+        }
+      },
+      "fp_only__binary": {
+        "advantage_cosine": {
+          "n_defined": 7,
+          "mean": 0.9134046697806065,
+          "values": [
+            0.9999999999999999,
+            1.0000000000000002,
+            0.5374838498865699,
+            0.8563488385776753,
+            0.9999999999999999,
+            1.0,
+            1.0
+          ]
+        },
+        "gradient_cosine": {
+          "n_defined": 7,
+          "mean": 0.9039360105799769,
+          "values": [
+            0.9999999999999465,
+            0.9999999999999266,
+            0.4549155437302417,
+            0.8726365303298491,
+            0.9999999999999416,
+            1.0,
+            0.9999999999999322
+          ]
+        }
+      },
+      "fp_only__fractional": {
+        "advantage_cosine": {
+          "n_defined": 6,
+          "mean": 0.8386567658932774,
+          "values": [
+            0.9757906609774567,
+            0.9393207755509336,
+            0.5773502691896258,
+            0.6831300510639732,
+            1.0,
+            0.8563488385776754
+          ]
+        },
+        "gradient_cosine": {
+          "n_defined": 6,
+          "mean": 0.9071334684376312,
+          "values": [
+            0.994283743341779,
+            0.9268431442887363,
+            0.7431047211552562,
+            0.9819748340135573,
+            0.9999999999999344,
+            0.796594367826524
+          ]
+        }
+      }
+    },
+    "fn_minus_fp": {
+      "binary__advantage_cosine": {
+        "fn_mean": 0.4227923023441405,
+        "fp_mean": 0.9134046697806065,
+        "fn_minus_fp": -0.490612367436466,
+        "n_fn": 6,
+        "n_fp": 7
+      },
+      "binary__gradient_cosine": {
+        "fn_mean": 0.47937818101653296,
+        "fp_mean": 0.9039360105799769,
+        "fn_minus_fp": -0.4245578295634439,
+        "n_fn": 6,
+        "n_fp": 7
+      },
+      "fractional__advantage_cosine": {
+        "fn_mean": 0.8049199461439436,
+        "fp_mean": 0.8386567658932774,
+        "fn_minus_fp": -0.033736819749333846,
+        "n_fn": 6,
+        "n_fp": 6
+      },
+      "fractional__gradient_cosine": {
+        "fn_mean": 0.861432564200347,
+        "fp_mean": 0.9071334684376312,
+        "fn_minus_fp": -0.045700904237284234,
+        "n_fn": 6,
+        "n_fp": 6
+      }
+    }
+  },
+  "takeaways": {
+    "endpoint_pass_at_1": "FN\u2212FP is -0.18 pp under binary and +0.01 pp under fractional; both seed-level intervals span zero.",
+    "training_signal_binary": "Under binary reward, FN is much worse than FP on fidelity, advantage agreement/cosine, top-1 preservation, and contrast erasure.",
+    "training_signal_fractional": "Under fractional reward, FN\u2248FP on fidelity and advantage metrics (|\u0394|\u22720.01), but top-1 preservation remains much lower under FN.",
+    "gradients": "On audited groups with the actual training aggregation, clean\u2192noisy cosine is substantially lower for FN than FP under binary, and nearly matched under fractional."
+  }
+}

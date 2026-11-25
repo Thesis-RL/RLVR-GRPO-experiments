@@ -6,6 +6,7 @@
 | Protocol selection | [Validation-only pilot results and decision](stage5_pilot_gate.json) |
 | Stage 6 | [Original three-seed endpoint and training-signal analysis](stage6_multiseed_reference.json) |
 | LoRA gradient audit | [Audit completeness check](gradient_audit_verification.md), [frozen audit protocol](../../../docs/GRADIENT_AUDIT_PROTOCOL.md) |
+| FP vs FN re-aggregation | [Note](../FP_VS_FN.md), [JSON](../fp_vs_fn.json), extractor [`scripts/extract_fp_vs_fn_contrasts.py`](../../../scripts/extract_fp_vs_fn_contrasts.py) — reads Stage 6 + offline `analysis.json` only |
 
 The training runs used archived Docker release bundles. These names resolve
 under `outputs/online_matrix/priority_bridge_v2/server_releases/` in the raw

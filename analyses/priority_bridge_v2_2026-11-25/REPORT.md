@@ -239,6 +239,10 @@ percentage points, with an uncertain sign. The rollout and gradient results
 characterize the training signal, and the test result measures downstream
 performance.
 
+For the matched-$J$ **FN−FP** question (endpoint, training-signal means,
+group erasure, and audit cosines) see the derived note
+[FP_VS_FN.md](FP_VS_FN.md) and [fp_vs_fn.json](fp_vs_fn.json).
+
 ## Data and reproduction
 
 - The [machine-readable results](analysis.json) include estimates by seed,

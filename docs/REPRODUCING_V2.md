@@ -19,6 +19,19 @@ rollouts, and gradient metrics and produces `analysis.json` and three SVGs.
 The published results are in
 [analyses/priority_bridge_v2_2026-11-25](../analyses/priority_bridge_v2_2026-11-25/README.md).
 
+To rebuild the matched-$J$ **FN−FP** tables from those published artifacts
+(without re-reading raw rollouts), run:
+
+```bash
+python3 -B scripts/extract_fp_vs_fn_contrasts.py \
+  --analysis-json analyses/priority_bridge_v2_2026-11-25/analysis.json \
+  --stage6-json analyses/priority_bridge_v2_2026-11-25/provenance/stage6_multiseed_reference.json \
+  --out-dir analyses/priority_bridge_v2_2026-11-25
+```
+
+This writes [FP_VS_FN.md](../analyses/priority_bridge_v2_2026-11-25/FP_VS_FN.md) and
+[fp_vs_fn.json](../analyses/priority_bridge_v2_2026-11-25/fp_vs_fn.json).
+
 To recompute the primary endpoint analysis independently, run:
 
 ```bash
