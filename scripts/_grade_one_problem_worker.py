@@ -10,9 +10,11 @@ Designed so a single runaway candidate cannot OOM the host:
 
 from __future__ import annotations
 
+import ast
 import contextlib
 import io
 import json
+import re
 import resource
 import signal
 import sys
@@ -74,50 +76,106 @@ def _timed(timeout_s: float):
         signal.signal(signal.SIGALRM, old)
 
 
-_DENY_SUBSTR = (
-    "subprocess",
-    "multiprocessing",
-    "ctypes",
-    "__import__",
-    "os.system",
-    "os.popen",
-    "os.remove",
-    "os.unlink",
-    "os.rmdir",
-    "os.rename",
-    "os.replace",
-    "os.chdir",
-    "os.chmod",
-    "os.chown",
-    "shutil",
-    "pathlib",
-    "socket",
-    "http.client",
-    "urllib",
-    "requests",
-    "pty",
-    "signal",
-    "resource",
-    "mmap",
-    "fcntl",
+_DENIED_MODULES = frozenset(
+    {
+        "subprocess",
+        "multiprocessing",
+        "ctypes",
+        "shutil",
+        "pathlib",
+        "socket",
+        "http",
+        "urllib",
+        "requests",
+        "pty",
+        "signal",
+        "resource",
+        "mmap",
+        "fcntl",
+        "importlib",
+    }
+)
+_DENIED_CALLS = frozenset(
+    {
+        "__import__",
+        "compile",
+        "eval",
+        "exec",
+        "open",
+        "builtins.__import__",
+        "builtins.compile",
+        "builtins.eval",
+        "builtins.exec",
+        "builtins.open",
+        "os.system",
+        "os.popen",
+        "os.remove",
+        "os.unlink",
+        "os.rmdir",
+        "os.rename",
+        "os.replace",
+        "os.chdir",
+        "os.chmod",
+        "os.chown",
+        "os._exit",
+        "os.abort",
+        "os.kill",
+    }
 )
 
 
-def _looks_dangerous(code: str) -> str | None:
-    import re
+def _dotted_name(node: ast.AST, aliases: dict[str, str]) -> str | None:
+    if isinstance(node, ast.Name):
+        return aliases.get(node.id, node.id)
+    if isinstance(node, ast.Attribute):
+        parent = _dotted_name(node.value, aliases)
+        return f"{parent}.{node.attr}" if parent else None
+    return None
 
-    low = code.lower()
-    for s in _DENY_SUBSTR:
-        if s in low:
-            return f"blocked:{s}"
+
+def _looks_dangerous(code: str) -> str | None:
+    try:
+        tree = ast.parse(code)
+    except SyntaxError:
+        # Let normal execution report the precise syntax error.
+        return None
+
+    aliases: dict[str, str] = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for imported in node.names:
+                root = imported.name.split(".", 1)[0]
+                if root in _DENIED_MODULES:
+                    return f"blocked:import:{root}"
+                aliases[imported.asname or root] = imported.name
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            root = module.split(".", 1)[0]
+            if root in _DENIED_MODULES:
+                return f"blocked:import:{root}"
+            for imported in node.names:
+                aliases[imported.asname or imported.name] = (
+                    f"{module}.{imported.name}" if module else imported.name
+                )
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        called = _dotted_name(node.func, aliases)
+        if called in _DENIED_CALLS:
+            return f"blocked:call:{called}"
+
     # Only flag allocation bombs, not ordinary sentinels like 10**9 in math.
     if re.search(r"\[\s*[^\]]*\*\s*\(?\s*10\s*\*\*\s*\d{6,}", code):
         return "blocked:huge_list"
     if re.search(r"range\s*\(\s*10\s*\*\*\s*\d{5,}", code):
         return "blocked:huge_range"
-    if re.search(r"while\s+True\s*:", code) or re.search(r"while\s+1\s*:", code):
-        return "blocked:infinite"
     return None
+
+
+def _error_text(exc: BaseException) -> str:
+    message = str(exc).replace("\n", " ")[:300]
+    return f"{type(exc).__name__}: {message}" if message else type(exc).__name__
 
 
 def grade_one(code: str, setup: str, tests: list[str], timeout_s: float):
@@ -134,15 +192,15 @@ def grade_one(code: str, setup: str, tests: list[str], timeout_s: float):
                 contextlib.redirect_stdout(io.StringIO()),
                 contextlib.redirect_stderr(io.StringIO()),
             ):
+                exec(code, ns)  # noqa: S102
                 if setup.strip():
                     exec(setup, ns)  # noqa: S102
-                exec(code, ns)  # noqa: S102
     except _Timeout:
         return [0] * len(tests), "timeout"
     except MemoryError:
         return [0] * len(tests), "memory"
-    except Exception as exc:  # noqa: BLE001
-        return [0] * len(tests), f"{type(exc).__name__}: {exc}"
+    except BaseException as exc:  # noqa: BLE001
+        return [0] * len(tests), _error_text(exc)
 
     outs, err = [], None
     for test in tests:
@@ -160,15 +218,15 @@ def grade_one(code: str, setup: str, tests: list[str], timeout_s: float):
         except MemoryError:
             outs.append(0)
             err = "memory"
-        except Exception as exc:  # noqa: BLE001
+        except BaseException as exc:  # noqa: BLE001
             outs.append(0)
-            err = f"{type(exc).__name__}: {exc}"
+            err = _error_text(exc)
     return outs, err
 
 
 def main() -> None:
     payload = json.load(sys.stdin)
-    mem = int(payload.get("mem_bytes", 64 * 1024 * 1024))
+    mem = int(payload.get("mem_bytes", 256 * 1024 * 1024))
     timeout_s = float(payload["timeout_s"])
     cpu_s = max(1, int(timeout_s * (1 + len(payload["test_list"])) * len(payload["codes"])) + 2)
     _set_limits(mem, cpu_s)

@@ -1,0 +1,33 @@
+schema_version: 1
+name: priority_bridge_v2_gradient_audit_v1_1
+source_config: configs/priority_bridge_v2.yaml
+matrix_root: outputs/online_matrix/priority_bridge_v2/main
+output_root: outputs/analysis_recheck/gradient_audit_v1_1
+
+seeds: [0, 1, 2]
+conditions:
+  - clean__binary
+  - clean__fractional
+  - fp_only__binary
+  - fp_only__fractional
+  - fn_only__binary
+  - fn_only__fractional
+
+phases:
+  early: 112
+  middle: 561
+  late: 1010
+
+aggregations: [binary, fractional]
+primary_scope: actual_training_aggregation
+dropout_mode: eval
+token_reconstruction:
+  visible_text: canonical_tokenization
+  append_one_eos_when_logged_count_is_larger: true
+  additional_noncanonical_tokens: omit_and_report
+loss:
+  type: dapo
+  importance_ratio: 1.0
+  kl_coefficient: 0.0
+  normalization: all_completion_tokens_in_group
+  optimizer_step: false

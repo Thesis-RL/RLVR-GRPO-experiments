@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "verifier_gate",
+  "status": "passed",
+  "official": {
+    "expected": 974,
+    "observed": 974,
+    "passed": 974,
+    "failed": 0,
+    "failures": []
+  },
+  "cases": [
+    {
+      "name": "empty_identifier_not_pty",
+      "passed": true,
+      "outcomes": [
+        1
+      ],
+      "error": null
+    },
+    {
+      "name": "finite_while_true",
+      "passed": true,
+      "outcomes": [
+        1
+      ],
+      "error": null
+    },
+    {
+      "name": "candidate_before_setup",
+      "passed": true,
+      "outcomes": [
+        1
+      ],
+      "error": null
+    },
+    {
+      "name": "numpy_with_thread_caps",
+      "passed": true,
+      "outcomes": [
+        1
+      ],
+      "error": null
+    },
+    {
+      "name": "partial_outcomes",
+      "passed": true,
+      "outcomes": [
+        1,
+        0
+      ],
+      "error": "AssertionError"
+    },
+    {
+      "name": "dangerous_import",
+      "passed": true,
+      "outcomes": [
+        0
+      ],
+      "error": "blocked:import:pty"
+    },
+    {
+      "name": "dynamic_code_bypass",
+      "passed": true,
+      "outcomes": [
+        0
+      ],
+      "error": "blocked:call:eval"
+    },
+    {
+      "name": "infinite_loop_timeout",
+      "passed": true,
+      "outcomes": [
+        0
+      ],
+      "error": "timeout"
+    }
+  ],
+  "settings": {
+    "timeout_s": 0.5,
+    "timeout_fallback_s": 5.0,
+    "mem_mb": 256
+  },
+  "elapsed_seconds": 39.172171933576465
+}

@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="585" viewBox="0 0 1060 585">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="26.0" y="33.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="23" font-weight="700" fill="#0f172a">Validation learning curves</text>
+<text x="26.0" y="58.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="400" fill="#0f172a">90 tasks · 1 decode per task · bold = mean of three seeds · thin = individual seeds</text>
+<text x="72.0" y="102.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Clean · Pass@1</text>
+<line x1="72" x2="361" y1="272.0" y2="272.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="276.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">50%</text>
+<line x1="72" x2="361" y1="232.75" y2="232.75" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="236.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">52%</text>
+<line x1="72" x2="361" y1="193.5" y2="193.5" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="197.5" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">54%</text>
+<line x1="72" x2="361" y1="154.25" y2="154.25" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="158.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="72" x2="361" y1="115.0" y2="115.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="119.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<text x="72.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="168.3" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="264.7" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="361.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="72.0,250.2 100.8,163.0 129.7,206.6 158.8,206.6 187.7,228.4 216.5,206.6 245.3,163.0 274.2,206.6 303.3,228.4 332.2,206.6 361.0,184.8" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,228.4 129.7,206.6 158.8,184.8 187.7,184.8 216.5,206.6 245.3,206.6 274.2,206.6 303.3,206.6 332.2,184.8 361.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,206.6 129.7,163.0 158.8,250.2 187.7,206.6 216.5,228.4 245.3,206.6 274.2,228.4 303.3,228.4 332.2,228.4 361.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,199.3 129.7,192.0 158.8,213.9 187.7,206.6 216.5,213.9 245.3,192.0 274.2,213.9 303.3,221.1 332.2,206.6 361.0,199.3" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="72.0,250.2 100.8,184.8 129.7,163.0 158.8,206.6 187.7,206.6 216.5,184.8 245.3,206.6 274.2,206.6 303.3,184.8 332.2,163.0 361.0,163.0" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,184.8 129.7,206.6 158.8,184.8 187.7,184.8 216.5,228.4 245.3,206.6 274.2,184.8 303.3,206.6 332.2,184.8 361.0,184.8" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,184.8 129.7,206.6 158.8,163.0 187.7,250.2 216.5,184.8 245.3,228.4 274.2,206.6 303.3,272.0 332.2,250.2 361.0,163.0" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,250.2 100.8,184.8 129.7,192.0 158.8,184.8 187.7,213.9 216.5,199.3 245.3,213.9 274.2,199.3 303.3,221.1 332.2,199.3 361.0,170.2" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="402.0" y="102.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">FP-only 30% · Pass@1</text>
+<line x1="402" x2="691" y1="272.0" y2="272.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="276.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">50%</text>
+<line x1="402" x2="691" y1="232.75" y2="232.75" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="236.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">52%</text>
+<line x1="402" x2="691" y1="193.5" y2="193.5" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="197.5" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">54%</text>
+<line x1="402" x2="691" y1="154.25" y2="154.25" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="158.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="402" x2="691" y1="115.0" y2="115.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="119.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<text x="402.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="498.3" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="594.7" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="691.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="402.0,250.2 430.8,228.4 459.7,206.6 488.8,184.8 517.7,206.6 546.5,184.8 575.3,206.6 604.2,228.4 633.3,206.6 662.2,228.4 691.0,228.4" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,250.2 459.7,228.4 488.8,184.8 517.7,206.6 546.5,206.6 575.3,184.8 604.2,228.4 633.3,228.4 662.2,228.4 691.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,163.0 459.7,184.8 488.8,184.8 517.7,228.4 546.5,206.6 575.3,228.4 604.2,184.8 633.3,184.8 662.2,206.6 691.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,213.9 459.7,206.6 488.8,184.8 517.7,213.9 546.5,199.3 575.3,206.6 604.2,213.9 633.3,206.6 662.2,221.1 691.0,213.9" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="402.0,250.2 430.8,184.8 459.7,206.6 488.8,206.6 517.7,206.6 546.5,228.4 575.3,206.6 604.2,206.6 633.3,228.4 662.2,184.8 691.0,206.6" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,206.6 459.7,228.4 488.8,141.2 517.7,206.6 546.5,206.6 575.3,228.4 604.2,206.6 633.3,228.4 662.2,184.8 691.0,228.4" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,228.4 459.7,228.4 488.8,184.8 517.7,206.6 546.5,163.0 575.3,184.8 604.2,206.6 633.3,184.8 662.2,250.2 691.0,228.4" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,250.2 430.8,206.6 459.7,221.1 488.8,177.5 517.7,206.6 546.5,199.3 575.3,206.6 604.2,206.6 633.3,213.9 662.2,206.6 691.0,221.1" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="732.0" y="102.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">FN-only 30% · Pass@1</text>
+<line x1="732" x2="1021" y1="272.0" y2="272.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="276.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">50%</text>
+<line x1="732" x2="1021" y1="232.75" y2="232.75" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="236.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">52%</text>
+<line x1="732" x2="1021" y1="193.5" y2="193.5" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="197.5" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">54%</text>
+<line x1="732" x2="1021" y1="154.25" y2="154.25" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="158.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="732" x2="1021" y1="115.0" y2="115.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="119.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<text x="732.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="828.3" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="924.7" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="1021.0" y="289.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="732.0,250.2 760.8,206.6 789.7,228.4 818.8,163.0 847.7,228.4 876.5,163.0 905.3,228.4 934.2,184.8 963.3,228.4 992.2,184.8 1021.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,206.6 789.7,228.4 818.8,163.0 847.7,184.8 876.5,163.0 905.3,184.8 934.2,184.8 963.3,184.8 992.2,184.8 1021.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,184.8 789.7,206.6 818.8,184.8 847.7,184.8 876.5,228.4 905.3,184.8 934.2,184.8 963.3,206.6 992.2,228.4 1021.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,199.3 789.7,221.1 818.8,170.2 847.7,199.3 876.5,184.8 905.3,199.3 934.2,184.8 963.3,206.6 992.2,199.3 1021.0,206.6" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="732.0,250.2 760.8,184.8 789.7,163.0 818.8,184.8 847.7,206.6 876.5,228.4 905.3,184.8 934.2,206.6 963.3,184.8 992.2,228.4 1021.0,206.6" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,119.4 789.7,228.4 818.8,163.0 847.7,228.4 876.5,250.2 905.3,206.6 934.2,206.6 963.3,272.0 992.2,184.8 1021.0,228.4" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,184.8 789.7,228.4 818.8,250.2 847.7,184.8 876.5,184.8 905.3,206.6 934.2,250.2 963.3,184.8 992.2,206.6 1021.0,206.6" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,250.2 760.8,163.0 789.7,206.6 818.8,199.3 847.7,206.6 876.5,221.1 905.3,199.3 934.2,221.1 963.3,213.9 992.2,206.6 1021.0,213.9" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="72.0" y="320.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Clean · Unit-test pass rate</text>
+<line x1="72" x2="361" y1="490.0" y2="490.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="494.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="72" x2="361" y1="458.6" y2="458.6" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="462.6" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<line x1="72" x2="361" y1="427.2" y2="427.2" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="431.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">60%</text>
+<line x1="72" x2="361" y1="395.8" y2="395.8" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="399.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">62%</text>
+<line x1="72" x2="361" y1="364.4" y2="364.4" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="368.4" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">64%</text>
+<line x1="72" x2="361" y1="333.0" y2="333.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="65.0" y="337.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">66%</text>
+<text x="72.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="168.3" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="264.7" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="361.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="72.0,433.0 100.8,369.1 129.7,403.9 158.8,415.6 187.7,421.4 216.5,403.9 245.3,386.5 274.2,427.2 303.3,421.4 332.2,409.8 361.0,398.1" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,433.0 129.7,409.8 158.8,398.1 187.7,386.5 216.5,409.8 245.3,415.6 274.2,403.9 303.3,403.9 332.2,386.5 361.0,398.1" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,415.6 129.7,374.9 158.8,444.6 187.7,409.8 216.5,433.0 245.3,415.6 274.2,427.2 303.3,421.4 332.2,421.4 361.0,409.8" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,405.9 129.7,396.2 158.8,419.4 187.7,405.9 216.5,415.6 245.3,405.9 274.2,419.4 303.3,415.6 332.2,405.9 361.0,402.0" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="72.0,433.0 100.8,398.1 129.7,374.9 158.8,409.8 187.7,421.4 216.5,398.1 245.3,415.6 274.2,409.8 303.3,386.5 332.2,386.5 361.0,380.7" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,386.5 129.7,415.6 158.8,398.1 187.7,392.3 216.5,433.0 245.3,409.8 274.2,392.3 303.3,403.9 332.2,386.5 361.0,386.5" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,386.5 129.7,403.9 158.8,374.9 187.7,444.6 216.5,398.1 245.3,427.2 274.2,415.6 303.3,467.9 332.2,438.8 361.0,386.5" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="72.0,433.0 100.8,390.4 129.7,398.1 158.8,394.2 187.7,419.4 216.5,409.8 245.3,417.5 274.2,405.9 303.3,419.4 332.2,403.9 361.0,384.6" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="402.0" y="320.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">FP-only 30% · Unit-test pass rate</text>
+<line x1="402" x2="691" y1="490.0" y2="490.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="494.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="402" x2="691" y1="458.6" y2="458.6" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="462.6" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<line x1="402" x2="691" y1="427.2" y2="427.2" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="431.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">60%</text>
+<line x1="402" x2="691" y1="395.8" y2="395.8" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="399.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">62%</text>
+<line x1="402" x2="691" y1="364.4" y2="364.4" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="368.4" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">64%</text>
+<line x1="402" x2="691" y1="333.0" y2="333.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="395.0" y="337.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">66%</text>
+<text x="402.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="498.3" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="594.7" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="691.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="402.0,433.0 430.8,433.0 459.7,409.8 488.8,398.1 517.7,409.8 546.5,398.1 575.3,403.9 604.2,415.6 633.3,409.8 662.2,415.6 691.0,421.4" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,462.1 459.7,438.8 488.8,409.8 517.7,403.9 546.5,421.4 575.3,392.3 604.2,427.2 633.3,427.2 662.2,409.8 691.0,409.8" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,374.9 459.7,392.3 488.8,398.1 517.7,433.0 546.5,403.9 575.3,438.8 604.2,403.9 633.3,380.7 662.2,398.1 691.0,392.3" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,423.3 459.7,413.6 488.8,402.0 517.7,415.6 546.5,407.8 575.3,411.7 604.2,415.6 633.3,405.9 662.2,407.8 691.0,407.8" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="402.0,433.0 430.8,386.5 459.7,403.9 488.8,409.8 517.7,398.1 546.5,421.4 575.3,403.9 604.2,421.4 633.3,433.0 662.2,409.8 691.0,415.6" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,403.9 459.7,427.2 488.8,363.2 517.7,415.6 546.5,403.9 575.3,433.0 604.2,403.9 633.3,433.0 662.2,392.3 691.0,438.8" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,415.6 459.7,433.0 488.8,398.1 517.7,403.9 546.5,386.5 575.3,392.3 604.2,415.6 633.3,403.9 662.2,450.5 691.0,421.4" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="402.0,433.0 430.8,402.0 459.7,421.4 488.8,390.4 517.7,405.9 546.5,403.9 575.3,409.8 604.2,413.6 633.3,423.3 662.2,417.5 691.0,425.3" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="732.0" y="320.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#0f172a">FN-only 30% · Unit-test pass rate</text>
+<line x1="732" x2="1021" y1="490.0" y2="490.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="494.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">56%</text>
+<line x1="732" x2="1021" y1="458.6" y2="458.6" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="462.6" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">58%</text>
+<line x1="732" x2="1021" y1="427.2" y2="427.2" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="431.2" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">60%</text>
+<line x1="732" x2="1021" y1="395.8" y2="395.8" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="399.8" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">62%</text>
+<line x1="732" x2="1021" y1="364.4" y2="364.4" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="368.4" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">64%</text>
+<line x1="732" x2="1021" y1="333.0" y2="333.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="725.0" y="337.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">66%</text>
+<text x="732.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">0</text>
+<text x="828.3" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">374</text>
+<text x="924.7" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">748</text>
+<text x="1021.0" y="507.0" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" font-weight="400" fill="#0f172a">1122</text>
+<polyline points="732.0,433.0 760.8,415.6 789.7,427.2 818.8,374.9 847.7,415.6 876.5,369.1 905.3,433.0 934.2,398.1 963.3,427.2 992.2,380.7 1021.0,409.8" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,415.6 789.7,427.2 818.8,369.1 847.7,398.1 876.5,380.7 905.3,386.5 934.2,386.5 963.3,398.1 992.2,386.5 1021.0,409.8" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,398.1 789.7,398.1 818.8,398.1 847.7,392.3 876.5,433.0 905.3,386.5 934.2,398.1 963.3,409.8 992.2,421.4 1021.0,421.4" fill="none" stroke="#1d4ed8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,409.8 789.7,417.5 818.8,380.7 847.7,402.0 876.5,394.2 905.3,402.0 934.2,394.2 963.3,411.7 992.2,396.2 1021.0,413.6" fill="none" stroke="#1d4ed8" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="732.0,433.0 760.8,398.1 789.7,386.5 818.8,386.5 847.7,415.6 876.5,438.8 905.3,398.1 934.2,415.6 963.3,398.1 992.2,421.4 1021.0,415.6" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,340.0 789.7,433.0 818.8,380.7 847.7,433.0 876.5,427.2 905.3,403.9 934.2,403.9 963.3,456.3 992.2,386.5 1021.0,427.2" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,386.5 789.7,427.2 818.8,444.6 847.7,380.7 876.5,398.1 905.3,409.8 934.2,427.2 963.3,403.9 992.2,403.9 1021.0,398.1" fill="none" stroke="#a34111" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" opacity="0.22"/>
+<polyline points="732.0,433.0 760.8,374.9 789.7,415.6 818.8,403.9 847.7,409.8 876.5,421.4 905.3,403.9 934.2,415.6 963.3,419.4 992.2,403.9 1021.0,413.6" fill="none" stroke="#a34111" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="74" y1="545" x2="102" y2="545" stroke="#1d4ed8" stroke-width="4"/><text x="110.0" y="550.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="400" fill="#334155">Binary</text><line x1="254" y1="545" x2="282" y2="545" stroke="#a34111" stroke-width="4"/><text x="290.0" y="550.0" text-anchor="start" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="400" fill="#334155">Fractional</text>
+<text x="1015.0" y="549.0" text-anchor="end" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12" font-weight="400" fill="#0f172a">Optimizer step</text>
+</svg>

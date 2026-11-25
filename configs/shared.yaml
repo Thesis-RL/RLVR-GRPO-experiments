@@ -85,7 +85,8 @@ evaluation:
   test_fractions: [0.9, 1.0]
   seed: 0
   timeout_s: 0.5
-  mem_mb: 64
+  timeout_fallback_s: 5.0
+  mem_mb: 256
 
 logging:
   output_root: outputs

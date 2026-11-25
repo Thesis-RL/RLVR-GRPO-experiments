@@ -10,7 +10,7 @@ import numpy as np
 import pytest
 import torch
 
-from rlvr.config import ConfigError
+from rlvr.config import ConfigError, load_config
 from rlvr.data.mbpp import MBPPProblem
 from rlvr.exec.mbpp_executor import ExecResult
 from rlvr.online.callbacks import ScheduledCleanEvalCallback
@@ -23,6 +23,7 @@ from rlvr.online.evaluation import (
 )
 from rlvr.online.lifecycle import prepare_run_directory
 from rlvr.online.progress import RunProgressCallback
+from rlvr.online.settings import resolve_evaluation_settings, resolve_training_settings
 from rlvr.run_logging import RunContext, write_run_manifest
 
 
@@ -39,6 +40,48 @@ def _context() -> RunContext:
         seed=0,
         profile="smoke",
     )
+
+
+def test_priority_bridge_v2_freezes_pilot_training_and_multisample_evaluation() -> None:
+    values = load_config("configs/priority_bridge_v2.yaml")
+    training = resolve_training_settings(values, smoke=False)
+    evaluation = resolve_evaluation_settings(values)
+
+    assert training.max_steps == 1122
+    assert training.learning_rate == 2.0e-6
+    assert training.warmup_steps == 56
+    assert evaluation.test_fractions == (0.9, 1.0)
+    assert evaluation.test_samples_per_task == 4
+    assert evaluation.base_samples_per_task == 8
+    assert evaluation.generation_chunk_size == 4
+    assert evaluation.validation_step0 is True
+    assert evaluation.problem_limit is None
+
+
+def test_primary_summary_accepts_integrated_multisample_shape(tmp_path) -> None:
+    for step, estimate in ((1010, 0.5), (1122, 0.6)):
+        destination = tmp_path / "evaluations" / "test" / f"step-{step}"
+        destination.mkdir(parents=True)
+        (destination / "summary.json").write_text(
+            json.dumps(
+                {
+                    "target": {"step": step},
+                    "pass_at_1": {"estimate": estimate},
+                    "by_difficulty": {},
+                }
+            )
+        )
+
+    summary = summarize_primary_metric(
+        tmp_path,
+        split_name="test",
+        metric="pass_at_1",
+        last_n=2,
+        require_count=True,
+    )
+
+    assert summary["selected_steps"] == [1010, 1122]
+    assert summary["mean"] == pytest.approx(0.55)
 
 
 def test_run_directory_rejects_accidental_reuse_and_validates_resume(tmp_path):
@@ -179,6 +222,7 @@ def test_evaluation_is_resumable_and_restores_train_mode(tmp_path, monkeypatch):
         "max_new_tokens": 32,
         "stop_sequence": "[DONE]",
         "timeout_s": 0.5,
+        "timeout_fallback_s": 5.0,
         "mem_limit": 64 * 1024 * 1024,
         "difficulty_by_task": {1: "easy"},
         "progress_callback": lambda completed, total: progress_updates.append((completed, total)),

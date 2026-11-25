@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "stage5_clean_pilot_gate",
+  "selection_split": "validation",
+  "held_out_test_used": false,
+  "decision": "pass",
+  "matrix_authorized": true,
+  "technical_pass": true,
+  "any_improvement_pass": true,
+  "all_non_degraded": true,
+  "gate": {
+    "status": "preregistered",
+    "primary_split": "validation",
+    "baseline_step": 0,
+    "late_checkpoint_count": 3,
+    "min_late_mean_delta_pass_at_1": 0.03,
+    "min_late_checkpoints_above_baseline": 2,
+    "min_late_mean_delta_mean_test_pass_rate": 0.0,
+    "max_allowed_non_degradation_pass_at_1": 0.01,
+    "max_allowed_non_degradation_mean_test_pass_rate": 0.01,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 9001,
+    "overall_pass_rule": "Both conditions must complete without technical errors, at least one must pass the improvement thresholds, and both must pass the non-degradation thresholds. Otherwise the six-condition matrix remains blocked for review."
+  },
+  "conditions": {
+    "clean__binary": {
+      "technical_pass": true,
+      "improvement_pass": true,
+      "non_degradation_pass": true,
+      "baseline_step": 0,
+      "baseline_pass_at_1": 0.5111111111111111,
+      "baseline_mean_test_pass_rate": 0.5962962962962963,
+      "late_steps": [
+        898,
+        1010,
+        1122
+      ],
+      "late_mean_pass_at_1": 0.5481481481481482,
+      "late_mean_test_pass_rate": 0.6259259259259259,
+      "delta_pass_at_1": 0.03703703703703709,
+      "delta_mean_test_pass_rate": 0.02962962962962956,
+      "late_checkpoints_above_baseline": 3,
+      "paired_task_bootstrap": {
+        "estimate": 0.037037037037037035,
+        "ci95_low": -0.007407407407407409,
+        "ci95_high": 0.08518518518518518
+      }
+    },
+    "clean__fractional": {
+      "technical_pass": true,
+      "improvement_pass": false,
+      "non_degradation_pass": true,
+      "baseline_step": 0,
+      "baseline_pass_at_1": 0.5111111111111111,
+      "baseline_mean_test_pass_rate": 0.5962962962962963,
+      "late_steps": [
+        898,
+        1010,
+        1122
+      ],
+      "late_mean_pass_at_1": 0.525925925925926,
+      "late_mean_test_pass_rate": 0.6074074074074073,
+      "delta_pass_at_1": 0.014814814814814947,
+      "delta_mean_test_pass_rate": 0.01111111111111096,
+      "late_checkpoints_above_baseline": 3,
+      "paired_task_bootstrap": {
+        "estimate": 0.014814814814814814,
+        "ci95_low": -0.033425925925925845,
+        "ci95_high": 0.06666666666666667
+      }
+    }
+  }
+}

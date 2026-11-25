@@ -27,6 +27,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--conditions", nargs="+", help="Optional ordered condition subset")
     parser.add_argument("--out-root", type=Path)
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--pilot", action="store_true")
+    parser.add_argument("--skip-clean-eval", action="store_true")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--poll-seconds", type=float, default=5.0)
     return parser.parse_args()
@@ -36,11 +38,13 @@ def main() -> None:
     args = parse_args()
     if args.poll_seconds <= 0:
         raise ConfigError("--poll-seconds must be positive")
+    if args.smoke and args.pilot:
+        raise ConfigError("--smoke and --pilot are mutually exclusive")
     experiment = load_experiment_config(args.config)
     seed = experiment.require_seed(args.seed)
     available = [condition.name for condition in experiment.conditions]
     conditions = list(args.conditions or available)
-    profile = "smoke" if args.smoke else "main"
+    profile = "smoke" if args.smoke else "pilot" if args.pilot else "main"
     out_root = args.out_root or (
         ROOT / "outputs" / "online_matrix" / experiment.name / profile / f"seed-{seed}"
     )
@@ -116,6 +120,10 @@ def main() -> None:
             ]
             if args.smoke:
                 command.append("--smoke")
+            if args.pilot:
+                command.append("--pilot")
+            if args.skip_clean_eval:
+                command.append("--skip-clean-eval")
             if run_dir.exists() and any(run_dir.iterdir()):
                 if args.resume and _has_checkpoint(run_dir):
                     command.extend(["--resume", "latest"])

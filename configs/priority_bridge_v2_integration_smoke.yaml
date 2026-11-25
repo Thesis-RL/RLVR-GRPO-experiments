@@ -1,0 +1,24 @@
+extends: priority_bridge_v2.yaml
+
+experiment:
+  name: priority_bridge_v2_integration_smoke
+  study: integration_smoke
+
+training:
+  seeds: [9100]
+  main:
+    max_steps: 2
+    save_steps: 2
+    save_total_limit: 4
+    warmup_steps: 0
+
+evaluation:
+  validation_interval_fraction: 0.5
+  test_fractions: [0.5, 1.0]
+  bootstrap_replicates: 200
+  problem_limit: 2
+
+matrix:
+  reward_types: [binary]
+  noise_specs:
+    - name: clean

@@ -25,6 +25,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from rlvr.config import ConfigError, load_experiment_config  # noqa: E402
 from rlvr.data.mbpp import load_mbpp, resolve_mbpp_split  # noqa: E402
+from rlvr.evaluation.multisample import (  # noqa: E402
+    MultiSampleTarget,
+    evaluate_multisample_clean,
+)
 from rlvr.generate.stopping import (  # noqa: E402
     done_stopping_criteria,
     inject_generate_stopping_criteria,
@@ -78,6 +82,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout-s", type=float, help="Per-test execution timeout")
     parser.add_argument("--mem-mb", type=int, help="Per-completion executor memory cap")
     parser.add_argument("--smoke", action="store_true", help="Use the provisional smoke profile")
+    parser.add_argument(
+        "--pilot", action="store_true", help="Use the validation-only pilot profile"
+    )
     parser.add_argument("--dry-run", action="store_true", help="Exercise rewards without a model")
     parser.add_argument("--skip-clean-eval", action="store_true")
     parser.add_argument("--list-conditions", action="store_true")
@@ -105,12 +112,14 @@ def main() -> None:
         return
     if not args.condition:
         raise SystemExit("--condition is required (or use --list-conditions)")
-    if args.dry_run and args.smoke:
-        raise ConfigError("--dry-run and --smoke are mutually exclusive")
+    if sum((args.dry_run, args.smoke, args.pilot)) > 1:
+        raise ConfigError("--dry-run, --smoke, and --pilot are mutually exclusive")
     if args.dry_run and args.resume:
         raise ConfigError("A dry run cannot be resumed")
 
-    profile = "dry-run" if args.dry_run else "smoke" if args.smoke else "main"
+    profile = (
+        "dry-run" if args.dry_run else "smoke" if args.smoke else "pilot" if args.pilot else "main"
+    )
     condition = experiment.condition(args.condition)
     seed = experiment.require_seed(args.seed)
     model = experiment.model
@@ -120,6 +129,7 @@ def main() -> None:
     settings = resolve_training_settings(
         experiment.values,
         smoke=args.smoke or args.dry_run,
+        pilot=args.pilot,
         max_steps=args.max_steps,
         use_vllm=args.use_vllm,
     )
@@ -129,7 +139,13 @@ def main() -> None:
         raise ConfigError(
             "model.dtype and training.precision must match for reproducible mixed precision"
         )
-    evaluation = resolve_evaluation_settings(experiment.values)
+    no_test_selection = args.pilot or (
+        args.smoke and not _mapping(experiment.values, "evaluation").get("test_fractions")
+    )
+    evaluation = resolve_evaluation_settings(
+        experiment.values,
+        allow_no_test=no_test_selection,
+    )
     logging = resolve_logging_settings(experiment.values)
     _validate_cli_for_profile(args, profile=profile)
     _validate_single_gpu(profile=profile)
@@ -266,6 +282,7 @@ def main() -> None:
         context=context,
         rollout_log_path=(out_dir / rollout_name) if logging.save_rollouts else None,
         timeout_s=timeout_s,
+        timeout_fallback_s=evaluation.timeout_fallback_s,
         mem_limit=mem_mb * 1024 * 1024,
         save_clean_outcomes=logging.save_clean_outcomes,
         save_noisy_outcomes=logging.save_noisy_outcomes,
@@ -317,11 +334,15 @@ def _run_training(
     rank: int,
     resume_checkpoint: str | bool | None,
 ) -> None:
+    import torch
     from peft import LoraConfig, TaskType
     from transformers import AutoTokenizer
     from trl import GRPOConfig, GRPOTrainer
 
     telemetry = RunTelemetry(out_dir)
+    gpu_memory_fraction = _apply_gpu_memory_fraction(torch)
+    if rank == 0 and gpu_memory_fraction is not None:
+        update_run_metadata(out_dir, {"gpu_memory_fraction": gpu_memory_fraction})
     progress = RunProgressCallback(
         out_dir,
         context=context,
@@ -414,25 +435,27 @@ def _run_training(
         event_path = out_dir / "events.jsonl"
         progress.context = runtime_context
         callbacks: list[Any] = [JsonlTrainerCallback(event_path, runtime_context), progress]
+        scheduled_eval_callback: ScheduledCleanEvalCallback | None = None
 
-        if settings.profile == "main":
-            callbacks.append(
-                _scheduled_evaluation_callback(
-                    settings=settings,
-                    tokenizer=tokenizer,
-                    few_shot=few_shot,
-                    context=runtime_context,
-                    out_dir=out_dir,
-                    generation=generation,
-                    evaluation=evaluation,
-                    data_config=data_config,
-                    timeout_s=timeout_s,
-                    mem_mb=mem_mb,
-                    event_path=event_path,
-                    telemetry=telemetry,
-                    progress=progress,
-                )
+        if settings.profile in {"main", "pilot"} or (
+            settings.profile == "smoke" and not evaluation.test_fractions
+        ):
+            scheduled_eval_callback = _scheduled_evaluation_callback(
+                settings=settings,
+                tokenizer=tokenizer,
+                few_shot=few_shot,
+                context=runtime_context,
+                out_dir=out_dir,
+                generation=generation,
+                evaluation=evaluation,
+                data_config=data_config,
+                timeout_s=timeout_s,
+                mem_mb=mem_mb,
+                event_path=event_path,
+                telemetry=telemetry,
+                progress=progress,
             )
+            callbacks.append(scheduled_eval_callback)
 
         class InstrumentedGRPOTrainer(GRPOTrainer):
             generation_and_scoring_seconds = 0.0
@@ -468,6 +491,32 @@ def _run_training(
                 peft_config=lora,
                 callbacks=callbacks,
             )
+
+        if evaluation.validation_step0:
+            if scheduled_eval_callback is None:
+                raise RuntimeError("Step-0 validation requires a scheduled evaluation callback")
+            trainer.accelerator.wait_for_everyone()
+            if rank == 0:
+                unwrapped = trainer.accelerator.unwrap_model(trainer.model)
+                baseline_summary = scheduled_eval_callback.evaluate(
+                    "validation",
+                    unwrapped,
+                    0,
+                    "base_model_before_training",
+                )
+                append_jsonl(
+                    event_path,
+                    {
+                        "event": "clean_evaluation_summary",
+                        "step": 0,
+                        "checkpoint": "base_model_before_training",
+                        "split": "validation",
+                        "summary": baseline_summary,
+                    },
+                    context=runtime_context,
+                )
+            trainer.accelerator.wait_for_everyone()
+
         progress.mark_stage("training")
         with telemetry.stage("training"):
             train_result = trainer.train(resume_from_checkpoint=resume_checkpoint)
@@ -520,6 +569,7 @@ def _run_training(
                         max_new_tokens=int(generation["max_new_tokens"]),
                         stop_sequence=str(generation["stop_sequence"]),
                         timeout_s=timeout_s,
+                        timeout_fallback_s=evaluation.timeout_fallback_s,
                         mem_limit=mem_mb * 1024 * 1024,
                         difficulty_by_task=test_difficulty,
                         progress_callback=progress.update_evaluation,
@@ -531,7 +581,7 @@ def _run_training(
                     last_n=1,
                     require_count=True,
                 )
-            else:
+            elif settings.profile == "main":
                 primary_summary = summarize_primary_metric(
                     out_dir,
                     split_name="test",
@@ -610,40 +660,96 @@ def _scheduled_evaluation_callback(
     progress: RunProgressCallback,
 ) -> ScheduledCleanEvalCallback:
     validation_split = resolve_mbpp_split(data_config["validation_split"])
-    test_split = resolve_mbpp_split(data_config["test_split"])
     validation_problems = load_mbpp(validation_split)
-    test_problems = load_mbpp(test_split)
-    test_difficulty_path = _repo_path(data_config.get("test_difficulty_path"))
-    if test_difficulty_path is None:
-        raise ConfigError("data.test_difficulty_path must be frozen before a main run")
-    test_difficulty = load_difficulty_map(
-        test_difficulty_path,
-        required_task_ids=[problem.task_id for problem in test_problems],
-        expected_model=context.model,
-        expected_revision=context.model_revision,
-        expected_split=test_split,
-        expected_group_size=int(generation["group_size"]),
-        expected_max_new_tokens=int(generation["max_new_tokens"]),
-        expected_stop_sequence=str(generation["stop_sequence"]),
-        require_metadata=True,
-    )
+    if settings.profile == "smoke":
+        # Smoke checks the callback path; the full 90-task validation is part
+        # of pilot/main runs and needlessly makes a two-step smoke take minutes.
+        validation_problems = validation_problems[:2]
+    if evaluation.problem_limit is not None:
+        validation_problems = validation_problems[: evaluation.problem_limit]
+    test_problems: list[Any] = []
+    test_difficulty: dict[int, str] = {}
+    if evaluation.test_fractions:
+        test_split = resolve_mbpp_split(data_config["test_split"])
+        test_problems = load_mbpp(test_split)
+        if evaluation.problem_limit is not None:
+            test_problems = test_problems[: evaluation.problem_limit]
+        test_difficulty_path = _repo_path(data_config.get("test_difficulty_path"))
+        if test_difficulty_path is None:
+            raise ConfigError("data.test_difficulty_path must be frozen before a main run")
+        test_difficulty = load_difficulty_map(
+            test_difficulty_path,
+            required_task_ids=[problem.task_id for problem in test_problems],
+            expected_model=context.model,
+            expected_revision=context.model_revision,
+            expected_split=test_split,
+            expected_group_size=int(generation["group_size"]),
+            expected_max_new_tokens=int(generation["max_new_tokens"]),
+            expected_stop_sequence=str(generation["stop_sequence"]),
+            require_metadata=True,
+        )
     validation_schedule = set(
         evaluation_steps(settings.max_steps, evaluation.validation_interval_fraction)
     )
-    test_schedule = set(fraction_steps(settings.max_steps, list(evaluation.test_fractions)))
+    test_schedule = (
+        set(fraction_steps(settings.max_steps, list(evaluation.test_fractions)))
+        if evaluation.test_fractions
+        else set()
+    )
 
     def run_evaluation(split_name: str, model: Any, step: int, checkpoint: str) -> dict[str, Any]:
         problems = validation_problems if split_name == "validation" else test_problems
         difficulties = {} if split_name == "validation" else test_difficulty
+        multisample = split_name == "test" and evaluation.test_samples_per_task > 1
+        total = len(problems) * (evaluation.test_samples_per_task if multisample else 1)
         progress.begin_evaluation(
             split=split_name,
             checkpoint=checkpoint,
             step=step,
             completed=0,
-            total=len(problems),
+            total=total,
         )
         try:
             with telemetry.stage(f"evaluation_{split_name}"):
+                if multisample:
+                    ordered_test_steps = sorted(test_schedule)
+                    checkpoint_index = ordered_test_steps.index(step)
+                    stable_checkpoint = f"{context.condition}/checkpoint-{step}"
+                    target = MultiSampleTarget(
+                        target_id=f"{context.run_id}__step-{step}",
+                        kind="adapter",
+                        model=context.model,
+                        model_revision=str(context.model_revision),
+                        checkpoint=stable_checkpoint,
+                        condition=context.condition,
+                        step=step,
+                    )
+                    return evaluate_multisample_clean(
+                        model,
+                        tokenizer,
+                        problems,
+                        few_shot=few_shot,
+                        target=target,
+                        out_dir=out_dir / "evaluations" / split_name / f"step-{step}",
+                        samples_per_task=evaluation.test_samples_per_task,
+                        generation_seed=evaluation.seed,
+                        generation_chunk_size=evaluation.generation_chunk_size,
+                        generation_chunk_offset=(
+                            checkpoint_index * evaluation.generation_chunk_size
+                        ),
+                        generation_chunk_stride=len(ordered_test_steps),
+                        temperature=float(generation["eval_temperature"]),
+                        top_p=float(generation["top_p"]),
+                        max_new_tokens=int(generation["max_new_tokens"]),
+                        stop_sequence=str(generation["stop_sequence"]),
+                        timeout_s=timeout_s,
+                        timeout_fallback_s=evaluation.timeout_fallback_s,
+                        mem_limit=mem_mb * 1024 * 1024,
+                        difficulty_by_task=difficulties,
+                        bootstrap_replicates=evaluation.bootstrap_replicates,
+                        bootstrap_seed=evaluation.bootstrap_seed + checkpoint_index,
+                        progress_callback=progress.update_evaluation,
+                    )
                 return evaluate_clean_pass_at_1(
                     model,
                     tokenizer,
@@ -660,6 +766,7 @@ def _scheduled_evaluation_callback(
                     max_new_tokens=int(generation["max_new_tokens"]),
                     stop_sequence=str(generation["stop_sequence"]),
                     timeout_s=timeout_s,
+                    timeout_fallback_s=evaluation.timeout_fallback_s,
                     mem_limit=mem_mb * 1024 * 1024,
                     difficulty_by_task=difficulties,
                     progress_callback=progress.update_evaluation,
@@ -802,6 +909,22 @@ def _validate_single_gpu(*, profile: str) -> None:
     world_size = int(os.environ.get("WORLD_SIZE", "1"))
     if world_size != 1:
         raise ConfigError("The current reward logger supports exactly one GPU/process per run")
+
+
+def _apply_gpu_memory_fraction(torch_module: Any) -> float | None:
+    raw = os.environ.get("RLVR_GPU_MEMORY_FRACTION")
+    if raw is None or not raw.strip():
+        return None
+    try:
+        fraction = float(raw)
+    except ValueError as exc:
+        raise ConfigError("RLVR_GPU_MEMORY_FRACTION must be a number in (0, 1]") from exc
+    if not 0.0 < fraction <= 1.0:
+        raise ConfigError("RLVR_GPU_MEMORY_FRACTION must be in (0, 1]")
+    if not torch_module.cuda.is_available():
+        raise ConfigError("RLVR_GPU_MEMORY_FRACTION was set but CUDA is unavailable")
+    torch_module.cuda.set_per_process_memory_fraction(fraction)
+    return fraction
 
 
 def _validate_main_difficulty_maps(

@@ -30,7 +30,8 @@ class MBPPNoisyReward:
     context: RunContext
     rollout_log_path: Path | None = None
     timeout_s: float = 0.5
-    mem_limit: int = 64 * 1024 * 1024
+    timeout_fallback_s: float = 5.0
+    mem_limit: int = 256 * 1024 * 1024
     save_clean_outcomes: bool = True
     save_noisy_outcomes: bool = True
     save_both_rewards: bool = True
@@ -102,6 +103,7 @@ class MBPPNoisyReward:
                     codes[group_start:group_end],
                     problem,
                     timeout_s=self.timeout_s,
+                    timeout_fallback_s=self.timeout_fallback_s,
                     mem_limit=self.mem_limit,
                 )
             finally:

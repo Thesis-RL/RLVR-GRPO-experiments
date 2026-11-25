@@ -53,7 +53,15 @@ class EvaluationSettings:
     test_fractions: tuple[float, ...]
     seed: int
     timeout_s: float
+    timeout_fallback_s: float
     mem_mb: int
+    validation_step0: bool
+    test_samples_per_task: int
+    base_samples_per_task: int
+    generation_chunk_size: int
+    bootstrap_replicates: int
+    bootstrap_seed: int
+    problem_limit: int | None
 
 
 @dataclass(frozen=True)
@@ -70,23 +78,28 @@ def resolve_training_settings(
     values: Mapping[str, Any],
     *,
     smoke: bool,
+    pilot: bool = False,
     max_steps: int | None = None,
     use_vllm: bool | None = None,
 ) -> TrainingSettings:
+    if smoke and pilot:
+        raise ConfigError("smoke and pilot profiles are mutually exclusive")
     training = _mapping(values, "training")
     generation = _mapping(values, "generation")
-    profile_name = "smoke" if smoke else "main"
+    profile_name = "smoke" if smoke else "pilot" if pilot else "main"
     profile = _mapping(training, profile_name)
 
-    if not smoke and str(training.get("protocol_status")) != "frozen":
+    if profile_name == "main" and str(training.get("protocol_status")) != "frozen":
         raise ConfigError(
             "Main training is blocked while training.protocol_status is not 'frozen'. "
             "Run --smoke first, then freeze the pilot-selected hyperparameters."
         )
-    if not smoke:
+    if profile_name == "pilot" and str(training.get("protocol_status")) != "pilot":
+        raise ConfigError("Pilot training requires training.protocol_status: pilot")
+    if profile_name in {"main", "pilot"}:
         model = _mapping(values, "model")
         if not str(model.get("revision") or "").strip():
-            raise ConfigError("model.revision must be pinned before a main run")
+            raise ConfigError(f"model.revision must be pinned before a {profile_name} run")
 
     required = (
         "learning_rate",
@@ -120,8 +133,8 @@ def resolve_training_settings(
         save_steps=int(profile["save_steps"]),
         save_total_limit=int(profile["save_total_limit"]),
         optimizer=str(training["optimizer"]),
-        lr_scheduler_type=str(training["lr_scheduler_type"]),
-        warmup_steps=int(training["warmup_steps"]),
+        lr_scheduler_type=str(profile.get("lr_scheduler_type", training["lr_scheduler_type"])),
+        warmup_steps=int(profile.get("warmup_steps", training["warmup_steps"])),
         weight_decay=float(training["weight_decay"]),
         max_grad_norm=float(training["max_grad_norm"]),
         adam_beta1=float(training["adam_beta1"]),
@@ -142,7 +155,9 @@ def resolve_training_settings(
     return settings
 
 
-def resolve_evaluation_settings(values: Mapping[str, Any]) -> EvaluationSettings:
+def resolve_evaluation_settings(
+    values: Mapping[str, Any], *, allow_no_test: bool = False
+) -> EvaluationSettings:
     evaluation = _mapping(values, "evaluation")
     test_fractions_raw = evaluation.get("test_fractions")
     if not isinstance(test_fractions_raw, list):
@@ -155,24 +170,63 @@ def resolve_evaluation_settings(values: Mapping[str, Any]) -> EvaluationSettings
         test_fractions=tuple(float(value) for value in test_fractions_raw),
         seed=int(evaluation.get("seed", 0)),
         timeout_s=float(evaluation.get("timeout_s", 0)),
+        timeout_fallback_s=float(evaluation.get("timeout_fallback_s", 0)),
         mem_mb=int(evaluation.get("mem_mb", 0)),
+        validation_step0=bool(evaluation.get("validation_step0", False)),
+        test_samples_per_task=int(evaluation.get("test_samples_per_task", 1)),
+        base_samples_per_task=int(evaluation.get("base_samples_per_task", 1)),
+        generation_chunk_size=int(evaluation.get("generation_chunk_size", 1)),
+        bootstrap_replicates=int(evaluation.get("bootstrap_replicates", 10_000)),
+        bootstrap_seed=int(evaluation.get("bootstrap_seed", 20_261_116)),
+        problem_limit=(
+            int(evaluation["problem_limit"])
+            if evaluation.get("problem_limit") is not None
+            else None
+        ),
     )
     if not settings.clean_only:
         raise ConfigError("Only clean evaluation is supported")
     if settings.primary_metric != "pass_at_1":
         raise ConfigError("evaluation.primary_metric must be pass_at_1")
-    if settings.primary_metric_last_n <= 0:
-        raise ConfigError("evaluation.primary_metric_last_n must be positive")
-    if settings.primary_metric_last_n > len(settings.test_fractions):
-        raise ConfigError("primary_metric_last_n exceeds the number of test evaluations")
+    if allow_no_test:
+        if settings.primary_metric_last_n != 0 or settings.test_fractions:
+            raise ConfigError(
+                "Pilot selection must set primary_metric_last_n: 0 and test_fractions: []"
+            )
+    else:
+        if settings.primary_metric_last_n <= 0:
+            raise ConfigError("evaluation.primary_metric_last_n must be positive")
+        if settings.primary_metric_last_n > len(settings.test_fractions):
+            raise ConfigError("primary_metric_last_n exceeds the number of test evaluations")
     if not 0.0 < settings.validation_interval_fraction <= 1.0:
         raise ConfigError("evaluation.validation_interval_fraction must be in (0, 1]")
-    if not settings.test_fractions or any(
+    if settings.test_fractions and any(
         not 0.0 < fraction <= 1.0 for fraction in settings.test_fractions
     ):
-        raise ConfigError("evaluation.test_fractions must be non-empty values in (0, 1]")
+        raise ConfigError("evaluation.test_fractions values must be in (0, 1]")
+    if not allow_no_test and not settings.test_fractions:
+        raise ConfigError("evaluation.test_fractions must be non-empty")
     if settings.timeout_s <= 0 or settings.mem_mb <= 0:
         raise ConfigError("evaluation timeout_s and mem_mb must be positive")
+    if settings.timeout_fallback_s < settings.timeout_s:
+        raise ConfigError("evaluation.timeout_fallback_s must be at least timeout_s")
+    if settings.test_samples_per_task <= 0 or settings.base_samples_per_task <= 0:
+        raise ConfigError("evaluation sample counts must be positive")
+    if settings.generation_chunk_size <= 0:
+        raise ConfigError("evaluation.generation_chunk_size must be positive")
+    if settings.generation_chunk_size > settings.test_samples_per_task:
+        raise ConfigError("evaluation.generation_chunk_size cannot exceed test_samples_per_task")
+    if settings.bootstrap_replicates <= 0:
+        raise ConfigError("evaluation.bootstrap_replicates must be positive")
+    if settings.problem_limit is not None and settings.problem_limit <= 0:
+        raise ConfigError("evaluation.problem_limit must be positive when configured")
+    if settings.test_samples_per_task > 1:
+        expected_base = len(settings.test_fractions) * settings.test_samples_per_task
+        if settings.base_samples_per_task != expected_base:
+            raise ConfigError(
+                "evaluation.base_samples_per_task must equal the combined samples "
+                "from all test checkpoints"
+            )
     return settings
 
 

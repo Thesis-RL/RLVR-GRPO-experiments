@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-24",
+  "tree_hash_definition": "SHA-256 over sorted relative-path NUL file-SHA256 NUL entries",
+  "trees": {
+    "seed_0": {
+      "files": 7667,
+      "bytes": 3951767425,
+      "tree_sha256": "a416f45632b3d96c815ece8cbde07c6a1e878fc1398445688faec4fb3d7852f5"
+    },
+    "seed_1": {
+      "files": 7666,
+      "bytes": 3952046996,
+      "tree_sha256": "af2999029fcce62ef1886dd92c4638a92e8bfbe76ff34bac556cf709cabd9ebd"
+    },
+    "seed_2": {
+      "files": 7666,
+      "bytes": 3952199492,
+      "tree_sha256": "1256ebb7e31472e462c7ab955f8a945859c1b3b5d11e4ace7a4f2553fcdf8d63"
+    },
+    "integration_smoke": {
+      "files": 57,
+      "bytes": 124822940,
+      "tree_sha256": "7f6a4ab5a5d1d429b2da0913704a43c6527d7f9dfd95eccb73a7d199ebaaabf3"
+    },
+    "multiseed_analysis": {
+      "files": 5,
+      "bytes": 151585,
+      "tree_sha256": "ae8390d2aeb19cc058d4fc78491608b30dc273f4afb38d4cb98e27358e6ac4ff"
+    },
+    "gradient_audit_v1_1": {
+      "files": 59,
+      "bytes": 467018,
+      "tree_sha256": "b887ca557e2cace316273e4b41d31e7c990656a76baf3a6b280514d49d7e23f5"
+    },
+    "container_logs": {
+      "files": 10,
+      "bytes": 2179590,
+      "tree_sha256": "fa54d0bbe32e770f0d7082e8838ac2e566ef9c5e2417b312abc2d325f04a0823"
+    },
+    "common_base": {
+      "files": 5,
+      "bytes": 12946280,
+      "prediction_rows": 4000,
+      "tree_sha256": "1ab39de2c7d1cc428cad69f52a0d0be57fe0f7b2e6e9c3c486fb46167abee28e"
+    },
+    "release_stage6_seed0": {
+      "files": 139,
+      "bytes": 3068074,
+      "tree_sha256": "cd2294abad90d888ed202e270a958f7d6394a50190adef541b226eb9c5b25797"
+    },
+    "release_stage6_seeds12": {
+      "files": 139,
+      "bytes": 3070213,
+      "tree_sha256": "fd0e2a249aeb49c235100ef3b60eb2612166c0843fc914c6062f846133849c40"
+    },
+    "release_gradient_audit_v1_1": {
+      "files": 145,
+      "bytes": 3124237,
+      "tree_sha256": "60e283a61885583a54cff1ab7d5c81d54e735d19dcbfc238875bd2f08fb8ec33"
+    },
+    "qwen_snapshot": {
+      "revision": "ea980cb0a6c2ae4b936e82123acc929f1cec04c1",
+      "files": 7,
+      "bytes": 3452676482,
+      "tree_sha256": "19f4138292f0769d2fd26bc783af33cfff21d3445fb9281d7733201782a6757d",
+      "resolved_file_sha_match_with_devbox": true
+    },
+    "offline_diagnostic_and_difficulty": {
+      "files": 18,
+      "bytes": 17210832,
+      "tree_sha256": "904059690855effb271bc2d7cb1985a20c25fc6c1dc2a53da23bd4029a25d280"
+    },
+    "mbpp_cache": {
+      "files": 4,
+      "bytes": 474200,
+      "tree_sha256": "21fd15f69d0c53a1d4142b483897e87450181bf62f9a6abe8101848f797218f8"
+    }
+  }
+}

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import random
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -37,6 +37,7 @@ def evaluate_clean_pass_at_1(
     max_new_tokens: int,
     stop_sequence: str,
     timeout_s: float,
+    timeout_fallback_s: float,
     mem_limit: int,
     difficulty_by_task: dict[int, str] | None = None,
     progress_callback: Callable[[int, int], None] | None = None,
@@ -84,6 +85,7 @@ def evaluate_clean_pass_at_1(
                     code,
                     problem,
                     timeout_s=timeout_s,
+                    timeout_fallback_s=timeout_fallback_s,
                     mem_limit=mem_limit,
                 )
                 outcomes = np.asarray([result.outcomes], dtype=np.int8)
@@ -158,17 +160,17 @@ def summarize_primary_metric(
     paths = root.glob("step-*/summary.json") if root.exists() else ()
     for path in paths:
         summaries.append(json.loads(path.read_text()))
-    summaries.sort(key=lambda item: int(item["step"]))
+    summaries.sort(key=_summary_step)
     if require_count and len(summaries) < last_n:
         raise RuntimeError(
             f"Expected at least {last_n} {split_name} evaluations, found {len(summaries)}"
         )
     selected = summaries[-last_n:]
-    values = [float(item[metric]) for item in selected]
+    values = [_metric_estimate(item[metric]) for item in selected]
     by_difficulty: dict[str, dict[str, Any]] = {}
     for stratum in ("hard", "medium", "easy"):
         stratum_values = [
-            float(item["by_difficulty"][stratum][metric])
+            _metric_estimate(item["by_difficulty"][stratum][metric])
             for item in selected
             if stratum in item.get("by_difficulty", {})
         ]
@@ -190,13 +192,30 @@ def summarize_primary_metric(
         "split": split_name,
         "metric": metric,
         "last_n": last_n,
-        "selected_steps": [int(item["step"]) for item in selected],
+        "selected_steps": [_summary_step(item) for item in selected],
         "values": values,
         "mean": float(np.mean(values)) if values else None,
         "by_difficulty": by_difficulty,
     }
     (Path(out_dir) / "primary_metric_summary.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
+
+
+def _metric_estimate(value: Any) -> float:
+    if isinstance(value, Mapping):
+        if "estimate" not in value:
+            raise RuntimeError("Evaluation metric mapping is missing an estimate")
+        return float(value["estimate"])
+    return float(value)
+
+
+def _summary_step(summary: Mapping[str, Any]) -> int:
+    if summary.get("step") is not None:
+        return int(summary["step"])
+    target = summary.get("target")
+    if isinstance(target, Mapping) and target.get("step") is not None:
+        return int(target["step"])
+    raise RuntimeError("Evaluation summary is missing its checkpoint step")
 
 
 def _read_predictions(path: Path, *, step: int, checkpoint: str) -> dict[int, dict[str, Any]]:

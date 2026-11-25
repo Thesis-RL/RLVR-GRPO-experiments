@@ -1,0 +1,49 @@
+extends: priority_bridge.yaml
+
+experiment:
+  name: priority_bridge_v2
+  study: shared_bridge_retrained
+
+protocol_provenance:
+  frozen_at: "2026-11-17"
+  selected_by: stage5_clean_pilot
+  pilot_seed: 9001
+  pilot_gate_sha256: 0cde3be340b37738ff9bf01d16678e2d7d43a3225b3373a0b9ede5b383dcfd87
+  pilot_gate_decision: pass
+  held_out_test_used_for_selection: false
+
+training:
+  seeds: [0, 1, 2]
+  protocol_status: frozen
+  main:
+    group_size: 16
+    learning_rate: 2.0e-6
+    per_device_train_batch_size: 1
+    gradient_accumulation_steps: 16
+    max_steps: 1122
+    kl_coefficient: 0.0
+    logging_steps: 1
+    # Scheduled validation checkpoints perform the actual saves. This avoids
+    # extra off-schedule checkpoints without changing optimization.
+    save_steps: 1122
+    save_total_limit: 12
+    warmup_steps: 56
+    lr_scheduler_type: linear
+
+evaluation:
+  clean_only: true
+  primary_metric: pass_at_1
+  primary_metric_last_n: 2
+  validation_interval_fraction: 0.1
+  validation_step0: true
+  test_fractions: [0.9, 1.0]
+  seed: 0
+  timeout_s: 0.5
+  timeout_fallback_s: 5.0
+  mem_mb: 256
+  test_samples_per_task: 4
+  base_samples_per_task: 8
+  generation_chunk_size: 4
+  bootstrap_replicates: 10000
+  bootstrap_seed: 20261116
+  problem_limit: null

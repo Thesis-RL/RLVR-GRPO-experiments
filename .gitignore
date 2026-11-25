@@ -19,3 +19,13 @@ outputs/online_grpo/
 outputs/dry_run/
 outputs/smoke_validation/
 outputs/online_matrix/
+outputs/multisample_evaluation/
+outputs/devbox_snapshot_*/
+outputs/analysis_recheck/
+outputs/multiseed_recheck/
+devbox_artifacts/
+deploy/devbox/devbox.env
+.env
+.env.*
+# Generated run exports and the local archive. Published reports live in analyses/.
+/reports/
